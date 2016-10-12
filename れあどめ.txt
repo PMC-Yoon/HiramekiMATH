@@ -1,4 +1,12 @@
-ƒRƒ~ƒbƒg‚ÌƒeƒXƒg‚Å‚·by•Ÿ‰ª
+ã‚³ãƒŸãƒƒãƒˆã®ãƒ†ã‚¹ãƒˆã§ã™byç¦å²¡
 Steel is my body,and fire is my blood.
 
+<<<<<<< HEAD
 ’Ç‹Ltest by kazuaki,terabayashi
+
+btest kazu
+=======
+è¿½è¨˜test by kazuaki,terabayashi
+
+The Quick Brown Fox Jumps Over The Razy Dog. By ã‚†ã‚“ã‚†ã‚“
+>>>>>>> bf2a2f47d3a7533b9c393ae3525ce4803838ccd9

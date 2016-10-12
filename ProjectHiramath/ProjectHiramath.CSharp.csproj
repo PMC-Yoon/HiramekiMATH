@@ -64,6 +64,7 @@
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
+<<<<<<< HEAD
     <Reference Include="LitJson">
       <HintPath>Assets\Plugins\JOKER\LitJson.dll</HintPath>
     </Reference>
@@ -126,6 +127,10 @@
     <Compile Include="Assets\JOKER\Scripts\Novel\Unity\MessageArea.cs" />
     <Compile Include="Assets\JOKER\Scripts\Novel\Unity\MessageFrame.cs" />
     <Compile Include="Assets\JOKER_GAME\Plugins\PluginComponent.cs" />
+=======
+  </ItemGroup>
+  <ItemGroup>
+>>>>>>> master
     <Compile Include="Assets\Script\BlockBox.cs" />
     <Compile Include="Assets\Script\BlockSelector.cs" />
     <Compile Include="Assets\Script\Character_Box.cs" />
@@ -134,6 +139,7 @@
     <Compile Include="Assets\Script\SceneChange.cs" />
     <Compile Include="Assets\Script\SpriteAnimator.cs" />
   </ItemGroup>
+<<<<<<< HEAD
   <ItemGroup>
     <None Include="Assets\JOKER_GAME\Resources\novel\data\config\config.txt" />
     <None Include="Assets\JOKER_GAME\Resources\novel\data\scenario\first.txt" />
@@ -150,5 +156,7 @@
     <None Include="Assets\JOKER_GAME\Resources\novel\data\scenario\wide\system.txt" />
     <None Include="Assets\JOKER_GAME\Resources\novel\data\scenario\wide\title.txt" />
   </ItemGroup>
+=======
+>>>>>>> master
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>

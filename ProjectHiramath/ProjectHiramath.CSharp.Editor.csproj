@@ -94,12 +94,15 @@
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
       <HintPath>Library\UnityAssemblies\SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
+<<<<<<< HEAD
     <Reference Include="LitJson">
       <HintPath>Assets\Plugins\JOKER\LitJson.dll</HintPath>
     </Reference>
     <Reference Include="NCalc">
       <HintPath>Assets\Plugins\JOKER\NCalc.dll</HintPath>
     </Reference>
+=======
+>>>>>>> master
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="ProjectHiramath.CSharp.csproj">
@@ -110,6 +113,7 @@
   <ItemGroup>
     <Compile Include="Assets\Editor\Exporter.cs" />
   </ItemGroup>
+<<<<<<< HEAD
   <ItemGroup>
     <None Include="Assets\JOKER_GAME\Resources\novel\data\config\config.txt" />
     <None Include="Assets\JOKER_GAME\Resources\novel\data\scenario\first.txt" />
@@ -126,5 +130,7 @@
     <None Include="Assets\JOKER_GAME\Resources\novel\data\scenario\wide\system.txt" />
     <None Include="Assets\JOKER_GAME\Resources\novel\data\scenario\wide\title.txt" />
   </ItemGroup>
+=======
+>>>>>>> master
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>
