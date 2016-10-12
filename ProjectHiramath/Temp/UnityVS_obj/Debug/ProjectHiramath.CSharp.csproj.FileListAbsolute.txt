@@ -1,0 +1,17 @@
+C:\Users\intern_user\Documents\HiramekiMATH\ProjectHiramath\Temp\UnityVS_bin\Debug\Assembly-CSharp.dll
+C:\Users\intern_user\Documents\HiramekiMATH\ProjectHiramath\Temp\UnityVS_bin\Debug\Assembly-CSharp.pdb
+C:\Users\intern_user\Documents\HiramekiMATH\ProjectHiramath\Temp\UnityVS_bin\Debug\LitJson.dll
+C:\Users\intern_user\Documents\HiramekiMATH\ProjectHiramath\Temp\UnityVS_bin\Debug\NCalc.dll
+C:\Users\intern_user\Documents\HiramekiMATH\ProjectHiramath\Temp\UnityVS_bin\Debug\UnityEditor.dll
+C:\Users\intern_user\Documents\HiramekiMATH\ProjectHiramath\Temp\UnityVS_bin\Debug\UnityEngine.Analytics.dll
+C:\Users\intern_user\Documents\HiramekiMATH\ProjectHiramath\Temp\UnityVS_bin\Debug\UnityEngine.dll
+C:\Users\intern_user\Documents\HiramekiMATH\ProjectHiramath\Temp\UnityVS_bin\Debug\UnityEngine.Networking.dll
+C:\Users\intern_user\Documents\HiramekiMATH\ProjectHiramath\Temp\UnityVS_bin\Debug\UnityEngine.UI.dll
+C:\Users\intern_user\Documents\HiramekiMATH\ProjectHiramath\Temp\UnityVS_bin\Debug\UnityEngine.xml
+C:\Users\intern_user\Documents\HiramekiMATH\ProjectHiramath\Temp\UnityVS_bin\Debug\UnityEngine.UI.xml
+C:\Users\intern_user\Documents\HiramekiMATH\ProjectHiramath\Temp\UnityVS_bin\Debug\UnityEngine.Networking.xml
+C:\Users\intern_user\Documents\HiramekiMATH\ProjectHiramath\Temp\UnityVS_bin\Debug\UnityEngine.Analytics.xml
+C:\Users\intern_user\Documents\HiramekiMATH\ProjectHiramath\Temp\UnityVS_bin\Debug\UnityEditor.xml
+C:\Users\intern_user\Documents\HiramekiMATH\ProjectHiramath\Temp\UnityVS_obj\Debug\ProjectHiramath.CSharp.csprojResolveAssemblyReference.cache
+C:\Users\intern_user\Documents\HiramekiMATH\ProjectHiramath\Temp\UnityVS_obj\Debug\Assembly-CSharp.dll
+C:\Users\intern_user\Documents\HiramekiMATH\ProjectHiramath\Temp\UnityVS_obj\Debug\Assembly-CSharp.pdb
