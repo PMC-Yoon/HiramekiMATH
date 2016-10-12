@@ -47,9 +47,6 @@ public class BlockBox : MonoBehaviour {
         width = puzzlebackground.GetComponent<SpriteRenderer>().bounds.size.x;
         height = puzzlebackground.GetComponent<SpriteRenderer>().bounds.size.y;
 
-
-        
-
         //ブロックの幅を求める
         float blockwidth;
         if (NumberBlock != null)
@@ -75,7 +72,6 @@ public class BlockBox : MonoBehaviour {
         //位置情報代入
         for( int x = 0, y = 0;y < 9; x++)
         {
-
             a_Block[x, y].pos = new Vector3(poLU.x + (intervalX * x), poLU.y - (intervalY * y), 0);
 
             if (x == 5)
