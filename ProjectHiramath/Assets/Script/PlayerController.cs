@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour {
     int PlayerX;
     void Start()
     {
-        PlayerX = 0;
+        PlayerX = 3;
       
 
 
@@ -21,11 +21,11 @@ public class PlayerController : MonoBehaviour {
         arrayBlcokBox = GameObject.Find("BlockBoxArray");
         BlockBox hoge = arrayBlcokBox.GetComponent<BlockBox>();
 
-        if( Input.GetKeyDown(KeyCode.D))
+        if( Input.GetKeyDown(KeyCode.A))
         {
             MoveLeft();
         }
-        if( Input.GetKeyDown(KeyCode.A))
+        if( Input.GetKeyDown(KeyCode.D))
         {
             MoveRight();
         }
@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour {
     
     
     
-    public void MoveLeft()
+    public void MoveRight()
     {
         if (PlayerX < 5)
         {
@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    public void MoveRight()
+    public void MoveLeft()
     {
         if (PlayerX > 0)
         {

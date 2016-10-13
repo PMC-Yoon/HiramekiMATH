@@ -55,7 +55,7 @@ public class BlockBox : MonoBehaviour {
         float blockwidth;
         if (NumberBlock != null)
         {
-            blockwidth = NumberBlock.GetComponent<SpriteRenderer>().bounds.size.x * 0.5f;
+            blockwidth = width / 6.0f * 0.5f;
         }
         else
         {
