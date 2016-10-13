@@ -149,7 +149,6 @@ public class BlockBox : MonoBehaviour {
         if (Input.GetMouseButtonDown(1)) //計算フラグ成立
         {
             CheckNumber();
-            
         }
         //計算処理　追加　福岡　2016/10/11 ここまで
     }
@@ -163,52 +162,31 @@ public class BlockBox : MonoBehaviour {
         {
             for (int m = 0; m < 9; m++)
             {
-                if (a_Block[n, m].use)
+                if (n < 4 && ((a_Block[n, m].Number == true) && (a_Block[n + 1, m].Number == false)) && ((a_Block[n, m].Number == true) && (a_Block[n + 2, m].Number == true)))
                 {
-                    if (n < 4 && a_Block[n + 1, m].use && a_Block[n + 2, m].use && ((a_Block[n, m].Number == true) && (a_Block[n + 1, m].Number == false)) && ((a_Block[n, m].Number == true) && (a_Block[n + 2, m].Number == true)))
-                    {
-                        //Debug.Log("ﾇｯ");
-                        a_Block[n, m].Delete = true;
-                        a_Block[n + 1, m].Delete = true;
-                        a_Block[n + 2, m].Delete = true;
-                        if (a_Block[n + 1, m].data == 1)
-                        {
-                            Debug.Log(a_Block[n, m].data + "+" + a_Block[n + 2, m].data);
-                            Score.ScorePlus(a_Block[n, m].data + a_Block[n + 2, m].data);
-                        }
-                        else if (a_Block[n + 1, m].data == 2)
-                        {
-                            Debug.Log(a_Block[n, m].data + "-" + a_Block[n + 2, m].data);
-                            Score.ScorePlus(a_Block[n, m].data - a_Block[n + 2, m].data);
-                        }
-                        else
-                        {
-                            Debug.Log(a_Block[n, m].data + "*" + a_Block[n + 2, m].data);
-                            Score.ScorePlus(a_Block[n, m].data * a_Block[n + 2, m].data);
-                        }
-                    }
-                    if (m < 7 && a_Block[n, m + 1].use && a_Block[n, m + 2].use && ((a_Block[n, m].Number == true) && (a_Block[n, m + 1].Number == false)) && ((a_Block[n, m].Number == true) && (a_Block[n, m + 2].Number == true)))
-                    {
-                        //Debug.Log("ﾇｯ");
-                        a_Block[n, m].Delete = true;
-                        a_Block[n, m + 1].Delete = true;
-                        a_Block[n, m + 2].Delete = true;
-                        if (a_Block[n, m + 1].data == 1)
-                        {
-                            Debug.Log(a_Block[n, m].data + "+" + a_Block[n, m + 2].data);
-                            Score.ScorePlus(a_Block[n, m].data + a_Block[n, m + 2].data);
-                        }
-                        else if (a_Block[n, m + 1].data == 2)
-                        {
-                            Debug.Log(a_Block[n, m].data + "-" + a_Block[n, m + 2].data);
-                            Score.ScorePlus(a_Block[n, m].data - a_Block[n, m + 2].data);
-                        }
-                        else
-                        {
-                            Debug.Log(a_Block[n, m].data + "*" + a_Block[n, m + 2].data);
-                            Score.ScorePlus(a_Block[n, m].data * a_Block[n, m + 2].data);
-                        }
-                    }
+                    //Debug.Log("ﾇｯ");
+                    a_Block[n, m].Delete = true;
+                    a_Block[n + 1, m].Delete = true;
+                    a_Block[n + 2, m].Delete = true;
+                    if (a_Block[n + 1, m].data == 1)
+                        Score.ScorePlus(a_Block[n, m].data + a_Block[n + 2, m].data);
+                    else if(a_Block[n + 1, m].data == 2)
+                        Score.ScorePlus(a_Block[n, m].data - a_Block[n + 2, m].data);
+                    else
+                        Score.ScorePlus(a_Block[n, m].data * a_Block[n + 2, m].data);
+                }
+                if (m < 7 && ((a_Block[n, m].Number == true) && (a_Block[n, m + 1].Number == false)) && ((a_Block[n, m].Number == true) && (a_Block[n, m + 2].Number == true)))
+                {
+                    //Debug.Log("ﾇｯ");
+                    a_Block[n, m].Delete = true;
+                    a_Block[n, m + 1].Delete = true;
+                    a_Block[n, m + 2].Delete = true;
+                    if (a_Block[n, m + 1].data == 1)
+                        Score.ScorePlus(a_Block[n, m].data + a_Block[n, m + 2].data);
+                    else if (a_Block[n, m + 1].data == 2)
+                        Score.ScorePlus(a_Block[n, m].data - a_Block[n, m + 2].data);
+                    else
+                        Score.ScorePlus(a_Block[n, m].data * a_Block[n, m + 2].data);
                 }
             }
         }
@@ -224,33 +202,8 @@ public class BlockBox : MonoBehaviour {
                 }
             }
         }
-
-        FallBlock();
     }
     //計算処理　追加　福岡　2016/10/11 ここまで
-
-    //
-    public void FallBlock()
-    {
-        int nNum = 0;
-        for (int n = 0; n < 6; n++)
-        {
-            for (int m = 0; m < 8; m++)
-            {
-                nNum = m + 1;
-                if(!a_Block[n,m].use)
-                {
-                    while (nNum <= 8 && !a_Block[n, nNum].use)
-                        nNum++;
-                    if (nNum <= 8)
-                    {
-                        addData(n, m, a_Block[n, nNum].Number, a_Block[n, nNum].data);
-                        deleteData(n, nNum);
-                    }
-                }
-            }
-        }
-    }
 
 
     //そのデータが使われているかチェック 追加　福岡　2016/10/11ここから
@@ -284,9 +237,8 @@ public class BlockBox : MonoBehaviour {
 
         //データ項目追加　hukuoka
         a_Block[arrayposx, arrayposy].Delete = false;
-        a_Block[arrayposx, arrayposy].Block.SetActive(true);
         a_Block[arrayposx, arrayposy].Block.GetComponent<BlockSelector>().NumberChanger(Number, data);
-        
+        a_Block[arrayposx, arrayposy].Block.SetActive(true);
         return true;
 
     }
@@ -302,8 +254,8 @@ public class BlockBox : MonoBehaviour {
 
         //データを初期化させる
         a_Block[arrayposX, arrayposY].use = false;
-       // a_Block[arrayposX, arrayposY].Number = false;
-       // a_Block[arrayposX, arrayposY].data = 0;
+        a_Block[arrayposX, arrayposY].Number = false;
+        a_Block[arrayposX, arrayposY].data = 0;
 
         //削除項目追加　hukuoka
         a_Block[arrayposX, arrayposY].Delete = false;
@@ -311,6 +263,9 @@ public class BlockBox : MonoBehaviour {
 
         return true;
     }
+
+
+    
 
 
 
