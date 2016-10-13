@@ -6,6 +6,8 @@ public class PlayerController : MonoBehaviour {
     public float Speed;
     GameObject arrayBlcokBox;
     int PlayerX;
+    private BlockBox.BLOCKBOX BlockData;
+    
     void Start()
     {
         PlayerX = 3;
@@ -52,70 +54,33 @@ public class PlayerController : MonoBehaviour {
             PlayerX--;
         }
     }
-    
-    
-    /*
-    public float Speed;
-
-    const int LaneMin = -3;
-    const int LaneMax = 2;
-
-    public float LaneWidth;
-    Vector3 move;
-   public int PlayerLane;
-
-    CharacterController controller;
-
-    int laneData;
-
-	// Use this for initialization
-	void Start () {
-        controller = GetComponent<CharacterController>();
-
-    }
-
-    // Update is called once per frame
-    void Update() {
-
-        //move.x = Input.GetAxis("Horizontal") * Speed;
-        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown("left"))
-        {
-            MoveLeft();
-        }
-        if(Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown("right"))
-        {
-            MoveRight();
-        }
-
-        float x = (PlayerLane * LaneWidth - transform.position.x) / LaneWidth;
-
-        move.x = x * Speed;//* Time.deltaTime;
-
-       // Vector3 globalDirection = transform.TransformDirection(move);//移動ベクトルをグローバルなベクトルに変換
-
-        controller.Move(move * Time.deltaTime);
-
-
-        // transform.Translate(new Vector3(move.x , 0, 0));
-
-    }
-
-
-   public void MoveLeft()
+   
+    //ブロックを取得する関数
+    public void NumberCatch()
     {
-        if (PlayerLane > LaneMin)
+        if (!BlockData.use)
         {
-            PlayerLane--;
-        }
-    }
-  public  void MoveRight()
-    {
-        if (PlayerLane < LaneMax)
-        {
-            PlayerLane++;
-        }
-    }
-    */
+            BlockData = arrayBlcokBox.GetComponent<BlockBox>().GetData(PlayerX, 3);
+            if (BlockData.use)
+            {
+                arrayBlcokBox.GetComponent<BlockBox>().deleteData(PlayerX, 3);
 
+            }
+        }
+    }
+
+    //ブロックを投げる関数
+    public void NumberThrow()
+    {
+       if(BlockData.use)
+        {
+            if (!arrayBlcokBox.GetComponent<BlockBox>().GetData(PlayerX, 3).use)
+            {
+                arrayBlcokBox.GetComponent<BlockBox>().addData(PlayerX, 3, BlockData.Number, BlockData.data);
+                BlockData.use = false;
+            }
+            
+        }
+    }
 
 }
