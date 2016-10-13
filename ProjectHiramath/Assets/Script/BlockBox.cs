@@ -29,6 +29,7 @@ public class BlockBox : MonoBehaviour {
     GameObject puzzlebackground;
 
     public GameObject NumberBlock; //ブロック割当
+    private ScoreSystem Score;
 
     
     void Awake()
@@ -135,6 +136,8 @@ public class BlockBox : MonoBehaviour {
         }
         //数字のランダム配置 追加　福岡　2016/10/11 ここまで
 
+        //スコアシステムの発見 2016/10/12
+        Score = GameObject.FindGameObjectWithTag("Score").GetComponent<ScoreSystem>();
 
 
 
@@ -165,6 +168,12 @@ public class BlockBox : MonoBehaviour {
                     a_Block[n, m].Delete = true;
                     a_Block[n + 1, m].Delete = true;
                     a_Block[n + 2, m].Delete = true;
+                    if (a_Block[n + 1, m].data == 1)
+                        Score.ScorePlus(a_Block[n, m].data + a_Block[n + 2, m].data);
+                    else if(a_Block[n + 1, m].data == 2)
+                        Score.ScorePlus(a_Block[n, m].data - a_Block[n + 2, m].data);
+                    else
+                        Score.ScorePlus(a_Block[n, m].data * a_Block[n + 2, m].data);
                 }
                 if (m < 7 && ((a_Block[n, m].Number == true) && (a_Block[n, m + 1].Number == false)) && ((a_Block[n, m].Number == true) && (a_Block[n, m + 2].Number == true)))
                 {
@@ -172,6 +181,12 @@ public class BlockBox : MonoBehaviour {
                     a_Block[n, m].Delete = true;
                     a_Block[n, m + 1].Delete = true;
                     a_Block[n, m + 2].Delete = true;
+                    if (a_Block[n, m + 1].data == 1)
+                        Score.ScorePlus(a_Block[n, m].data + a_Block[n, m + 2].data);
+                    else if (a_Block[n, m + 1].data == 2)
+                        Score.ScorePlus(a_Block[n, m].data - a_Block[n, m + 2].data);
+                    else
+                        Score.ScorePlus(a_Block[n, m].data * a_Block[n, m + 2].data);
                 }
             }
         }
