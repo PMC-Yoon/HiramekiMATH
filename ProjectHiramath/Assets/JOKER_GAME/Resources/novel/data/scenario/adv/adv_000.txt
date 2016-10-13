@@ -1,0 +1,46 @@
+﻿@call file=tall/libs/utils
+[bg_new name="background" storage="room_tall"]
+[bg_show name="background"]
+
+;メッセージ表示
+[showmessage]
+[call file=tall/system target="*system_setting_buttons"]
+[text_new name=_sp_chara_name layer=ui x="-186" y=-250 val="" color="DDFF00" fontsize=30 anchor="MiddleLeft"]
+[text_show name="_sp_chara_name"] 
+
+
+;---------------キャラ定義
+
+@tag_default tag="chara"
+[chara_new name="yuko" storage="chara" jname="ゆうこ" scale=2 jcolor=FF77FF]
+[chara_new name="mai" storage="kiri" jname="麻衣" scale=2 jcolor=22FFFF]
+@reset_tag_default
+
+;ゆうこの表情登録
+[chara_face name="yuko" face="angry" storage=chara_a ]
+[chara_face name="yuko" face="komaru" storage=chara_k ]
+[chara_face name="yuko" face="warau" storage=chara_w ]
+
+;麻衣の表情登録
+[chara_face name="mai" face="angry" storage=kiri_a ]
+[chara_face name="mai" face="komaru" storage=kiri_k ]
+
+@chara_pos name="yuko" x=0 y=-0.7
+@chara_pos name="mai" x=-5 y=-0.7
+
+;@show name=yuko
+
+[playbgm wait=false time=1 storage="music"]
+
+#俺
+さて、、、なにやら新しい[r]
+ゲームエンジンができたとかいうから[p]
+
+来てみたものの、、、、[p]
+誰もいないな。。。。[l]どうしようか。[p]
+
+まぁ、いいや。帰ろう[p]
+
+[scene file="Game"]
+
+[s]
