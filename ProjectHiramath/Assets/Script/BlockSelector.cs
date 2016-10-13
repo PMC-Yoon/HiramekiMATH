@@ -27,11 +27,11 @@ public class BlockSelector : MonoBehaviour {
         Number = nNum;
         if (bNumber)
         {
-            Debug.Log("BASS");
+            //Debug.Log("BASS");
         }
         else
         {
-            Debug.Log("KICK");
+          //  Debug.Log("KICK");
             Number = nNum + 10;
         }
     }
