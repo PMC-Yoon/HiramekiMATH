@@ -14,10 +14,11 @@ public class SpriteAnimator : MonoBehaviour {
     public Sprite[] TexBox; //テクスチャ格納
     private int[] AnimNum; //アニメ開始番号
     public int[] AnimSize; //アニメ枚数
+    public float[] Second;
     private int NowAnim;
     private int AnimKind; //現在のアニメの種類
     private float nCount;
-    public float[] Second;
+    
     // Use this for initialization
     void Start () {
         AnimNum = new int[AnimSize.Length];
