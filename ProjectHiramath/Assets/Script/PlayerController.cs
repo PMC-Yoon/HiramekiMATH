@@ -8,11 +8,12 @@ public class PlayerController : MonoBehaviour
     GameObject arrayBlcokBox;
     int PlayerX;
     private BlockBox.BLOCKBOX BlockData;
+    bool bPlayerCatch;
 
     void Start()
     {
         PlayerX = 3;
-
+        bPlayerCatch = false;
 
 
         //   transform.position = new Vector3( transform.position.z);
@@ -57,7 +58,7 @@ public class PlayerController : MonoBehaviour
     }
 
     //ブロックを取得する関数
-    public void NumberCatch()
+     void NumberCatch()
     {
         if (!BlockData.use)
         {
@@ -73,17 +74,33 @@ public class PlayerController : MonoBehaviour
     }
 
     //ブロックを投げる関数
-    public void NumberThrow()
+     void NumberThrow()
     {
         if (BlockData.use)
         {
-            if (!arrayBlcokBox.GetComponent<BlockBox>().GetData(PlayerX, arrayBlcokBox.GetComponent<BlockBox>().GetArrayY(PlayerX)+1).use)
+            if (!arrayBlcokBox.GetComponent<BlockBox>().GetData(PlayerX, arrayBlcokBox.GetComponent<BlockBox>().GetArrayY(PlayerX) + 1).use)
             {
-                arrayBlcokBox.GetComponent<BlockBox>().addData(PlayerX, arrayBlcokBox.GetComponent<BlockBox>().GetArrayY(PlayerX)+1, BlockData.Number, BlockData.data);
+                arrayBlcokBox.GetComponent<BlockBox>().addData(PlayerX, arrayBlcokBox.GetComponent<BlockBox>().GetArrayY(PlayerX) + 1, BlockData.Number, BlockData.data);
                 BlockData.use = false;
             }
 
         }
     }
+
+    public void CatchAndRelease()
+    {
+        if( bPlayerCatch)
+        {
+            NumberThrow();
+            bPlayerCatch = false;
+        }
+        else
+        {
+            NumberCatch();
+            bPlayerCatch = true;
+
+        }
+    }
+  
 
 }
