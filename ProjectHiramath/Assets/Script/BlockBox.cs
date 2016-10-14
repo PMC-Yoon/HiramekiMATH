@@ -97,30 +97,10 @@ public class BlockBox : MonoBehaviour {
         {
             for (int m = 0; m < 9; m++)
             {
-                /* if (n == 0 && m == 0)
-                     a_Block[n, m].pos = Vector3.zero;
-                 else
-                 {
-                     a_Block[n, m].pos.x = 0.7f * n;
-                     a_Block[n, m].pos.y = -0.7f * m;
-                     a_Block[n, m].pos.z = 0;
-                 }*/
-             //    a_Block[n, m].pos.x = 0.68f * n;
-              //  a_Block[n, m].pos.y = -0.65f * m;
-              //  a_Block[n, m].pos.z = 0;
-
-
-
                 a_Block[n, m].Block = Instantiate(NumberBlock) as GameObject;
                 a_Block[n, m].Block.transform.SetParent(this.transform);
                 a_Block[n, m].Block.transform.localPosition = a_Block[n, m].pos;
                 a_Block[n, m].Block = a_Block[n, m].Block;
-
-
-              
-
-                //a_Block[n, m].Block.SetActive(false);
-
 
                 if (Random.Range(0, 101) >= 75)
                 {
@@ -238,7 +218,6 @@ public class BlockBox : MonoBehaviour {
                 if (a_Block[n, m].Delete)
                 {
                     deleteData(n, m);
-                    //GameObject.FindGameObjectWithTag("hoge").transform.GetChild((n + 1) * (m + 1) - 1).gameObject.SetActive(false);
                 }
             }
         }
