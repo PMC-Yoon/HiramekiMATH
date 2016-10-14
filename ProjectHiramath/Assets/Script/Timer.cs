@@ -31,7 +31,24 @@ public class Timer : MonoBehaviour {
         }
 
         text.text = Seconds.ToString("000");
-        
-	
+  
 	}
+
+
+    public bool GetTimerZeroFlg()
+    {
+        if( Seconds < 0.0f)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public void SetTime(int time)
+    {
+
+    }
 }
