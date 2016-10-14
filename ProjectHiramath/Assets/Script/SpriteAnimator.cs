@@ -17,9 +17,9 @@ public class SpriteAnimator : MonoBehaviour {
     private int NowAnim;
     private int AnimKind; //現在のアニメの種類
     private float nCount;
-    public float Second;
-	// Use this for initialization
-	void Start () {
+    public float[] Second;
+    // Use this for initialization
+    void Start () {
         AnimNum = new int[AnimSize.Length];
         AnimNum[0] = 0;
         for (int n = 1; n < AnimSize.Length; n++)
@@ -29,12 +29,13 @@ public class SpriteAnimator : MonoBehaviour {
         NowAnim = 0;
         AnimKind = 0;
         nCount = 0;
+
     }
 	
 	// Update is called once per frame
 	void Update () {
         nCount += 1 * Time.deltaTime;
-         if(nCount >= Second)
+         if(nCount >= Second[AnimKind])
          {
              nCount = 0;
             NowAnim++;
