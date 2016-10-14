@@ -114,6 +114,10 @@ public class BlockBox : MonoBehaviour {
                 a_Block[n, m].Block.transform.SetParent(this.transform);
                 a_Block[n, m].Block.transform.localPosition = a_Block[n, m].pos;
                 a_Block[n, m].Block = a_Block[n, m].Block;
+
+
+              
+
                 //a_Block[n, m].Block.SetActive(false);
 
 
@@ -132,6 +136,16 @@ public class BlockBox : MonoBehaviour {
                     //a_Block[n, m].Block.transform.GetComponent<BlockSelector>().NumberChanger(true, nNum);
                 }
 
+
+                //追記　Terabayashi
+                if (m > 4)
+                {
+
+                    a_Block[n, m].use = false;
+                    a_Block[n, m].Delete = false;
+                    a_Block[n, m].Block.SetActive(false);
+                }
+                //追記ここまで
             }
         }
         //数字のランダム配置 追加　福岡　2016/10/11 ここまで
@@ -310,6 +324,20 @@ public class BlockBox : MonoBehaviour {
         a_Block[arrayposX, arrayposY].Block.SetActive(false);
 
         return true;
+    }
+
+
+    //その配列の一番下のY座標を返す
+    public int GetArrayY(int X)
+    {
+        for(int i = 0; i < 9; i ++)
+        {
+            if( a_Block[X,i].use == false)
+            {
+                return i - 1;
+            }
+        }
+        return -1;//エラー
     }
 
 

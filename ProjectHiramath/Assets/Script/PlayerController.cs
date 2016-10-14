@@ -61,10 +61,12 @@ public class PlayerController : MonoBehaviour
     {
         if (!BlockData.use)
         {
-            BlockData = arrayBlcokBox.GetComponent<BlockBox>().GetData(PlayerX, 3);
+        
+
+            BlockData = arrayBlcokBox.GetComponent<BlockBox>().GetData(PlayerX, arrayBlcokBox.GetComponent<BlockBox>().GetArrayY(PlayerX));
             if (BlockData.use)
             {
-                arrayBlcokBox.GetComponent<BlockBox>().deleteData(PlayerX, 3);
+                arrayBlcokBox.GetComponent<BlockBox>().deleteData(PlayerX, arrayBlcokBox.GetComponent<BlockBox>().GetArrayY(PlayerX));
 
             }
         }
@@ -75,9 +77,9 @@ public class PlayerController : MonoBehaviour
     {
         if (BlockData.use)
         {
-            if (!arrayBlcokBox.GetComponent<BlockBox>().GetData(PlayerX, 3).use)
+            if (!arrayBlcokBox.GetComponent<BlockBox>().GetData(PlayerX, arrayBlcokBox.GetComponent<BlockBox>().GetArrayY(PlayerX)+1).use)
             {
-                arrayBlcokBox.GetComponent<BlockBox>().addData(PlayerX, 3, BlockData.Number, BlockData.data);
+                arrayBlcokBox.GetComponent<BlockBox>().addData(PlayerX, arrayBlcokBox.GetComponent<BlockBox>().GetArrayY(PlayerX)+1, BlockData.Number, BlockData.data);
                 BlockData.use = false;
             }
 
