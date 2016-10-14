@@ -70,6 +70,7 @@ public class PlayerController : MonoBehaviour
                 arrayBlcokBox.GetComponent<BlockBox>().deleteData(PlayerX, arrayBlcokBox.GetComponent<BlockBox>().GetArrayY(PlayerX));
 
             }
+            GetComponent<Character_Box>().AnimChange(1); //アニメーション再生　持ち上げなう　
         }
     }
 
@@ -83,7 +84,7 @@ public class PlayerController : MonoBehaviour
                 arrayBlcokBox.GetComponent<BlockBox>().addData(PlayerX, arrayBlcokBox.GetComponent<BlockBox>().GetArrayY(PlayerX) + 1, BlockData.Number, BlockData.data);
                 BlockData.use = false;
             }
-
+            GetComponent<Character_Box>().AnimChange(0); //アニメーション再生　平常運転
         }
     }
 
@@ -100,6 +101,8 @@ public class PlayerController : MonoBehaviour
             bPlayerCatch = true;
 
         }
+
+        
     }
   
 
