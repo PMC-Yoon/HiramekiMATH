@@ -30,7 +30,8 @@ public class BlockBox : MonoBehaviour {
 
     public GameObject NumberBlock; //ブロック割当
     private ScoreSystem Score;
-
+    private float nCount;
+    public float BlockTime; //せり出してくるまでの時間
     
     void Awake()
     {
@@ -125,15 +126,12 @@ public class BlockBox : MonoBehaviour {
                 {
                     nNum = Random.Range(0, 3);
                     addData(n, m, false, nNum);
-                    //a_Block[n, m].Block.transform.GetComponent<BlockSelector>().NumberChanger(false, nNum);
-                    //a_Block[n, m].Block.SetActive(false);
 
                 }
                 else
                 {
                     nNum = Random.Range(0, 10);
                     addData(n, m, true, nNum);
-                    //a_Block[n, m].Block.transform.GetComponent<BlockSelector>().NumberChanger(true, nNum);
                 }
 
 
@@ -152,13 +150,19 @@ public class BlockBox : MonoBehaviour {
 
         //スコアシステムの発見 2016/10/12
         Score = GameObject.FindGameObjectWithTag("Score").GetComponent<ScoreSystem>();
-
+        nCount = 0;
 
 
     }
 
     void Update()
     {
+        nCount += 1.0f * Time.deltaTime;
+        if(nCount >= BlockTime)
+        {
+            BlockAdvance();
+            nCount = 0;
+        }
         //計算処理　追加　福岡　2016/10/11 ここから
         if (Input.GetMouseButtonDown(1)) //計算フラグ成立
         {
@@ -243,7 +247,7 @@ public class BlockBox : MonoBehaviour {
     }
     //計算処理　追加　福岡　2016/10/11 ここまで
 
-    //
+    //ブロックを上に詰める
     public void FallBlock()
     {
         int nNum = 0;
@@ -265,6 +269,49 @@ public class BlockBox : MonoBehaviour {
             }
         }
     }
+
+    //ブロックせり出し
+    public void BlockAdvance()
+    {
+        for (int n = 5; n >= 0; n--)
+        {
+            for (int m = 8; m > 0; m--)
+            {
+                if (a_Block[n, m].use)
+                {
+                    deleteData(n, m);
+                    addData(n, m, a_Block[n, m - 1].Number, a_Block[n, m - 1].data);
+                }
+                else
+                {
+                    a_Block[n, m].Number = a_Block[n, m - 1].Number;
+                    a_Block[n, m].data = a_Block[n, m - 1].data;
+                    if(a_Block[n, m - 1].use)
+                    {
+                        addData(n, m, a_Block[n, m].Number, a_Block[n, m].data);
+                    }
+                    
+                }
+            }
+        }
+
+        for (int n = 0; n < 6; n++)
+        {
+            int nNum;
+            deleteData(n,0);
+            if (Random.Range(0, 101) >= 75)
+            {
+                nNum = Random.Range(0, 3);
+                addData(n, 0, false, nNum);
+
+            }
+            else
+            {
+                nNum = Random.Range(0, 10);
+                addData(n, 0, true, nNum);
+            }
+        }
+    } 
 
 
     //そのデータが使われているかチェック 追加　福岡　2016/10/11ここから
