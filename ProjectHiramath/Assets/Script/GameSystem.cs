@@ -18,6 +18,7 @@ public class GameSystem : MonoBehaviour {
         if( timer.GetComponent<Timer>().GetTimerZeroFlg())
         {
             BlockArray.GetComponent<BlockBox>().CheckNumber();
+            timer.GetComponent<Timer>().SetTime(10);
         }
 
 

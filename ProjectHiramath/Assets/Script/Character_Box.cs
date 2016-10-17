@@ -6,16 +6,17 @@ public class Character_Box : MonoBehaviour
     public GameObject[] Chara_Box;
     private GameObject Chara;
     private int CharacterNum;
-    private float ScaleSize;
+    public float ScaleSize;
     // Use this for initialization
     void Start()
     {
         CharacterNum = 0;
-        ScaleSize = 0.5f;
+       // ScaleSize = 0.5f;
         Chara = Instantiate(Chara_Box[CharacterNum]);
         Chara.transform.position = this.gameObject.transform.position;
         Chara.transform.localScale = new Vector3(ScaleSize, ScaleSize, ScaleSize);
         Chara.transform.SetParent(this.gameObject.transform);
+        Chara.transform.localEulerAngles = (Vector3.zero);
     }
 
     // Update is called once per frame
@@ -32,6 +33,7 @@ public class Character_Box : MonoBehaviour
         Chara.transform.position = this.gameObject.transform.position;
         Chara.transform.localScale = new Vector3(ScaleSize, ScaleSize, ScaleSize);
         Chara.transform.SetParent(this.gameObject.transform);
+        Chara.transform.localEulerAngles = (Vector3.zero);
     }
 
     public void AnimChange(int nNum)

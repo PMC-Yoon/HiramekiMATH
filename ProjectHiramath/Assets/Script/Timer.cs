@@ -25,10 +25,7 @@ public class Timer : MonoBehaviour {
 
         Seconds -= Time.deltaTime;
 
-        if( Seconds < 0 )
-        {
-            Seconds = 0.0f;
-        }
+      
 
         text.text = Seconds.ToString("000");
   
@@ -47,8 +44,8 @@ public class Timer : MonoBehaviour {
         }
     }
 
-    public void SetTime(int time)
+    public void SetTime(float time)
     {
-
+        Seconds = time;
     }
 }
