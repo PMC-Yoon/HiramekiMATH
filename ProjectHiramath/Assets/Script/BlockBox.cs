@@ -32,6 +32,7 @@ public class BlockBox : MonoBehaviour {
     private ScoreSystem Score;
     private float nCount;
     public float BlockTime; //せり出してくるまでの時間
+    private bool EraseFlag;
     
     void Awake()
     {
@@ -132,7 +133,7 @@ public class BlockBox : MonoBehaviour {
         Score = GameObject.FindGameObjectWithTag("Score").GetComponent<ScoreSystem>();
         nCount = 0;
 
-
+        EraseFlag = false;
     }
 
     void Update()
@@ -144,10 +145,10 @@ public class BlockBox : MonoBehaviour {
             nCount = 0;
         }
         //計算処理　追加　福岡　2016/10/11 ここから
-        if (Input.GetMouseButtonDown(1)) //計算フラグ成立
+        if (Input.GetMouseButtonDown(1) || EraseFlag) //計算フラグ成立
         {
             CheckNumber();
-            
+            EraseFlag = false;
         }
         //計算処理　追加　福岡　2016/10/11 ここまで
     }
@@ -366,6 +367,10 @@ public class BlockBox : MonoBehaviour {
         return -1;//エラー
     }
 
+    public void EraseAwake()
+    {
+        EraseFlag = true;
+    }
 
 
 }
