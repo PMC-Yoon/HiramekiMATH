@@ -103,20 +103,20 @@ public class BlockBox : MonoBehaviour {
                 a_Block[n, m].Block.transform.localPosition = a_Block[n, m].pos;
                 a_Block[n, m].Block = a_Block[n, m].Block;
 
-                if (Random.Range(0, 101) >= 75)
+                /*if (Random.Range(0, 101) >= 75)
                 {
                     nNum = Random.Range(0, 3);
                     addData(n, m, false, nNum);
 
                 }
                 else
-                {
+                {*/
                     nNum = Random.Range(0, 10);
                     addData(n, m, true, nNum);
-                }
+               // }
 
 
-                //追記　Terabayashi
+             /*  //追記　Terabayashi
                 if (m > 4)
                 {
 
@@ -124,7 +124,7 @@ public class BlockBox : MonoBehaviour {
                     a_Block[n, m].Delete = false;
                     a_Block[n, m].Block.SetActive(false);
                 }
-                //追記ここまで
+                //追記ここまで*/
             }
         }
         //数字のランダム配置 追加　福岡　2016/10/11 ここまで
@@ -138,13 +138,17 @@ public class BlockBox : MonoBehaviour {
 
     void Update()
     {
-        nCount += 1.0f * Time.deltaTime;
-        if(nCount >= BlockTime)
+       // nCount += 1.0f * Time.deltaTime;
+        /*if(nCount >= BlockTime)
         {
             BlockAdvance();
             nCount = 0;
-        }
+        }*/
         //計算処理　追加　福岡　2016/10/11 ここから
+        if(Input.GetMouseButtonDown(0))
+        {
+            ChangeBlock();
+        }
         if (Input.GetMouseButtonDown(1) || EraseFlag) //計算フラグ成立
         {
             CheckNumber();
@@ -231,7 +235,7 @@ public class BlockBox : MonoBehaviour {
     public void FallBlock()
     {
         int nNum = 0;
-        for (int n = 0; n < 6; n++)
+        /*for (int n = 0; n < 6; n++)
         {
             for (int m = 0; m < 8; m++)
             {
@@ -242,8 +246,27 @@ public class BlockBox : MonoBehaviour {
                         nNum++;
                     if (nNum <= 8)
                     {
-                        addData(n, m, a_Block[n, nNum].Number, a_Block[n, nNum].data);
                         deleteData(n, nNum);
+                        addData(n, m, a_Block[n, nNum].Number, a_Block[n, nNum].data);
+                        
+                    }
+                }
+            }
+        }*/
+        for (int n = 0; n < 6; n++)
+        {
+            for (int m = 8; m >= 0; m--)
+            {
+                nNum = m - 1;
+                if (!a_Block[n, m].use)
+                {
+                    while (nNum >= 0 && !a_Block[n, nNum].use)
+                        nNum--;
+                    if (nNum >= 0)
+                    {
+                        deleteData(n, nNum);
+                        addData(n, m, a_Block[n, nNum].Number, a_Block[n, nNum].data);
+
                     }
                 }
             }
@@ -373,5 +396,28 @@ public class BlockBox : MonoBehaviour {
     }
 
 
+    void ChangeBlock()
+    {
+        float fWidth = (a_Block[1, 0].pos.x - a_Block[0, 0].pos.x) / 2.0f;
+        float fHeight = (a_Block[0, 0].pos.y- a_Block[0, 1].pos.y) / 2.0f;
+        Vector3 MousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Debug.Log(Input.mousePosition);
+        Debug.Log(MousePos);
+        Debug.Log(fWidth);
+        Debug.Log(fHeight);
+        for (int n = 0; n < 6; n++)
+        {
+            for (int m = 0; m < 9; m++)
+            {
+                
+                if (a_Block[n, m].use &&( a_Block[n, m].pos.x + fWidth > MousePos.x && a_Block[n, m].pos.x - fWidth < MousePos.x) && (a_Block[n, m].pos.y + fHeight > MousePos.y && a_Block[n, m].pos.y - fHeight < MousePos.y))
+                {
+                    Debug.Log("hoge");
+                    deleteData(n, m);
+                    addData(n, m, false, 1);
+                }
+            }
+        }
+    }
 }
 
