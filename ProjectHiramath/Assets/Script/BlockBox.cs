@@ -102,41 +102,21 @@ public class BlockBox : MonoBehaviour {
                 a_Block[n, m].Block.transform.SetParent(this.transform);
                 a_Block[n, m].Block.transform.localPosition = a_Block[n, m].pos;
                 a_Block[n, m].Block = a_Block[n, m].Block;
-                //deleteData(n, m);
 
-                /* if (Random.Range(0, 101) >= 75)
-                 {
-                     nNum = Random.Range(0, 3);
-                     addData(n, m, false, nNum);
+                if (Random.Range(0, 101) >= 75)
+                {
+                    nNum = Random.Range(0, 3);
+                    addData(n, m, false, nNum);
 
-                 }
-                 else
-                 {
-                     nNum = Random.Range(0, 10);
-                     addData(n, m, true, nNum);
-                 }*/
+                }
+                else
+                {
+                    nNum = Random.Range(0, 10);
+                    addData(n, m, true, nNum);
+                }
 
-                a_Block[n, m].use = false;
-                a_Block[n, m].Delete = false;
-                a_Block[n, m].Block.SetActive(false);
 
                 //追記　Terabayashi
-                /* if (m > 4)
-                 {
-
-                     a_Block[n, m].use = false;
-                     a_Block[n, m].Delete = false;
-                     a_Block[n, m].Block.SetActive(false);
-                 }*/
-                //追記ここまで
-            }
-        }
-
-        BlockGenerate(6, 9);
-        for (int n = 0; n < 6; n++)
-        {
-            for (int m = 0; m < 9; m++)
-            {
                 if (m > 4)
                 {
 
@@ -144,12 +124,13 @@ public class BlockBox : MonoBehaviour {
                     a_Block[n, m].Delete = false;
                     a_Block[n, m].Block.SetActive(false);
                 }
-           }
+                //追記ここまで
+            }
         }
-                //数字のランダム配置 追加　福岡　2016/10/11 ここまで
+        //数字のランダム配置 追加　福岡　2016/10/11 ここまで
 
-                //スコアシステムの発見 2016/10/12
-                Score = GameObject.FindGameObjectWithTag("Score").GetComponent<ScoreSystem>();
+        //スコアシステムの発見 2016/10/12
+        Score = GameObject.FindGameObjectWithTag("Score").GetComponent<ScoreSystem>();
         nCount = 0;
 
         EraseFlag = false;
@@ -158,7 +139,7 @@ public class BlockBox : MonoBehaviour {
     void Update()
     {
         nCount += 1.0f * Time.deltaTime;
-        if(nCount >= BlockTime && !EraseFlag)
+        if(nCount >= BlockTime)
         {
             BlockAdvance();
             nCount = 0;
@@ -295,23 +276,21 @@ public class BlockBox : MonoBehaviour {
         }
 
         for (int n = 0; n < 6; n++)
-         {
-             int nNum;
-             deleteData(n,0);
-            /* if (Random.Range(0, 101) >= 75)
-             {
-                 nNum = Random.Range(0, 3);
-                 addData(n, 0, false, nNum);
+        {
+            int nNum;
+            deleteData(n,0);
+            if (Random.Range(0, 101) >= 75)
+            {
+                nNum = Random.Range(0, 3);
+                addData(n, 0, false, nNum);
 
-             }
-             else
-             {
-                 nNum = Random.Range(0, 10);
-                 addData(n, 0, true, nNum);
-             }*/
-         }
-
-        BlockGenerate(6, 1);
+            }
+            else
+            {
+                nNum = Random.Range(0, 10);
+                addData(n, 0, true, nNum);
+            }
+        }
     } 
 
 
@@ -362,6 +341,10 @@ public class BlockBox : MonoBehaviour {
             return false;
         }
 
+        //データを初期化させる
+        a_Block[arrayposX, arrayposY].use = false;
+       // a_Block[arrayposX, arrayposY].Number = false;
+       // a_Block[arrayposX, arrayposY].data = 0;
 
         //削除項目追加　hukuoka
         a_Block[arrayposX, arrayposY].Delete = false;
@@ -387,29 +370,6 @@ public class BlockBox : MonoBehaviour {
     public void EraseAwake()
     {
         EraseFlag = true;
-    }
-
-    public void BlockGenerate(int x,int y)
-    {
-        int nNum;
-        for(int n = 0; n < x; n++)
-        {
-            for(int m = 0; m < y; m++)
-            {
-                if (Random.Range(0, 101) >= 75)
-                {
-                    nNum = Random.Range(0, 3);
-                    addData(n, m, false, nNum);
-
-                }
-                else
-                {
-                    nNum = Random.Range(0, 10);
-                    addData(n, m, true, nNum);
-                }
-            }
-        }
-
     }
 
 
