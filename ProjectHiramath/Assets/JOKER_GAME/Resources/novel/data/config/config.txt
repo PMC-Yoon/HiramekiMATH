@@ -10,7 +10,7 @@ saveslot_max = 5
 messageSpeed = 0.02
 
 ;デフォルトのメッセージフォントサイズを指定します
-messageFontSize=16
+messageFontSize=12
 messageFontColor=FFFFFF
 
 ;デバッグメッセージを表示するかどうか
