@@ -1,0 +1,65 @@
+﻿@call file=tall/libs/utils
+[bg_new name="background" storage="N_BG"]
+[bg_show name="background"]
+
+;メッセージ表示
+[showmessage]
+[text_new name=_sp_chara_name layer=ui x=-50 y=-120 val="" color="FFFFFF" fontsize=16 anchor="MiddleLeft"]
+[text_show name="_sp_chara_name"] 
+
+;---------------キャラ定義
+
+@tag_default tag="chara"
+[chara_new name="Galileo" storage="G_normal_1" jname="ガリレオ" scale=0.9 jcolor=FF77FF]
+[chara_new name="Einstein" storage="E_normal_1" jname="アインシュタイン" scale=0.9 jcolor=22FFFF]
+@reset_tag_default
+
+;ゆうこの表情登録
+[chara_face name="Galileo" face="angry" storage=chara_a ]
+[chara_face name="Galileo" face="komaru" storage=chara_k ]
+[chara_face name="Galileo" face="warau" storage=chara_w ]
+
+;麻衣の表情登録
+[chara_face name="Einstein" face="angry" storage=kiri_a ]
+[chara_face name="Einstein" face="komaru" storage=kiri_k ]
+
+@chara_pos name="Galileo" x=-1.2 y=0.2
+@chara_pos name="Einstein" x=1.5 y=0.2
+
+;[playbgm wait=false time=1 storage="music"]
+
+ここは、いじんたちがくらす[r]ジーニアスアイランド。[r]
+このしまにはあるでんせつがある。[p]
+
+やまおくのしんでんにあるちえのぼうし。[r]
+これをてにしたものはえいえんのちえと、[r]「いちばんかしこい」しょうごうをてにいれるだろう～と[p]
+
+すこしバカなじゅうにんたちは、[r]このぼうしのでんせつをあろうことかしんじてしまい
+かわいそうなことに、[r]ぼうしをめぐってたたかいつづけるのであった・・・。[p]
+
+@show name=Galileo
+#Galileo
+「おい！おまえ！」[p]
+
+@show name=Einstein
+#Einstein
+「あん？」[p]
+
+#Galileo
+「あたしとしょうぶしろ！」[p]
+
+#Einstein
+「いやだね。[l]わたしはサボテンのせわでいそがしいんだ。」[p]
+
+#Galileo
+「えーーー！」[r]
+「じゃあ、いちばんかしこいのはあたしってことだな！ばーかばーか！」[p]
+
+#Einstein
+「ｶﾁﾝ」[p]
+「きがかわった。[l][r]そこまでいうならいいだろう」[r]
+「みせてやろう。わたしのちからを！」[p]
+
+[scene file="Game"]
+
+[s]
