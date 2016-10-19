@@ -19,15 +19,5 @@ showLog=true
 ;バックログの最大保持数
 backlogNum=100
 
-;【未実装】デフォルトのBGMボリュームとSEボリュームを設定します 0〜10 
-bgmVolume=10  
-seVolume=10
-
-;【未実装】クリック待ちに表示されるアイコン画像を指定できます。指定がない場合は表示されません
-;glyph=glyph_default 
-
-
-
-
-width=“gagaga”
-height=“wwwww”
+;width=“gagaga”
+;height=“wwwww”

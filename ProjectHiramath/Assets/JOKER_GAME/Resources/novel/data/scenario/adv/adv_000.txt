@@ -4,7 +4,7 @@
 
 ;メッセージ表示
 [showmessage]
-[text_new name=_sp_chara_name layer=ui x=-40 y=-130 val="" color="FFFFFF" fontsize=16 anchor="MiddleLeft"]
+[text_new name=_sp_chara_name layer=ui x=-40 y=-140 val="" color="FFFFFF" fontsize=16 anchor="MiddleLeft"]
 [text_show name="_sp_chara_name"] 
 
 ;---------------キャラ定義
