@@ -33,6 +33,8 @@ public class BlockBox : MonoBehaviour {
     private float nCount;
     public float BlockTime; //せり出してくるまでの時間
     private bool EraseFlag;
+
+    private int ChangeNum; //変換記号
     
     void Awake()
     {
@@ -134,6 +136,8 @@ public class BlockBox : MonoBehaviour {
         nCount = 0;
 
         EraseFlag = false;
+
+        ChangeNum = -1; //最初は何も起きない
     }
 
     void Update()
@@ -413,10 +417,21 @@ public class BlockBox : MonoBehaviour {
                 if (a_Block[n, m].use &&( a_Block[n, m].pos.x + fWidth > MousePos.x && a_Block[n, m].pos.x - fWidth < MousePos.x) && (a_Block[n, m].pos.y + fHeight > MousePos.y && a_Block[n, m].pos.y - fHeight < MousePos.y))
                 {
                     Debug.Log("hoge");
-                    deleteData(n, m);
-                    addData(n, m, false, 1);
+                    if(ChangeNum >= 0)
+                    {
+                        deleteData(n, m);
+                        addData(n, m, false, ChangeNum);
+                    }
                 }
             }
+        }
+    }
+
+    void  ChangeNumberSet(int nNum)
+    {
+        if(nNum >= 0)
+        {
+            ChangeNum = nNum;
         }
     }
 }
