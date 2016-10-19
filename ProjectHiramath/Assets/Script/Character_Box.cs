@@ -11,7 +11,6 @@ public class Character_Box : MonoBehaviour
     void Start()
     {
         CharacterNum = 0;
-       // ScaleSize = 0.5f;
         Chara = Instantiate(Chara_Box[CharacterNum]);
         Chara.transform.position = this.gameObject.transform.position;
         Chara.transform.localScale = new Vector3(ScaleSize, ScaleSize, ScaleSize);
