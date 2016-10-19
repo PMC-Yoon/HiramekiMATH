@@ -427,7 +427,7 @@ public class BlockBox : MonoBehaviour {
         }
     }
 
-    void  ChangeNumberSet(int nNum)
+    public void  ChangeNumberSet(int nNum)
     {
         if(nNum >= 0)
         {
