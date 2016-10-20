@@ -37,13 +37,13 @@ public class Fade : MonoBehaviour
         {
             case "FadeIn":
                 alpha.a = 1.0f - (Time.time - startTime) / FadeTime;
-                this.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, alpha.a);
+                this.GetComponent<Image>().color = new Color(0, 0, 0, alpha.a);
                 break;
 
 
             case "FadeOut":
                 alpha.a = (Time.time - startTime) / FadeTime;
-                this.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, alpha.a);
+                this.GetComponent<Image>().color = new Color(0, 0, 0, alpha.a);
 
                 break;
         }
@@ -61,6 +61,7 @@ public class Fade : MonoBehaviour
 
     public void FadeStart()
     {
+        
         fadeStart = "FadeOut";
         startTime = Time.time;
         Invoke("Load", FadeTime);

@@ -4,9 +4,10 @@ using UnityEngine.SceneManagement;
 public class Menu : MonoBehaviour {
     public GameObject PauseMenuPrefab;
 
+    GameObject fade;
 	// Use this for initialization
 	void Start () {
-	
+        fade = GameObject.Find("Fade");
 	}
 	
 	// Update is called once per frame
@@ -43,6 +44,21 @@ public class Menu : MonoBehaviour {
             PauseMenuPrefab.SetActive(true);
             return;
         }
+    }
+
+    public void PauseMenuRestart()
+    {
+        PauseRelease();
+        fade.gameObject.GetComponent<Fade>().NextSceneName = "game";
+        fade.gameObject.GetComponent<Fade>().FadeStart();
+
+    }
+
+    public void PauseMenuTitleBack()
+    {
+        PauseRelease();
+        fade.gameObject.GetComponent<Fade>().NextSceneName = "title";
+        fade.gameObject.GetComponent<Fade>().FadeStart();
     }
 
 

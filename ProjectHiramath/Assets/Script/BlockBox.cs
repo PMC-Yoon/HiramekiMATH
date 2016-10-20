@@ -201,8 +201,12 @@ public class BlockBox : MonoBehaviour {
         //計算処理　追加　福岡　2016/10/11 ここから
         if(Input.GetMouseButtonDown(0))
         {
-            ChangeBlock();
-            CheckNumber();
+            //if分追加　2016/10/20 terabayashi
+            if ((int)Time.timeScale == 1)
+            {
+                ChangeBlock();
+                CheckNumber();
+            }
         }
         if (Input.GetMouseButtonDown(1) || EraseFlag) //計算フラグ成立
         {
