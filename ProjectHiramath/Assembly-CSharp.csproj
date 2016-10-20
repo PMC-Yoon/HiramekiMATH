@@ -109,6 +109,7 @@
      <Compile Include="Assets\Script\SceneChange.cs" />
      <Compile Include="Assets\Script\ScoreSystem.cs" />
      <Compile Include="Assets\Script\SpriteAnimator.cs" />
+     <Compile Include="Assets\Script\System\Fade.cs" />
      <Compile Include="Assets\Script\Timer.cs" />
      <None Include="Assets\JOKER_GAME\Resources\novel\data\scenario\wide\libs\utils.txt" />
      <None Include="Assets\JOKER_GAME\Resources\novel\data\scenario\tall\libs\utils.txt" />

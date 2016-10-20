@@ -47,7 +47,7 @@ public class BlockBox : MonoBehaviour {
     void Start()
     {
         AreaWidth = 6;
-        AreaHeight = 9;
+        AreaHeight = 6;
 
         //ブロックの中心座標を求める処理 2016/10/11 KazuakiTerabayashi 
         puzzlebackground = GameObject.Find("puzzleBackground");
@@ -413,19 +413,52 @@ public class BlockBox : MonoBehaviour {
         int WidthMax = AreaWidth - 1;
         int HeightMax = AreaHeight - 1;
         Vector3 MousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Debug.Log(Input.mousePosition);
-        Debug.Log(MousePos);
-        Debug.Log(fWidth);
-        Debug.Log(fHeight);
-        for (int n = 0; n < AreaWidth; n++)
+        for(int n = 1; n < WidthMax; n++)
         {
-            for (int m = 0; m < AreaHeight; m++)
+            if((a_Block[n - 1, 0].use && a_Block[n + 1, 0].use) && (a_Block[n, 0].pos.x + fWidth > MousePos.x && a_Block[n, 0].pos.x - fWidth < MousePos.x) && (a_Block[n, 0].pos.y + fHeight > MousePos.y && a_Block[n, 0].pos.y - fHeight < MousePos.y))
+            {
+                if (ChangeNum >= 0)
+                {
+                    deleteData(n, 0);
+                    addData(n, 0, false, ChangeNum);
+                }
+            }
+
+            if ((a_Block[n - 1, HeightMax].use && a_Block[n + 1, HeightMax].use) && (a_Block[n, HeightMax].pos.x + fWidth > MousePos.x && a_Block[n, HeightMax].pos.x - fWidth < MousePos.x) && (a_Block[n, HeightMax].pos.y + fHeight > MousePos.y && a_Block[n, HeightMax].pos.y - fHeight < MousePos.y))
+            {
+                if (ChangeNum >= 0)
+                {
+                    deleteData(n, HeightMax);
+                    addData(n, HeightMax, false, ChangeNum);
+                }
+            }
+        }
+        for (int m = 1; m < HeightMax; m++)
+        {
+            if((a_Block[0, m - 1].use && a_Block[0, m + 1].use) && (a_Block[0, m].pos.x + fWidth > MousePos.x && a_Block[0, m].pos.x - fWidth < MousePos.x) && (a_Block[0, m].pos.y + fHeight > MousePos.y && a_Block[0, m].pos.y - fHeight < MousePos.y))
+            {
+                if (ChangeNum >= 0)
+                {
+                    deleteData(0, m);
+                    addData(0, m, false, ChangeNum);
+                }
+            }
+
+            if ((a_Block[WidthMax, m - 1].use && a_Block[WidthMax, m + 1].use) && (a_Block[WidthMax, m].pos.x + fWidth > MousePos.x && a_Block[WidthMax, m].pos.x - fWidth < MousePos.x) && (a_Block[WidthMax, m].pos.y + fHeight > MousePos.y && a_Block[WidthMax, m].pos.y - fHeight < MousePos.y))
+            {
+                if (ChangeNum >= 0)
+                {
+                    deleteData(WidthMax, m);
+                    addData(WidthMax, m, false, ChangeNum);
+                }
+            }
+        }
+        for (int n = 1; n < AreaWidth - 1; n++)
+        {
+            for (int m = 1; m < AreaHeight - 1; m++)
             {
                 //以下の５つの式が全て成立し、座標が合っている部分のブロックを変更する
                 if (a_Block[n, m].use &&
-                     !((n == 0 && m == 0) || (n == 0 && m == HeightMax) || (n == WidthMax && m == 0) || (n == WidthMax && m == HeightMax)) &&  //四隅でないか
-                     !((n == 0 || n == WidthMax) && (!a_Block[n, m - 1].use || !a_Block[n, m + 1].use)) &&                                     //左右の端の場合、上下に数字があるか
-                     !((m == 0 || m == HeightMax) &&(!a_Block[n - 1, m].use || a_Block[n + 1, m].use)) &&                                      //上下の端の場合、左右に数字があるか
                      ((a_Block[n, m - 1].use && a_Block[n, m + 1].use) || (a_Block[n - 1, m].use && a_Block[n + 1, m].use)) &&                 //上下、もしくは左右に数字があるか
                     ( a_Block[n, m].pos.x + fWidth > MousePos.x && a_Block[n, m].pos.x - fWidth < MousePos.x) && (a_Block[n, m].pos.y + fHeight > MousePos.y && a_Block[n, m].pos.y - fHeight < MousePos.y)) //座標判定
                 {
