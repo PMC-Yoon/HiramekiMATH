@@ -34,6 +34,7 @@ public class Menu : MonoBehaviour {
         if( (int)Time.timeScale == 0)
         {
             PauseRelease();
+            PauseMenuPrefab.SetActive(false);
             return;
         }
         if( (int)Time.timeScale == 1)
