@@ -6,6 +6,8 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System.Collections.Generic;
+using System.IO;
 
 
 public class BlockBox : MonoBehaviour {
@@ -24,7 +26,8 @@ public class BlockBox : MonoBehaviour {
     }
 
     //宣言
-    public BLOCKBOX[,] a_Block = new BLOCKBOX[6, 9];
+    public BLOCKBOX[,] a_Block = new BLOCKBOX[6, 6];
+    private int[] NumberLast;
 
     GameObject puzzlebackground;
 
@@ -38,6 +41,8 @@ public class BlockBox : MonoBehaviour {
 
     private int AreaWidth;  //横に何個並ぶか
     private int AreaHeight; //縦に何個並ぶか
+
+    private int Border; //ボーダー仮収納箱
     
     void Awake()
     {
@@ -84,7 +89,7 @@ public class BlockBox : MonoBehaviour {
         Vector3 poLU = new Vector3(posBackground.x - (width / 2) + blockwidth, posBackground.y + (height/2) - blockwidth, 0);
 
         //位置情報代入
-        for( int x = 0, y = 0;y < 9; x++)
+        for( int x = 0, y = 0;y < AreaHeight; x++)
         {
 
             a_Block[x, y].pos = new Vector3(poLU.x + (intervalX * x), poLU.y - (intervalY * y), 0);
@@ -98,7 +103,9 @@ public class BlockBox : MonoBehaviour {
 
         //ブロックの中心座標を求める処理 2016/10/11 KazuakiTerabayashi ここまで
 
+        NumberLast = new int[4];
 
+        StageLoad();
 
         //数字のランダム配置 追加　福岡　2016/10/11 ここから
         int nNum;
@@ -111,28 +118,20 @@ public class BlockBox : MonoBehaviour {
                 a_Block[n, m].Block.transform.localPosition = a_Block[n, m].pos;
                 a_Block[n, m].Block = a_Block[n, m].Block;
 
-                /*if (Random.Range(0, 101) >= 75)
+                if(a_Block[n, m].data < 0)
                 {
-                    nNum = Random.Range(0, 3);
-                    addData(n, m, false, nNum);
-
+                    a_Block[n, m].use = true;
+                    deleteData(n, m);
                 }
                 else
-                {*/
-                    nNum = Random.Range(0, 10);
-                    addData(n, m, true, nNum);
-               // }
-
-
-             /*  //追記　Terabayashi
-                if (m > 4)
                 {
-
-                    a_Block[n, m].use = false;
-                    a_Block[n, m].Delete = false;
-                    a_Block[n, m].Block.SetActive(false);
+                    addData(n, m, true, a_Block[n, m].data);
                 }
-                //追記ここまで*/
+
+                //Num = Random.Range(0, 10);
+                //addData(n, m, true, nNum);
+
+
             }
         }
         //数字のランダム配置 追加　福岡　2016/10/11 ここまで
@@ -144,6 +143,51 @@ public class BlockBox : MonoBehaviour {
         EraseFlag = false;
 
         ChangeNum = -1; //最初は何も起きない
+        
+    }
+
+    void StageLoad()
+    {
+        string FileName;
+        int Stage;
+        TextAsset CSV;
+        List<string[]> StageStatus = new List<string[]>();
+        FileName = "stage_";
+        Stage = 1;
+        CSV = Resources.Load(FileName + Stage) as TextAsset;
+        StringReader reader = new StringReader(CSV.text);
+
+        while (reader.Peek() > -1)
+        {
+            string line = reader.ReadLine();
+            StageStatus.Add(line.Split(','));
+        }
+
+        //EnemyPos = new EnemyBox[StageStatus.Count]; //ファイルの長さを取得し、それに合わせて長さを変更
+        //ENEMY = new GameObject[StageStatus.Count];
+
+        // int ListCount = 0;
+        for (int n = 0; n < AreaWidth; n++)
+        {
+            for (int m = 0; m < AreaHeight; m++)
+            {
+                a_Block[n,m].Number = true;
+                a_Block[n,m].data = int.Parse(StageStatus[m][n]);
+            }
+        }
+
+        Border = int.Parse(StageStatus[AreaHeight][0]);
+
+        for (int n = 0; n < NumberLast.Length; n++)
+        {
+            NumberLast[n] = int.Parse(StageStatus[AreaHeight][n + 1]);
+        }
+
+        Debug.Log(Border);
+        Debug.Log(NumberLast[0]);
+        Debug.Log(NumberLast[1]);
+        Debug.Log(NumberLast[2]);
+        Debug.Log(NumberLast[3]);
     }
 
     void Update()
@@ -158,6 +202,7 @@ public class BlockBox : MonoBehaviour {
         if(Input.GetMouseButtonDown(0))
         {
             ChangeBlock();
+            CheckNumber();
         }
         if (Input.GetMouseButtonDown(1) || EraseFlag) //計算フラグ成立
         {
@@ -413,23 +458,30 @@ public class BlockBox : MonoBehaviour {
         int WidthMax = AreaWidth - 1;
         int HeightMax = AreaHeight - 1;
         Vector3 MousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        int BlockX = -1;
+        int BlockY = -1;
         for(int n = 1; n < WidthMax; n++)
         {
             if((a_Block[n - 1, 0].use && a_Block[n + 1, 0].use) && (a_Block[n, 0].pos.x + fWidth > MousePos.x && a_Block[n, 0].pos.x - fWidth < MousePos.x) && (a_Block[n, 0].pos.y + fHeight > MousePos.y && a_Block[n, 0].pos.y - fHeight < MousePos.y))
             {
-                if (ChangeNum >= 0)
+                if (ChangeNum >= 0 && NumberLast[ChangeNum] > 0)
                 {
-                    deleteData(n, 0);
-                    addData(n, 0, false, ChangeNum);
+                   // NumberLast[ChangeNum]--;
+                   // deleteData(n, 0);
+                   // addData(n, 0, false, ChangeNum);
+                    BlockX = n;
+                    BlockY = 0;
                 }
             }
 
             if ((a_Block[n - 1, HeightMax].use && a_Block[n + 1, HeightMax].use) && (a_Block[n, HeightMax].pos.x + fWidth > MousePos.x && a_Block[n, HeightMax].pos.x - fWidth < MousePos.x) && (a_Block[n, HeightMax].pos.y + fHeight > MousePos.y && a_Block[n, HeightMax].pos.y - fHeight < MousePos.y))
             {
-                if (ChangeNum >= 0)
+                if (ChangeNum >= 0 && NumberLast[ChangeNum] > 0)
                 {
-                    deleteData(n, HeightMax);
-                    addData(n, HeightMax, false, ChangeNum);
+                    // deleteData(n, HeightMax);
+                    // addData(n, HeightMax, false, ChangeNum);
+                    BlockX = n;
+                    BlockY = HeightMax;
                 }
             }
         }
@@ -437,25 +489,29 @@ public class BlockBox : MonoBehaviour {
         {
             if((a_Block[0, m - 1].use && a_Block[0, m + 1].use) && (a_Block[0, m].pos.x + fWidth > MousePos.x && a_Block[0, m].pos.x - fWidth < MousePos.x) && (a_Block[0, m].pos.y + fHeight > MousePos.y && a_Block[0, m].pos.y - fHeight < MousePos.y))
             {
-                if (ChangeNum >= 0)
+                if (ChangeNum >= 0 && NumberLast[ChangeNum] > 0)
                 {
-                    deleteData(0, m);
-                    addData(0, m, false, ChangeNum);
+                    // deleteData(0, m);
+                    // addData(0, m, false, ChangeNum);
+                    BlockX = 0;
+                    BlockY = m;
                 }
             }
 
             if ((a_Block[WidthMax, m - 1].use && a_Block[WidthMax, m + 1].use) && (a_Block[WidthMax, m].pos.x + fWidth > MousePos.x && a_Block[WidthMax, m].pos.x - fWidth < MousePos.x) && (a_Block[WidthMax, m].pos.y + fHeight > MousePos.y && a_Block[WidthMax, m].pos.y - fHeight < MousePos.y))
             {
-                if (ChangeNum >= 0)
+                if (ChangeNum >= 0 && NumberLast[ChangeNum] > 0)
                 {
-                    deleteData(WidthMax, m);
-                    addData(WidthMax, m, false, ChangeNum);
+                    // deleteData(WidthMax, m);
+                    // addData(WidthMax, m, false, ChangeNum);
+                    BlockX = WidthMax;
+                    BlockY = m;
                 }
             }
         }
-        for (int n = 1; n < AreaWidth - 1; n++)
+        for (int n = 1; n < WidthMax; n++)
         {
-            for (int m = 1; m < AreaHeight - 1; m++)
+            for (int m = 1; m < HeightMax; m++)
             {
                 //以下の５つの式が全て成立し、座標が合っている部分のブロックを変更する
                 if (a_Block[n, m].use &&
@@ -463,14 +519,24 @@ public class BlockBox : MonoBehaviour {
                     ( a_Block[n, m].pos.x + fWidth > MousePos.x && a_Block[n, m].pos.x - fWidth < MousePos.x) && (a_Block[n, m].pos.y + fHeight > MousePos.y && a_Block[n, m].pos.y - fHeight < MousePos.y)) //座標判定
                 {
                     Debug.Log("hoge");
-                    if(ChangeNum >= 0)
+                    if(ChangeNum >= 0 && NumberLast[ChangeNum] > 0)
                     {
-                        deleteData(n, m);
-                        addData(n, m, false, ChangeNum);
+                        //deleteData(n, m);
+                        // addData(n, m, false, ChangeNum);
+                        BlockX = n;
+                        BlockY = m;
                     }
                 }
             }
         }
+
+        if(BlockX >= 0)
+        {
+            deleteData(BlockX, BlockY);
+            addData(BlockX, BlockY, false, ChangeNum);
+            NumberLast[ChangeNum]--;
+        }
+
     }
 
     public void  ChangeNumberSet(int nNum)
