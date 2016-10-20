@@ -153,7 +153,7 @@ public class BlockBox : MonoBehaviour {
         TextAsset CSV;
         List<string[]> StageStatus = new List<string[]>();
         FileName = "stage_";
-        Stage = 1;
+        Stage = 0;
         CSV = Resources.Load(FileName + Stage) as TextAsset;
         StringReader reader = new StringReader(CSV.text);
 
@@ -192,12 +192,7 @@ public class BlockBox : MonoBehaviour {
 
     void Update()
     {
-       // nCount += 1.0f * Time.deltaTime;
-        /*if(nCount >= BlockTime)
-        {
-            BlockAdvance();
-            nCount = 0;
-        }*/
+        EraseCheck();
         //計算処理　追加　福岡　2016/10/11 ここから
         if(Input.GetMouseButtonDown(0))
         {
@@ -217,7 +212,74 @@ public class BlockBox : MonoBehaviour {
     }
 
 
+    void EraseCheck()
+    {
+        float fWidth = (a_Block[1, 0].pos.x - a_Block[0, 0].pos.x) / 2.0f;
+        float fHeight = (a_Block[0, 0].pos.y - a_Block[0, 1].pos.y) / 2.0f;
+        int WidthMax = AreaWidth - 1;
+        int HeightMax = AreaHeight - 1;
+        Vector3 MousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        a_Block[0, 0].Block.GetComponent<BlockSelector>().Black();
+        a_Block[WidthMax, 0].Block.GetComponent<BlockSelector>().Black();
+        a_Block[0, HeightMax].Block.GetComponent<BlockSelector>().Black();
+        a_Block[WidthMax, HeightMax].Block.GetComponent<BlockSelector>().Black();
+        for (int n = 1; n < WidthMax; n++)
+        {
+            if ((a_Block[n - 1, 0].use && a_Block[n + 1, 0].use))
+            {
+                a_Block[n, 0].Block.GetComponent<BlockSelector>().White();
+            }
+            else
+            {
+                a_Block[n, 0].Block.GetComponent<BlockSelector>().Black();
+            }
 
+            if ((a_Block[n - 1, HeightMax].use && a_Block[n + 1, HeightMax].use))
+            {
+                a_Block[n, HeightMax].Block.GetComponent<BlockSelector>().White();
+            }
+            else
+            {
+                a_Block[n, HeightMax].Block.GetComponent<BlockSelector>().Black();
+            }
+        }
+        for (int m = 1; m < HeightMax; m++)
+        {
+            if ((a_Block[0, m - 1].use && a_Block[0, m + 1].use))
+            {
+                a_Block[0, m].Block.GetComponent<BlockSelector>().White();
+            }
+            else
+            {
+                a_Block[0, m].Block.GetComponent<BlockSelector>().Black();
+            }
+
+            if ((a_Block[WidthMax, m - 1].use && a_Block[WidthMax, m + 1].use))
+            {
+                a_Block[WidthMax, m].Block.GetComponent<BlockSelector>().White();
+            }
+            else
+            {
+                a_Block[WidthMax, m].Block.GetComponent<BlockSelector>().Black();
+            }
+        }
+        for (int n = 1; n < WidthMax; n++)
+        {
+            for (int m = 1; m < HeightMax; m++)
+            {
+                //以下の５つの式が全て成立し、座標が合っている部分のブロックを変更する
+                if (a_Block[n, m].use &&
+                     ((a_Block[n, m - 1].use && a_Block[n, m + 1].use) || (a_Block[n - 1, m].use && a_Block[n + 1, m].use))) //座標判定
+                {
+                    a_Block[n, m].Block.GetComponent<BlockSelector>().White();
+                }
+                else
+                {
+                    a_Block[n, m].Block.GetComponent<BlockSelector>().Black();
+                }
+            }
+        }
+    }
     //計算処理　追加　福岡　2016/10/11 ここから
     public void CheckNumber()
     {
@@ -470,9 +532,6 @@ public class BlockBox : MonoBehaviour {
             {
                 if (ChangeNum >= 0 && NumberLast[ChangeNum] > 0)
                 {
-                   // NumberLast[ChangeNum]--;
-                   // deleteData(n, 0);
-                   // addData(n, 0, false, ChangeNum);
                     BlockX = n;
                     BlockY = 0;
                 }
@@ -482,8 +541,6 @@ public class BlockBox : MonoBehaviour {
             {
                 if (ChangeNum >= 0 && NumberLast[ChangeNum] > 0)
                 {
-                    // deleteData(n, HeightMax);
-                    // addData(n, HeightMax, false, ChangeNum);
                     BlockX = n;
                     BlockY = HeightMax;
                 }
@@ -495,8 +552,6 @@ public class BlockBox : MonoBehaviour {
             {
                 if (ChangeNum >= 0 && NumberLast[ChangeNum] > 0)
                 {
-                    // deleteData(0, m);
-                    // addData(0, m, false, ChangeNum);
                     BlockX = 0;
                     BlockY = m;
                 }
@@ -506,8 +561,6 @@ public class BlockBox : MonoBehaviour {
             {
                 if (ChangeNum >= 0 && NumberLast[ChangeNum] > 0)
                 {
-                    // deleteData(WidthMax, m);
-                    // addData(WidthMax, m, false, ChangeNum);
                     BlockX = WidthMax;
                     BlockY = m;
                 }
@@ -525,8 +578,6 @@ public class BlockBox : MonoBehaviour {
                     Debug.Log("hoge");
                     if(ChangeNum >= 0 && NumberLast[ChangeNum] > 0)
                     {
-                        //deleteData(n, m);
-                        // addData(n, m, false, ChangeNum);
                         BlockX = n;
                         BlockY = m;
                     }
