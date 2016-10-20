@@ -35,6 +35,9 @@ public class BlockBox : MonoBehaviour {
     private bool EraseFlag;
 
     private int ChangeNum; //変換記号
+
+    private int AreaWidth;  //横に何個並ぶか
+    private int AreaHeight; //縦に何個並ぶか
     
     void Awake()
     {
@@ -43,6 +46,9 @@ public class BlockBox : MonoBehaviour {
 
     void Start()
     {
+        AreaWidth = 6;
+        AreaHeight = 9;
+
         //ブロックの中心座標を求める処理 2016/10/11 KazuakiTerabayashi 
         puzzlebackground = GameObject.Find("puzzleBackground");
         
@@ -71,8 +77,8 @@ public class BlockBox : MonoBehaviour {
 
         //１個１個の間隔をもとめる
         float intervalX, intervalY;
-        intervalX = width / 6;
-        intervalY = height / 9;
+        intervalX = width / AreaWidth;
+        intervalY = height / AreaHeight;
 
         //一番左上の位置
         Vector3 poLU = new Vector3(posBackground.x - (width / 2) + blockwidth, posBackground.y + (height/2) - blockwidth, 0);
@@ -96,9 +102,9 @@ public class BlockBox : MonoBehaviour {
 
         //数字のランダム配置 追加　福岡　2016/10/11 ここから
         int nNum;
-        for (int n = 0; n < 6; n++)
+        for (int n = 0; n < AreaWidth; n++)
         {
-            for (int m = 0; m < 9; m++)
+            for (int m = 0; m < AreaHeight; m++)
             {
                 a_Block[n, m].Block = Instantiate(NumberBlock) as GameObject;
                 a_Block[n, m].Block.transform.SetParent(this.transform);
@@ -166,13 +172,13 @@ public class BlockBox : MonoBehaviour {
     //計算処理　追加　福岡　2016/10/11 ここから
     public void CheckNumber()
     {
-        for (int n = 0; n < 6; n++)
+        for (int n = 0; n < AreaWidth; n++)
         {
-            for (int m = 0; m < 9; m++)
+            for (int m = 0; m < AreaHeight; m++)
             {
                 if (a_Block[n, m].use)
                 {
-                    if (n < 4 && a_Block[n + 1, m].use && a_Block[n + 2, m].use && ((a_Block[n, m].Number == true) && (a_Block[n + 1, m].Number == false)) && ((a_Block[n, m].Number == true) && (a_Block[n + 2, m].Number == true)))
+                    if (n < AreaWidth - 2 && a_Block[n + 1, m].use && a_Block[n + 2, m].use && ((a_Block[n, m].Number == true) && (a_Block[n + 1, m].Number == false)) && ((a_Block[n, m].Number == true) && (a_Block[n + 2, m].Number == true)))
                     {
                         //Debug.Log("ﾇｯ");
                         a_Block[n, m].Delete = true;
@@ -194,7 +200,7 @@ public class BlockBox : MonoBehaviour {
                             Score.ScorePlus(a_Block[n, m].data * a_Block[n + 2, m].data);
                         }
                     }
-                    if (m < 7 && a_Block[n, m + 1].use && a_Block[n, m + 2].use && ((a_Block[n, m].Number == true) && (a_Block[n, m + 1].Number == false)) && ((a_Block[n, m].Number == true) && (a_Block[n, m + 2].Number == true)))
+                    if (m < AreaHeight - 2 && a_Block[n, m + 1].use && a_Block[n, m + 2].use && ((a_Block[n, m].Number == true) && (a_Block[n, m + 1].Number == false)) && ((a_Block[n, m].Number == true) && (a_Block[n, m + 2].Number == true)))
                     {
                         //Debug.Log("ﾇｯ");
                         a_Block[n, m].Delete = true;
@@ -220,9 +226,9 @@ public class BlockBox : MonoBehaviour {
             }
         }
 
-        for (int n = 0; n < 6; n++)
+        for (int n = 0; n < AreaWidth; n++)
         {
-            for (int m = 0; m < 9; m++)
+            for (int m = 0; m < AreaHeight; m++)
             {
                 if (a_Block[n, m].Delete)
                 {
@@ -257,9 +263,9 @@ public class BlockBox : MonoBehaviour {
                 }
             }
         }*/
-        for (int n = 0; n < 6; n++)
+        for (int n = 0; n < AreaWidth; n++)
         {
-            for (int m = 8; m >= 0; m--)
+            for (int m = AreaHeight - 1; m >= 0; m--)
             {
                 nNum = m - 1;
                 if (!a_Block[n, m].use)
@@ -280,9 +286,9 @@ public class BlockBox : MonoBehaviour {
     //ブロックせり出し
     public void BlockAdvance()
     {
-        for (int n = 5; n >= 0; n--)
+        for (int n = AreaWidth - 1; n >= 0; n--)
         {
-            for (int m = 8; m > 0; m--)
+            for (int m = AreaHeight - 1; m > 0; m--)
             {
                 if (a_Block[n, m].use)
                 {
@@ -302,7 +308,7 @@ public class BlockBox : MonoBehaviour {
             }
         }
 
-        for (int n = 0; n < 6; n++)
+        for (int n = 0; n < AreaWidth; n++)
         {
             int nNum;
             deleteData(n,0);
@@ -384,7 +390,7 @@ public class BlockBox : MonoBehaviour {
     //その配列の一番下のY座標を返す
     public int GetArrayY(int X)
     {
-        for(int i = 0; i < 9; i ++)
+        for(int i = 0; i < AreaHeight; i ++)
         {
             if( a_Block[X,i].use == false)
             {
@@ -404,17 +410,24 @@ public class BlockBox : MonoBehaviour {
     {
         float fWidth = (a_Block[1, 0].pos.x - a_Block[0, 0].pos.x) / 2.0f;
         float fHeight = (a_Block[0, 0].pos.y- a_Block[0, 1].pos.y) / 2.0f;
+        int WidthMax = AreaWidth - 1;
+        int HeightMax = AreaHeight - 1;
         Vector3 MousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Debug.Log(Input.mousePosition);
         Debug.Log(MousePos);
         Debug.Log(fWidth);
         Debug.Log(fHeight);
-        for (int n = 0; n < 6; n++)
+        for (int n = 0; n < AreaWidth; n++)
         {
-            for (int m = 0; m < 9; m++)
+            for (int m = 0; m < AreaHeight; m++)
             {
-                
-                if (a_Block[n, m].use &&( a_Block[n, m].pos.x + fWidth > MousePos.x && a_Block[n, m].pos.x - fWidth < MousePos.x) && (a_Block[n, m].pos.y + fHeight > MousePos.y && a_Block[n, m].pos.y - fHeight < MousePos.y))
+                //以下の５つの式が全て成立し、座標が合っている部分のブロックを変更する
+                if (a_Block[n, m].use &&
+                     !((n == 0 && m == 0) || (n == 0 && m == HeightMax) || (n == WidthMax && m == 0) || (n == WidthMax && m == HeightMax)) &&  //四隅でないか
+                     !((n == 0 || n == WidthMax) && (!a_Block[n, m - 1].use || !a_Block[n, m + 1].use)) &&                                     //左右の端の場合、上下に数字があるか
+                     !((m == 0 || m == HeightMax) &&(!a_Block[n - 1, m].use || a_Block[n + 1, m].use)) &&                                      //上下の端の場合、左右に数字があるか
+                     ((a_Block[n, m - 1].use && a_Block[n, m + 1].use) || (a_Block[n - 1, m].use && a_Block[n + 1, m].use)) &&                 //上下、もしくは左右に数字があるか
+                    ( a_Block[n, m].pos.x + fWidth > MousePos.x && a_Block[n, m].pos.x - fWidth < MousePos.x) && (a_Block[n, m].pos.y + fHeight > MousePos.y && a_Block[n, m].pos.y - fHeight < MousePos.y)) //座標判定
                 {
                     Debug.Log("hoge");
                     if(ChangeNum >= 0)
