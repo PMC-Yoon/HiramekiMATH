@@ -37,6 +37,15 @@ public class BlockSelector : MonoBehaviour
             Number = nNum + 10;
         }
     }
+
+    public void Black()
+    {
+        gameObject.GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.5f, 0.5f);
+    }
+    public void White()
+    {
+        gameObject.GetComponent<SpriteRenderer>().color = new Color(1.0f, 1.0f, 1.0f);
+    }
     
     public void Active()
     {
