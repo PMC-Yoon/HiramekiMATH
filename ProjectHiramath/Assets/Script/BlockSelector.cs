@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.EventSystems;
 
-public class BlockSelector : MonoBehaviour {
+public class BlockSelector : MonoBehaviour
+{
     public Sprite[] NumBox;
     public int Number;
     private int PrevNum;
@@ -35,9 +37,13 @@ public class BlockSelector : MonoBehaviour {
             Number = nNum + 10;
         }
     }
-
+    
     public void Active()
     {
         this.gameObject.SetActive(false);
     }
+   /* public void OnPointerDown(PointerEventData eventData)
+    {
+        Number = 11;
+    }*/
 }
