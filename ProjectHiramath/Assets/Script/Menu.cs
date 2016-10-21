@@ -54,10 +54,17 @@ public class Menu : MonoBehaviour {
 
     }
 
-    public void PauseMenuTitleBack()
+    public void PauseMenuStageSelect()
     {
         PauseRelease();
-        fade.gameObject.GetComponent<Fade>().NextSceneName = "title";
+        fade.gameObject.GetComponent<Fade>().NextSceneName = "StageSelect";
+        fade.gameObject.GetComponent<Fade>().FadeStart();
+    }
+
+    public void PauseMenuCharacterSelect()
+    {
+        PauseRelease();
+        fade.gameObject.GetComponent<Fade>().NextSceneName = "CharacterSelect";
         fade.gameObject.GetComponent<Fade>().FadeStart();
     }
 
