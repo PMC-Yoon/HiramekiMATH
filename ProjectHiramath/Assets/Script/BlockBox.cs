@@ -43,7 +43,10 @@ public class BlockBox : MonoBehaviour {
     private int AreaHeight; //縦に何個並ぶか
 
     private int Border; //ボーダー仮収納箱
-    
+    private bool bEnd;
+
+    private StageData stageData;
+
     void Awake()
     {
 
@@ -104,8 +107,15 @@ public class BlockBox : MonoBehaviour {
         //ブロックの中心座標を求める処理 2016/10/11 KazuakiTerabayashi ここまで
 
         NumberLast = new int[4];
+       // Border = 444;
+
+        
+        stageData = GameObject.Find("StageData").GetComponent<StageData>();
+
+        stageData.StageLoad(0, 1, a_Block, ref Border, NumberLast);
 
         StageLoad();
+
 
         //数字のランダム配置 追加　福岡　2016/10/11 ここから
         int nNum;
@@ -125,6 +135,7 @@ public class BlockBox : MonoBehaviour {
                 }
                 else
                 {
+                    a_Block[n, m].Number = true;
                     addData(n, m, true, a_Block[n, m].data);
                 }
 
@@ -138,17 +149,21 @@ public class BlockBox : MonoBehaviour {
 
         //スコアシステムの発見 2016/10/12
         Score = GameObject.FindGameObjectWithTag("Score").GetComponent<ScoreSystem>();
+        Score.BorderSet(Border);
         nCount = 0;
 
         EraseFlag = false;
 
         ChangeNum = -1; //最初は何も起きない
-        
+
+       bEnd = false;
+
+
     }
 
     void StageLoad()
     {
-        string FileName;
+        /*string FileName;
         int Stage;
         TextAsset CSV;
         List<string[]> StageStatus = new List<string[]>();
@@ -181,7 +196,7 @@ public class BlockBox : MonoBehaviour {
         for (int n = 0; n < NumberLast.Length; n++)
         {
             NumberLast[n] = int.Parse(StageStatus[AreaHeight][n + 1]);
-        }
+        }*/
 
         Debug.Log(Border);
         Debug.Log(NumberLast[0]);
@@ -192,6 +207,7 @@ public class BlockBox : MonoBehaviour {
 
     void Update()
     {
+        CrearCheck();
         EraseCheck();
         //計算処理　追加　福岡　2016/10/11 ここから
         if(Input.GetMouseButtonDown(0))
@@ -211,6 +227,17 @@ public class BlockBox : MonoBehaviour {
         //計算処理　追加　福岡　2016/10/11 ここまで
     }
 
+    void CrearCheck()
+    {
+        if((Score.ScoreCheck() >= Border) && !bEnd)
+        {
+            Debug.Log("おわた");
+            GameObject.Find("GameSystem").GetComponent<Menu>().Result();
+            bEnd = true;
+            //リザルト呼び出し
+            // fade.gameObject.GetComponent<Fade>().NextSceneName = "title";
+        }
+    }
 
     void EraseCheck()
     {
@@ -575,7 +602,7 @@ public class BlockBox : MonoBehaviour {
                      ((a_Block[n, m - 1].use && a_Block[n, m + 1].use) || (a_Block[n - 1, m].use && a_Block[n + 1, m].use)) &&                 //上下、もしくは左右に数字があるか
                     ( a_Block[n, m].pos.x + fWidth > MousePos.x && a_Block[n, m].pos.x - fWidth < MousePos.x) && (a_Block[n, m].pos.y + fHeight > MousePos.y && a_Block[n, m].pos.y - fHeight < MousePos.y)) //座標判定
                 {
-                    Debug.Log("hoge");
+                    
                     if(ChangeNum >= 0 && NumberLast[ChangeNum] > 0)
                     {
                         BlockX = n;
@@ -590,6 +617,7 @@ public class BlockBox : MonoBehaviour {
             deleteData(BlockX, BlockY);
             addData(BlockX, BlockY, false, ChangeNum);
             NumberLast[ChangeNum]--;
+            Debug.Log(NumberLast[ChangeNum]);
         }
 
     }
