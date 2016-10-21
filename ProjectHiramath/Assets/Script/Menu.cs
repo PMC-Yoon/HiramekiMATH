@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 public class Menu : MonoBehaviour {
     public GameObject PauseMenuPrefab;
-
+    public GameObject ResultPrefab; //追加しました　by福岡
     GameObject fade;
 	// Use this for initialization
 	void Start () {
@@ -62,5 +62,21 @@ public class Menu : MonoBehaviour {
     }
 
 
+    //リザルト出す関数 追加しました　by福岡
+    public void Result()
+    {
+        if ((int)Time.timeScale == 0)
+        {
+            PauseRelease();
+            ResultPrefab.SetActive(false);
+            return;
+        }
+        if ((int)Time.timeScale == 1)
+        {
+            PauseSet();
+            ResultPrefab.SetActive(true);
+            return;
+        }
+    }
 
 }
