@@ -138,7 +138,9 @@
     <Compile Include="Assets\Script\SceneChange.cs" />
     <Compile Include="Assets\Script\ScoreSystem.cs" />
     <Compile Include="Assets\Script\SpriteAnimator.cs" />
+    <Compile Include="Assets\Script\StageSelect\StageSelectSystem.cs" />
     <Compile Include="Assets\Script\StageSelect\selectcharacternum.cs" />
+    <Compile Include="Assets\Script\StageSelect\selectstagenum.cs" />
     <Compile Include="Assets\Script\System\Fade.cs" />
     <Compile Include="Assets\Script\Timer.cs" />
   </ItemGroup>
