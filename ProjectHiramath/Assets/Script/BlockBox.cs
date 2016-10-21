@@ -46,6 +46,8 @@ public class BlockBox : MonoBehaviour {
     private bool bEnd;
 
     private StageData stageData;
+    private int CharaNum;
+    private int StageNum;
 
     void Awake()
     {
@@ -107,17 +109,22 @@ public class BlockBox : MonoBehaviour {
         //ブロックの中心座標を求める処理 2016/10/11 KazuakiTerabayashi ここまで
 
         NumberLast = new int[4];
-       // Border = 444;
+        // Border = 444;
 
-        
+        StageNum = StageSelectSystem.SelectStage;
+        CharaNum = CharacterSelectSystem.SelectCharacter;
+
+        Debug.Log(CharaNum);
+        Debug.Log(StageNum);
+
         stageData = GameObject.Find("StageData").GetComponent<StageData>();
 
-        stageData.StageLoad(0, 1, a_Block, ref Border, NumberLast);
+        stageData.StageLoad(CharaNum, StageNum, a_Block, ref Border, NumberLast);
 
         StageLoad();
 
 
-        //数字のランダム配置 追加　福岡　2016/10/11 ここから
+        //数字の初期配置配置 追加　福岡　2016/10/11 ここから
         int nNum;
         for (int n = 0; n < AreaWidth; n++)
         {
@@ -139,8 +146,6 @@ public class BlockBox : MonoBehaviour {
                     addData(n, m, true, a_Block[n, m].data);
                 }
 
-                //Num = Random.Range(0, 10);
-                //addData(n, m, true, nNum);
 
 
             }
@@ -198,11 +203,11 @@ public class BlockBox : MonoBehaviour {
             NumberLast[n] = int.Parse(StageStatus[AreaHeight][n + 1]);
         }*/
 
-        Debug.Log(Border);
+       /* Debug.Log(Border);
         Debug.Log(NumberLast[0]);
         Debug.Log(NumberLast[1]);
         Debug.Log(NumberLast[2]);
-        Debug.Log(NumberLast[3]);
+        Debug.Log(NumberLast[3]);*/
     }
 
     void Update()
