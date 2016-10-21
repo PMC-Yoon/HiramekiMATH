@@ -128,6 +128,7 @@
     <Compile Include="Assets\JOKER_GAME\Plugins\PluginComponent.cs" />
     <Compile Include="Assets\Script\BlockBox.cs" />
     <Compile Include="Assets\Script\BlockSelector.cs" />
+    <Compile Include="Assets\Script\CharacterSelect\CharacterSelectSystem.cs" />
     <Compile Include="Assets\Script\Character_Box.cs" />
     <Compile Include="Assets\Script\GameSystem.cs" />
     <Compile Include="Assets\Script\GaugeMove.cs" />
@@ -137,6 +138,9 @@
     <Compile Include="Assets\Script\SceneChange.cs" />
     <Compile Include="Assets\Script\ScoreSystem.cs" />
     <Compile Include="Assets\Script\SpriteAnimator.cs" />
+    <Compile Include="Assets\Script\StageSelect\StageSelectSystem.cs" />
+    <Compile Include="Assets\Script\StageSelect\selectcharacternum.cs" />
+    <Compile Include="Assets\Script\StageSelect\selectstagenum.cs" />
     <Compile Include="Assets\Script\System\Fade.cs" />
     <Compile Include="Assets\Script\Timer.cs" />
   </ItemGroup>
