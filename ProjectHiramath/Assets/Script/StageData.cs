@@ -40,6 +40,7 @@ public class StageData : MonoBehaviour {
             for (int Loop2 = 0; Loop2 < StageMax / CharacterMax; Loop2++, Stage++)
             {
                 CSV = Resources.Load(FileName + Chara + "_" + Stage) as TextAsset;
+                Debug.Log(FileName + Chara + "_" + Stage);
                 reader = new StringReader(CSV.text);
 
                 StageBox[Loop, Loop2].FieldData = new int[(int)(FieldSize.x), (int)(FieldSize.y)];
@@ -62,11 +63,14 @@ public class StageData : MonoBehaviour {
                 }
 
                 StageBox[Loop, Loop2].Border = int.Parse(StageStatus[(int)(FieldSize.y)][0]);
+                Debug.Log(StageBox[Loop, Loop2].Border);
 
                 StageBox[Loop, Loop2].NumberLast[0] = int.Parse(StageStatus[(int)(FieldSize.y)][3]);
                 StageBox[Loop, Loop2].NumberLast[1] = int.Parse(StageStatus[(int)(FieldSize.y)][1]);
                 StageBox[Loop, Loop2].NumberLast[2] = int.Parse(StageStatus[(int)(FieldSize.y)][2]);
                 StageBox[Loop, Loop2].NumberLast[3] = int.Parse(StageStatus[(int)(FieldSize.y)][4]);
+
+                StageStatus.RemoveRange(0, StageStatus.Count);
             }
             Stage = 1;
         }
