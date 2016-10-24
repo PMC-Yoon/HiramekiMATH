@@ -49,6 +49,11 @@ public class BlockBox : MonoBehaviour {
     private int CharaNum;
     private int StageNum;
 
+    private BLOCKBOX[,] LastBlock;
+    private int LastScore;
+    private int LastSymbol;
+    private bool UndoFlag;
+
     void Awake()
     {
 
@@ -161,8 +166,11 @@ public class BlockBox : MonoBehaviour {
 
         ChangeNum = -1; //最初は何も起きない
 
-       bEnd = false;
+        bEnd = false;
 
+        LastBlock = new BLOCKBOX[6,6];
+        LastSymbol = -1;
+        LastScore = 0;
 
     }
 
@@ -221,7 +229,7 @@ public class BlockBox : MonoBehaviour {
             if ((int)Time.timeScale == 1)
             {
                 ChangeBlock();
-                CheckNumber();
+                
             }
         }
         if (Input.GetMouseButtonDown(1) || EraseFlag) //計算フラグ成立
@@ -316,6 +324,7 @@ public class BlockBox : MonoBehaviour {
     //計算処理　追加　福岡　2016/10/11 ここから
     public void CheckNumber()
     {
+        int NowScore = Score.ScoreCheck();
         for (int n = 0; n < AreaWidth; n++)
         {
             for (int m = 0; m < AreaHeight; m++)
@@ -369,6 +378,8 @@ public class BlockBox : MonoBehaviour {
                 }
             }
         }
+
+        LastScore = Score.ScoreCheck() - NowScore;
 
         for (int n = 0; n < AreaWidth; n++)
         {
@@ -620,10 +631,12 @@ public class BlockBox : MonoBehaviour {
 
         if(BlockX >= 0)
         {
+            UndoRecord(ChangeNum);
             deleteData(BlockX, BlockY);
             addData(BlockX, BlockY, false, ChangeNum);
             NumberLast[ChangeNum]--;
             Debug.Log(NumberLast[ChangeNum]);
+            CheckNumber();
         }
 
     }
@@ -639,6 +652,55 @@ public class BlockBox : MonoBehaviour {
     public int NumberLastCheck(int nNum)
     {
         return NumberLast[nNum];
+    }
+
+    private void UndoRecord(int UndoNum)
+    {
+        UndoFlag = true;
+        LastSymbol = UndoNum;
+
+        for (int n = 0; n < AreaWidth; n++)
+        {
+            for (int m = 0; m < AreaHeight; m++)
+            {
+                LastBlock[n, m] = a_Block[n, m];
+            }
+        }
+    }
+
+    public void Undo()
+    {
+        bool[,] bFlag = new bool[6, 6];
+        if(UndoFlag)
+        {
+            for (int n = 0; n < AreaWidth; n++)
+            {
+                for (int m = 0; m < AreaHeight; m++)
+                {
+                    deleteData(n, m);
+                    a_Block[n, m] = LastBlock[n, m];
+                    if (a_Block[n, m].use)
+                    {
+                        a_Block[n, m].use = false;
+                    }
+                    else
+                    {
+                        bFlag[n, m] = true;
+                    }
+                    addData(n, m, a_Block[n, m].Number, a_Block[n, m].data);
+
+                    if(bFlag[n, m])
+                    {
+                        deleteData(n, m);
+                    }
+                }
+            }
+
+            NumberLast[LastSymbol]++;
+
+            Score.ScorePlus(-LastScore);
+            UndoFlag = false;
+        }
     }
 }
 
