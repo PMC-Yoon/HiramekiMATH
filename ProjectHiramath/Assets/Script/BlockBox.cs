@@ -54,6 +54,9 @@ public class BlockBox : MonoBehaviour {
     private int LastSymbol;
     private bool UndoFlag;
 
+    private int EraseBlockX;
+    private int EraseBlockY;
+
     void Awake()
     {
 
@@ -140,7 +143,7 @@ public class BlockBox : MonoBehaviour {
                 a_Block[n, m].Block.transform.localPosition = a_Block[n, m].pos;
                 a_Block[n, m].Block = a_Block[n, m].Block;
 
-                if(a_Block[n, m].data < 0)
+                if (a_Block[n, m].data < 0)
                 {
                     a_Block[n, m].use = true;
                     deleteData(n, m);
@@ -172,6 +175,8 @@ public class BlockBox : MonoBehaviour {
         LastSymbol = -1;
         LastScore = 0;
 
+        EraseBlockX = 0;
+        EraseBlockY = 0;
     }
 
     void StageLoad()
@@ -223,7 +228,7 @@ public class BlockBox : MonoBehaviour {
         CrearCheck();
         EraseCheck();
         //計算処理　追加　福岡　2016/10/11 ここから
-        if(Input.GetMouseButtonDown(0))
+        if(Input.GetMouseButtonDown(0) && !EraseFlag)
         {
             //if分追加　2016/10/20 terabayashi
             if ((int)Time.timeScale == 1)
@@ -232,17 +237,46 @@ public class BlockBox : MonoBehaviour {
                 
             }
         }
-        if (Input.GetMouseButtonDown(1) || EraseFlag) //計算フラグ成立
-        {
+        /*if (Input.GetMouseButtonDown(1) || EraseFlag) //計算フラグ成立
+        
             CheckNumber();
             EraseFlag = false;
+        }*/
+
+        if(EraseFlag)
+        {
+            a_Block[EraseBlockX, EraseBlockY].Block.transform.Rotate(0,180 * Time.deltaTime,0);
+
+            if (a_Block[EraseBlockX, EraseBlockY].Block.transform.localEulerAngles.y > 180.0f)
+            {
+                CheckNumber();
+                EraseFlag = false;
+                a_Block[EraseBlockX, EraseBlockY].Block.transform.localEulerAngles = Vector3.zero;
+            }
+
+            else if (a_Block[EraseBlockX, EraseBlockY].Block.transform.localEulerAngles.y > 90.0f && a_Block[EraseBlockX, EraseBlockY].Number != false )
+            {
+                Debug.Log("hoge");
+                deleteData(EraseBlockX, EraseBlockY);
+                addData(EraseBlockX, EraseBlockY, false, ChangeNum);
+            }
+
         }
         //計算処理　追加　福岡　2016/10/11 ここまで
     }
 
     void CrearCheck()
     {
-        if((Score.ScoreCheck() >= Border) && !bEnd)
+        bool bLast = false;
+        for (int n = 0; n < NumberLast.Length; n++)
+        {
+            if(NumberLast[n] != 0 && (CharaNum == 0 && n != NumberLast.Length - 1))
+            {
+                bLast = true;
+            }
+        }
+
+        if (!bLast && (Score.ScoreCheck() >= Border) && !bEnd && !EraseFlag)
         {
             Debug.Log("おわた");
             stageData.StageClear(CharaNum, StageNum, true);
@@ -333,7 +367,6 @@ public class BlockBox : MonoBehaviour {
                 {
                     if (n < AreaWidth - 2 && a_Block[n + 1, m].use && a_Block[n + 2, m].use && ((a_Block[n, m].Number == true) && (a_Block[n + 1, m].Number == false)) && ((a_Block[n, m].Number == true) && (a_Block[n + 2, m].Number == true)))
                     {
-                        //Debug.Log("ﾇｯ");
                         a_Block[n, m].Delete = true;
                         a_Block[n + 1, m].Delete = true;
                         a_Block[n + 2, m].Delete = true;
@@ -355,7 +388,6 @@ public class BlockBox : MonoBehaviour {
                     }
                     if (m < AreaHeight - 2 && a_Block[n, m + 1].use && a_Block[n, m + 2].use && ((a_Block[n, m].Number == true) && (a_Block[n, m + 1].Number == false)) && ((a_Block[n, m].Number == true) && (a_Block[n, m + 2].Number == true)))
                     {
-                        //Debug.Log("ﾇｯ");
                         a_Block[n, m].Delete = true;
                         a_Block[n, m + 1].Delete = true;
                         a_Block[n, m + 2].Delete = true;
@@ -555,10 +587,7 @@ public class BlockBox : MonoBehaviour {
         return -1;//エラー
     }
 
-    public void EraseAwake()
-    {
-        EraseFlag = true;
-    }
+
 
 
     void ChangeBlock()
@@ -632,11 +661,11 @@ public class BlockBox : MonoBehaviour {
         if(BlockX >= 0)
         {
             UndoRecord(ChangeNum);
-            deleteData(BlockX, BlockY);
-            addData(BlockX, BlockY, false, ChangeNum);
+            EraseFlag = true;
+            EraseBlockX = BlockX;
+            EraseBlockY = BlockY;
             NumberLast[ChangeNum]--;
             Debug.Log(NumberLast[ChangeNum]);
-            CheckNumber();
         }
 
     }
