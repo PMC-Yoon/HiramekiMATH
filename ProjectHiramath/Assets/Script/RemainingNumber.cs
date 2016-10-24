@@ -13,7 +13,7 @@ public class RemainingNumber : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         int hoge = blockarray.GetComponent<BlockBox>().NumberLastCheck(operatorNum);
-        this.GetComponent<Text>().text = "×" + blockarray.GetComponent<BlockBox>().NumberLastCheck(operatorNum);
+        this.GetComponent<Text>().text = blockarray.GetComponent<BlockBox>().NumberLastCheck(operatorNum).ToString("00");
 	
 	}
 }
