@@ -15,11 +15,11 @@ public class StageSelectSystem : MonoBehaviour {
         selectChara = CharacterSelectSystem.SelectCharacter;
         stagedata = GameObject.Find("StageData");
 
-        stagedata.GetComponent<StageData>().StageClear(selectChara, 0, true);
-      
-        for (int i = 0; i < 4; i++)
+       // stagedata.GetComponent<StageData>().StageClear(selectChara, 0, true);
+     //   stagelist[0].SetActive(true);
+        for (int i = 1; i < 4; i++)
         {
-            bool draw = stagedata.GetComponent<StageData>().ClearCheck(selectChara, i);
+            bool draw = stagedata.GetComponent<StageData>().ClearCheck(selectChara, i-1);
             stagelist[i].SetActive(draw);
         }
     }
