@@ -267,7 +267,16 @@ public class BlockBox : MonoBehaviour {
 
     void CrearCheck()
     {
-        if((Score.ScoreCheck() >= Border) && !bEnd)
+        bool bLast = false;
+        for (int n = 0; n < NumberLast.Length; n++)
+        {
+            if(NumberLast[n] != 0 && (CharaNum == 0 && n != NumberLast.Length - 1))
+            {
+                bLast = true;
+            }
+        }
+
+        if (!bLast && (Score.ScoreCheck() >= Border) && !bEnd && !EraseFlag)
         {
             Debug.Log("おわた");
             stageData.StageClear(CharaNum, StageNum, true);
