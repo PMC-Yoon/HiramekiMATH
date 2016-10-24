@@ -5,9 +5,13 @@ public class StageSelectSystem : MonoBehaviour {
 
     public static int SelectStage;
     public GameObject ConfirmMenuPrefab;
+
+    GameObject[] Stages;
     void Start()
     {
         SelectStage = 0;
+ //       GameObject.FindGameObjectsWithTag("Stage");
+        
     }
 
     
