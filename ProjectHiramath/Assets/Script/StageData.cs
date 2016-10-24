@@ -15,6 +15,7 @@ public class StageData : MonoBehaviour {
     private int CharacterMax;
     private STAGEBOX[,] StageBox;
     private Vector2 FieldSize;
+    private bool[,] StageClearFlag;
 	// Use this for initialization
 	void Start () {
         StageMax = 16;
@@ -22,7 +23,8 @@ public class StageData : MonoBehaviour {
         FieldSize = new Vector2(6, 6);
         StageBox = new STAGEBOX[CharacterMax, StageMax / CharacterMax];
         //StageBox = new int[CharacterMax, StageMax / CharacterMax];
-       // NumberLastBox = new int[CharacterMax, StageMax / CharacterMax, 4];
+        // NumberLastBox = new int[CharacterMax, StageMax / CharacterMax, 4];
+        StageClearFlag =  new bool[CharacterMax, StageMax / CharacterMax];
         DontDestroyOnLoad(this);
 
         string FileName;
@@ -74,7 +76,16 @@ public class StageData : MonoBehaviour {
             }
             Stage = 1;
         }
-    }
+
+        for (int Loop = 0; Loop < CharacterMax; Loop++, Chara++)
+        {
+            for (int Loop2 = 0; Loop2 < StageMax / CharacterMax; Loop2++, Stage++)
+            {
+                StageClearFlag[Loop, Loop2] = false;
+            }
+        }
+
+}
 	
 	// Update is called once per frame
 	void Update () {
@@ -99,5 +110,15 @@ public class StageData : MonoBehaviour {
         {
             numberlast[n] = StageBox[CharaNum, StageNum].NumberLast[n];
         }
+    }
+
+    public void StageClear(int Chara,int Stage,bool Flag)
+    {
+        StageClearFlag[Chara, Stage] = Flag;
+    }
+
+    public bool ClearCheck(int Chara, int Stage)
+    {
+        return StageClearFlag[Chara, Stage];
     }
 }

@@ -237,6 +237,7 @@ public class BlockBox : MonoBehaviour {
         if((Score.ScoreCheck() >= Border) && !bEnd)
         {
             Debug.Log("おわた");
+            stageData.StageClear(CharaNum, StageNum, true);
             GameObject.Find("GameSystem").GetComponent<Menu>().Result();
             bEnd = true;
             //リザルト呼び出し
@@ -633,6 +634,11 @@ public class BlockBox : MonoBehaviour {
         {
             ChangeNum = nNum;
         }
+    }
+
+    public int NumberLastCheck(int nNum)
+    {
+        return NumberLast[nNum];
     }
 }
 
