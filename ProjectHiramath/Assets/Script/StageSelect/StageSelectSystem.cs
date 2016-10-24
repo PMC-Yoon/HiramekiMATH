@@ -1,17 +1,27 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class StageSelectSystem : MonoBehaviour {
 
     public static int SelectStage;
     public GameObject ConfirmMenuPrefab;
-
-    GameObject[] Stages;
+    GameObject stagedata;
+    public GameObject[] stagelist;
     void Start()
     {
         SelectStage = 0;
- //       GameObject.FindGameObjectsWithTag("Stage");
-        
+        int selectChara;
+        selectChara = CharacterSelectSystem.SelectCharacter;
+        stagedata = GameObject.Find("StageData");
+
+        stagedata.GetComponent<StageData>().StageClear(selectChara, 0, true);
+      
+        for (int i = 0; i < 4; i++)
+        {
+            bool draw = stagedata.GetComponent<StageData>().ClearCheck(selectChara, i);
+            stagelist[i].SetActive(draw);
+        }
     }
 
     
