@@ -359,6 +359,9 @@ public class BlockBox : MonoBehaviour {
     public void CheckNumber()
     {
         int NowScore = Score.ScoreCheck();
+        bool bSkill = false;
+        int BlockNumX = 0;
+        int BlockNumY = 0;
         for (int n = 0; n < AreaWidth; n++)
         {
             for (int m = 0; m < AreaHeight; m++)
@@ -370,20 +373,28 @@ public class BlockBox : MonoBehaviour {
                         a_Block[n, m].Delete = true;
                         a_Block[n + 1, m].Delete = true;
                         a_Block[n + 2, m].Delete = true;
-                        if (a_Block[n + 1, m].data == 1)
+                        switch(a_Block[n + 1, m].data)
                         {
-                            Debug.Log(a_Block[n, m].data + "+" + a_Block[n + 2, m].data);
-                            Score.ScorePlus(a_Block[n, m].data + a_Block[n + 2, m].data);
-                        }
-                        else if (a_Block[n + 1, m].data == 2)
-                        {
-                            Debug.Log(a_Block[n, m].data + "-" + a_Block[n + 2, m].data);
-                            Score.ScorePlus(a_Block[n, m].data - a_Block[n + 2, m].data);
-                        }
-                        else
-                        {
-                            Debug.Log(a_Block[n, m].data + "*" + a_Block[n + 2, m].data);
-                            Score.ScorePlus(a_Block[n, m].data * a_Block[n + 2, m].data);
+                            case 0:
+                                Debug.Log(a_Block[n, m].data + "*" + a_Block[n + 2, m].data);
+                                Score.ScorePlus(a_Block[n, m].data * a_Block[n + 2, m].data);
+                                break;
+                            case 1:
+                                Debug.Log(a_Block[n, m].data + "+" + a_Block[n + 2, m].data);
+                                Score.ScorePlus(a_Block[n, m].data + a_Block[n + 2, m].data);
+                                break;
+                            case 2:
+                                Debug.Log(a_Block[n, m].data + "-" + a_Block[n + 2, m].data);
+                                Score.ScorePlus(a_Block[n, m].data - a_Block[n + 2, m].data);
+                                break;
+                            case 3:
+                               // a_Block[n, m].Delete = false;
+                                a_Block[n + 1, m].Delete = false;
+                                a_Block[n + 2, m].Delete = false;
+                                bSkill = true;
+                                BlockNumX = n;
+                                BlockNumY = m;
+                                break;
                         }
                     }
                     if (m < AreaHeight - 2 && a_Block[n, m + 1].use && a_Block[n, m + 2].use && ((a_Block[n, m].Number == true) && (a_Block[n, m + 1].Number == false)) && ((a_Block[n, m].Number == true) && (a_Block[n, m + 2].Number == true)))
@@ -391,22 +402,51 @@ public class BlockBox : MonoBehaviour {
                         a_Block[n, m].Delete = true;
                         a_Block[n, m + 1].Delete = true;
                         a_Block[n, m + 2].Delete = true;
-                        if (a_Block[n, m + 1].data == 1)
+                        switch (a_Block[n, m + 1].data)
                         {
-                            Debug.Log(a_Block[n, m].data + "+" + a_Block[n, m + 2].data);
-                            Score.ScorePlus(a_Block[n, m].data + a_Block[n, m + 2].data);
-                        }
-                        else if (a_Block[n, m + 1].data == 2)
-                        {
-                            Debug.Log(a_Block[n, m].data + "-" + a_Block[n, m + 2].data);
-                            Score.ScorePlus(a_Block[n, m].data - a_Block[n, m + 2].data);
-                        }
-                        else
-                        {
-                            Debug.Log(a_Block[n, m].data + "*" + a_Block[n, m + 2].data);
-                            Score.ScorePlus(a_Block[n, m].data * a_Block[n, m + 2].data);
+                            case 0:
+                                Debug.Log(a_Block[n, m].data + "*" + a_Block[n, m + 2].data);
+                                Score.ScorePlus(a_Block[n, m].data * a_Block[n, m + 2].data);
+                                break;
+                            case 1:
+                                Debug.Log(a_Block[n, m].data + "+" + a_Block[n, m + 2].data);
+                                Score.ScorePlus(a_Block[n, m].data + a_Block[n, m + 2].data);
+                                break;
+                            case 2:
+                                Debug.Log(a_Block[n, m].data + "-" + a_Block[n, m + 2].data);
+                                Score.ScorePlus(a_Block[n, m].data - a_Block[n, m + 2].data);
+                                break;
+                            case 3:
+                               // a_Block[n, m].Delete = false;
+                                a_Block[n, m + 1].Delete = false;
+                                a_Block[n, m + 2].Delete = false;
+                                bSkill = true;
+                                BlockNumX = n;
+                                BlockNumY = m;
+                                break;
                         }
                     }
+                }
+            }
+
+            if(bSkill)
+            {
+                switch (CharaNum)
+                {
+                    case 0:
+                        //ヒント呼び出し
+                        break;
+                    case 1:
+                        Exproad(BlockNumX, BlockNumY);
+                        break;
+                    case 2:
+                        Reverce(BlockNumX, BlockNumY);
+                        break;
+                    case 3:
+                        BlockRotation(BlockNumX, BlockNumY);
+                        break;
+                    default:
+                        break;
                 }
             }
         }
@@ -427,6 +467,37 @@ public class BlockBox : MonoBehaviour {
         FallBlock();
     }
     //計算処理　追加　福岡　2016/10/11 ここまで
+
+    //スキル（アインシュタイン）：爆発
+    private void Exproad(int BlockX, int BlockY)
+    {
+        a_Block[BlockX, BlockY].Delete = true;
+        a_Block[BlockX + 1, BlockY].Delete = true;
+        a_Block[BlockX + 2, BlockY].Delete = true;
+        a_Block[BlockX, BlockY].Delete = true;
+        a_Block[BlockX, BlockY + 1].Delete = true;
+        a_Block[BlockX, BlockY + 2].Delete = true;
+    }
+
+    //スキル（アルキメデス）：入れ替え
+    private void Reverce(int BlockX, int BlockY)
+    {
+        BLOCKBOX box;
+        box = a_Block[BlockX - 1, BlockY];
+        a_Block[BlockX - 1, BlockY] = a_Block[BlockX + 1, BlockY];
+        a_Block[BlockX + 1, BlockY] = box;
+        deleteData(BlockX - 1, BlockY);
+        deleteData(BlockX + 1, BlockY);
+        addData(BlockX - 1, BlockY, a_Block[BlockX - 1, BlockY].Number, a_Block[BlockX - 1, BlockY].data);
+        addData(BlockX + 1, BlockY, a_Block[BlockX - 1, BlockY].Number, a_Block[BlockX - 1, BlockY].data);
+    }
+
+    //スキル（ニュートン）：回転
+    private void BlockRotation(int BlockX, int BlockY)
+    {
+        //NumberBlock
+    }
+
 
     //ブロックを上に詰める
     public void FallBlock()

@@ -7,7 +7,7 @@ public class GameSystem : MonoBehaviour {
     GameObject BlockArray;
 	// Use this for initialization
 	void Start () {
-        timer = GameObject.Find("Timer");
+       // timer = GameObject.Find("Timer");
         BlockArray = GameObject.Find("BlockBoxArray");
 	
 	}
@@ -15,11 +15,11 @@ public class GameSystem : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if( timer.GetComponent<Timer>().GetTimerZeroFlg())
-        {
+       // if( timer.GetComponent<Timer>().GetTimerZeroFlg())
+       // {
           //  BlockArray.GetComponent<BlockBox>().EraseAwake();
-            timer.GetComponent<Timer>().SetTime(10);
-        }
+      //      timer.GetComponent<Timer>().SetTime(10);
+       // }
 
 
 	}
