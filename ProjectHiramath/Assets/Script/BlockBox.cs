@@ -245,20 +245,35 @@ public class BlockBox : MonoBehaviour {
 
         if(EraseFlag)
         {
-            a_Block[EraseBlockX, EraseBlockY].Block.transform.Rotate(0,180 * Time.deltaTime,0);
-
-            if (a_Block[EraseBlockX, EraseBlockY].Block.transform.localEulerAngles.y > 180.0f)
+            if (ChangeNum != 3)
             {
-                CheckNumber();
-                EraseFlag = false;
-                a_Block[EraseBlockX, EraseBlockY].Block.transform.localEulerAngles = Vector3.zero;
+                a_Block[EraseBlockX, EraseBlockY].Block.transform.Rotate(0, 180 * Time.deltaTime, 0);
+
+                if (a_Block[EraseBlockX, EraseBlockY].Block.transform.localEulerAngles.y > 180.0f)
+                {
+                    CheckNumber();
+                    EraseFlag = false;
+                    a_Block[EraseBlockX, EraseBlockY].Block.transform.localEulerAngles = Vector3.zero;
+                }
+
+                else if (a_Block[EraseBlockX, EraseBlockY].Block.transform.localEulerAngles.y > 90.0f && a_Block[EraseBlockX, EraseBlockY].Number != false)
+                {
+                    Debug.Log("hoge");
+                    deleteData(EraseBlockX, EraseBlockY);
+                    addData(EraseBlockX, EraseBlockY, false, ChangeNum);
+
+                }
             }
-
-            else if (a_Block[EraseBlockX, EraseBlockY].Block.transform.localEulerAngles.y > 90.0f && a_Block[EraseBlockX, EraseBlockY].Number != false )
+            else
             {
-                Debug.Log("hoge");
-                deleteData(EraseBlockX, EraseBlockY);
-                addData(EraseBlockX, EraseBlockY, false, ChangeNum);
+                int LastNum = a_Block[EraseBlockX, EraseBlockY].data;
+                a_Block[EraseBlockX, EraseBlockY].data = ChangeNum;
+                a_Block[EraseBlockX, EraseBlockY].Number = false;
+                CheckNumber();
+                a_Block[EraseBlockX, EraseBlockY].data = LastNum;
+                a_Block[EraseBlockX, EraseBlockY].Number = true;
+                EraseFlag = false;
+
             }
 
         }
@@ -268,22 +283,34 @@ public class BlockBox : MonoBehaviour {
     void CrearCheck()
     {
         bool bLast = false;
+        int Count = 0;
         for (int n = 0; n < NumberLast.Length; n++)
         {
-            if(NumberLast[n] != 0 && (CharaNum == 0 && n != NumberLast.Length - 1))
+            if(NumberLast[n] == 0 || (CharaNum == 0 && n == NumberLast.Length - 1))
+            {
+                Count++;
+            }
+            if(Count >= NumberLast.Length)
             {
                 bLast = true;
             }
         }
 
-        if (!bLast && (Score.ScoreCheck() >= Border) && !bEnd && !EraseFlag)
+        if (bLast && (Score.ScoreCheck() >= Border) && !bEnd && !EraseFlag)
         {
             Debug.Log("おわた");
             stageData.StageClear(CharaNum, StageNum, true);
-            GameObject.Find("GameSystem").GetComponent<Menu>().Result();
+            GameObject.Find("GameSystem").GetComponent<Menu>().Result(true);
             bEnd = true;
             //リザルト呼び出し
             // fade.gameObject.GetComponent<Fade>().NextSceneName = "title";
+        }
+
+        else if(bLast && (Score.ScoreCheck() < Border) && !bEnd && !EraseFlag)
+        {
+            Debug.Log("無念");
+            GameObject.Find("GameSystem").GetComponent<Menu>().Result(false);
+            bEnd = true;
         }
     }
 
@@ -300,7 +327,7 @@ public class BlockBox : MonoBehaviour {
         a_Block[WidthMax, HeightMax].Block.GetComponent<BlockSelector>().Black();
         for (int n = 1; n < WidthMax; n++)
         {
-            if ((a_Block[n - 1, 0].use && a_Block[n + 1, 0].use))
+            if ((a_Block[n - 1, 0].use && a_Block[n + 1, 0].use) && ChangeNum != 3)
             {
                 a_Block[n, 0].Block.GetComponent<BlockSelector>().White();
             }
@@ -309,7 +336,7 @@ public class BlockBox : MonoBehaviour {
                 a_Block[n, 0].Block.GetComponent<BlockSelector>().Black();
             }
 
-            if ((a_Block[n - 1, HeightMax].use && a_Block[n + 1, HeightMax].use))
+            if ((a_Block[n - 1, HeightMax].use && a_Block[n + 1, HeightMax].use) && ChangeNum != 3)
             {
                 a_Block[n, HeightMax].Block.GetComponent<BlockSelector>().White();
             }
@@ -320,7 +347,7 @@ public class BlockBox : MonoBehaviour {
         }
         for (int m = 1; m < HeightMax; m++)
         {
-            if ((a_Block[0, m - 1].use && a_Block[0, m + 1].use))
+            if ((a_Block[0, m - 1].use && a_Block[0, m + 1].use) && ChangeNum != 3)
             {
                 a_Block[0, m].Block.GetComponent<BlockSelector>().White();
             }
@@ -329,7 +356,7 @@ public class BlockBox : MonoBehaviour {
                 a_Block[0, m].Block.GetComponent<BlockSelector>().Black();
             }
 
-            if ((a_Block[WidthMax, m - 1].use && a_Block[WidthMax, m + 1].use))
+            if ((a_Block[WidthMax, m - 1].use && a_Block[WidthMax, m + 1].use) && ChangeNum != 3)
             {
                 a_Block[WidthMax, m].Block.GetComponent<BlockSelector>().White();
             }
@@ -362,6 +389,7 @@ public class BlockBox : MonoBehaviour {
         bool bSkill = false;
         int BlockNumX = 0;
         int BlockNumY = 0;
+        //Debug.Log("Calling");
         for (int n = 0; n < AreaWidth; n++)
         {
             for (int m = 0; m < AreaHeight; m++)
@@ -387,12 +415,12 @@ public class BlockBox : MonoBehaviour {
                                 Debug.Log(a_Block[n, m].data + "-" + a_Block[n + 2, m].data);
                                 Score.ScorePlus(a_Block[n, m].data - a_Block[n + 2, m].data);
                                 break;
-                            case 3:
-                               // a_Block[n, m].Delete = false;
-                                a_Block[n + 1, m].Delete = false;
+                            default:
+                                 a_Block[n, m].Delete = false;
+                               // a_Block[n + 1, m].Delete = false;
                                 a_Block[n + 2, m].Delete = false;
                                 bSkill = true;
-                                BlockNumX = n;
+                                BlockNumX = n + 1;
                                 BlockNumY = m;
                                 break;
                         }
@@ -416,38 +444,44 @@ public class BlockBox : MonoBehaviour {
                                 Debug.Log(a_Block[n, m].data + "-" + a_Block[n, m + 2].data);
                                 Score.ScorePlus(a_Block[n, m].data - a_Block[n, m + 2].data);
                                 break;
-                            case 3:
-                               // a_Block[n, m].Delete = false;
-                                a_Block[n, m + 1].Delete = false;
+                            default:
+                                 a_Block[n, m].Delete = false;
+                                //a_Block[n, m + 1].Delete = false;
                                 a_Block[n, m + 2].Delete = false;
                                 bSkill = true;
                                 BlockNumX = n;
-                                BlockNumY = m;
+                                BlockNumY = m + 1;
                                 break;
                         }
                     }
                 }
             }
 
-            if(bSkill)
+            
+        }
+        if (bSkill)
+        {
+            switch (CharaNum)
             {
-                switch (CharaNum)
-                {
-                    case 0:
-                        //ヒント呼び出し
-                        break;
-                    case 1:
-                        Exproad(BlockNumX, BlockNumY);
-                        break;
-                    case 2:
-                        Reverce(BlockNumX, BlockNumY);
-                        break;
-                    case 3:
-                        BlockRotation(BlockNumX, BlockNumY);
-                        break;
-                    default:
-                        break;
-                }
+                case 0:
+                    //ヒント呼び出し（おそらくここには来ない）
+                    Debug.Log("来ちゃダメ！");
+                    break;
+                case 1:
+                    Debug.Log("リヴァース");
+                    Reverce(BlockNumX, BlockNumY);
+                    break;
+                case 2:
+                    Debug.Log("爆発");
+                    Exproad(BlockNumX, BlockNumY);
+                    break;
+                case 3:
+                    Debug.Log("ツイスト");
+                    BlockRotation(BlockNumX, BlockNumY);
+                    break;
+                default:
+                    Debug.Log("来ちゃダメ！");
+                    break;
             }
         }
 
@@ -473,28 +507,70 @@ public class BlockBox : MonoBehaviour {
     {
         a_Block[BlockX, BlockY].Delete = true;
         a_Block[BlockX + 1, BlockY].Delete = true;
-        a_Block[BlockX + 2, BlockY].Delete = true;
-        a_Block[BlockX, BlockY].Delete = true;
+        a_Block[BlockX - 1, BlockY].Delete = true;
         a_Block[BlockX, BlockY + 1].Delete = true;
-        a_Block[BlockX, BlockY + 2].Delete = true;
+        a_Block[BlockX, BlockY - 1].Delete = true;
     }
 
     //スキル（アルキメデス）：入れ替え
     private void Reverce(int BlockX, int BlockY)
     {
+        a_Block[BlockX, BlockY].Delete = false;
+
         BLOCKBOX box;
         box = a_Block[BlockX - 1, BlockY];
-        a_Block[BlockX - 1, BlockY] = a_Block[BlockX + 1, BlockY];
-        a_Block[BlockX + 1, BlockY] = box;
+        a_Block[BlockX - 1, BlockY].data = a_Block[BlockX + 1, BlockY].data;
+        a_Block[BlockX + 1, BlockY].data = box.data;
         deleteData(BlockX - 1, BlockY);
         deleteData(BlockX + 1, BlockY);
         addData(BlockX - 1, BlockY, a_Block[BlockX - 1, BlockY].Number, a_Block[BlockX - 1, BlockY].data);
-        addData(BlockX + 1, BlockY, a_Block[BlockX - 1, BlockY].Number, a_Block[BlockX - 1, BlockY].data);
+        addData(BlockX + 1, BlockY, a_Block[BlockX + 1, BlockY].Number, a_Block[BlockX + 1, BlockY].data);
     }
 
     //スキル（ニュートン）：回転
     private void BlockRotation(int BlockX, int BlockY)
     {
+        int[] Box = new int[8];
+        bool[] UseBox = new bool[8];
+        int BoxNum = 0;
+        a_Block[BlockX, BlockY].Delete = false;
+
+        Box[0] = a_Block[BlockX - 1, BlockY].data;
+        UseBox[0] = a_Block[BlockX - 1, BlockY].use;
+        Box[1] = a_Block[BlockX - 1, BlockY - 1].data;
+        UseBox[1] = a_Block[BlockX - 1, BlockY - 1].use;
+        Box[2] = a_Block[BlockX, BlockY - 1].data;
+        UseBox[2] = a_Block[BlockX, BlockY - 1].use;
+        Box[3] = a_Block[BlockX - 1, BlockY + 1].data;
+        UseBox[3] = a_Block[BlockX - 1, BlockY + 1].use;
+        Box[4] = a_Block[BlockX + 1, BlockY - 1].data;
+        UseBox[4] = a_Block[BlockX + 1, BlockY - 1].use;
+        Box[5] = a_Block[BlockX, BlockY + 1].data;
+        UseBox[5] = a_Block[BlockX, BlockY + 1].use;
+        Box[6] = a_Block[BlockX + 1, BlockY + 1].data;
+        UseBox[6] = a_Block[BlockX + 1, BlockY + 1].use;
+        Box[7] = a_Block[BlockX + 1, BlockY].data;
+        UseBox[7] = a_Block[BlockX + 1, BlockY].use;
+        for (int n = -1; n < 2; n++)
+        {
+            for (int m = -1; m < 2; m++)
+            {
+                if (!(n == 0 && m == 0))
+                {
+                    if (UseBox[BoxNum])
+                    {
+                        a_Block[BlockX + m, BlockY + n].data = Box[BoxNum];
+                        deleteData(BlockX + m, BlockY + n);
+                        addData(BlockX + m, BlockY + n, true, a_Block[BlockX + m, BlockY + n].data);
+                    }
+                    else
+                    {
+                        deleteData(BlockX + m, BlockY + n);
+                    }
+                    BoxNum++;
+                }
+            }
+        }
         //NumberBlock
     }
 
@@ -674,7 +750,7 @@ public class BlockBox : MonoBehaviour {
         {
             if((a_Block[n - 1, 0].use && a_Block[n + 1, 0].use) && (a_Block[n, 0].pos.x + fWidth > MousePos.x && a_Block[n, 0].pos.x - fWidth < MousePos.x) && (a_Block[n, 0].pos.y + fHeight > MousePos.y && a_Block[n, 0].pos.y - fHeight < MousePos.y))
             {
-                if (ChangeNum >= 0 && NumberLast[ChangeNum] > 0)
+                if (ChangeNum >= 0 && NumberLast[ChangeNum] > 0 && ChangeNum != 3)
                 {
                     BlockX = n;
                     BlockY = 0;
@@ -683,7 +759,7 @@ public class BlockBox : MonoBehaviour {
 
             if ((a_Block[n - 1, HeightMax].use && a_Block[n + 1, HeightMax].use) && (a_Block[n, HeightMax].pos.x + fWidth > MousePos.x && a_Block[n, HeightMax].pos.x - fWidth < MousePos.x) && (a_Block[n, HeightMax].pos.y + fHeight > MousePos.y && a_Block[n, HeightMax].pos.y - fHeight < MousePos.y))
             {
-                if (ChangeNum >= 0 && NumberLast[ChangeNum] > 0)
+                if (ChangeNum >= 0 && NumberLast[ChangeNum] > 0 && ChangeNum != 3)
                 {
                     BlockX = n;
                     BlockY = HeightMax;
@@ -694,7 +770,7 @@ public class BlockBox : MonoBehaviour {
         {
             if((a_Block[0, m - 1].use && a_Block[0, m + 1].use) && (a_Block[0, m].pos.x + fWidth > MousePos.x && a_Block[0, m].pos.x - fWidth < MousePos.x) && (a_Block[0, m].pos.y + fHeight > MousePos.y && a_Block[0, m].pos.y - fHeight < MousePos.y))
             {
-                if (ChangeNum >= 0 && NumberLast[ChangeNum] > 0)
+                if (ChangeNum >= 0 && NumberLast[ChangeNum] > 0 && ChangeNum != 3)
                 {
                     BlockX = 0;
                     BlockY = m;
@@ -703,7 +779,7 @@ public class BlockBox : MonoBehaviour {
 
             if ((a_Block[WidthMax, m - 1].use && a_Block[WidthMax, m + 1].use) && (a_Block[WidthMax, m].pos.x + fWidth > MousePos.x && a_Block[WidthMax, m].pos.x - fWidth < MousePos.x) && (a_Block[WidthMax, m].pos.y + fHeight > MousePos.y && a_Block[WidthMax, m].pos.y - fHeight < MousePos.y))
             {
-                if (ChangeNum >= 0 && NumberLast[ChangeNum] > 0)
+                if (ChangeNum >= 0 && NumberLast[ChangeNum] > 0 && ChangeNum != 3)
                 {
                     BlockX = WidthMax;
                     BlockY = m;

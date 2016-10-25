@@ -18,7 +18,10 @@ public class SpriteAnimator : MonoBehaviour {
     private int NowAnim;
     private int AnimKind; //現在のアニメの種類
     private float nCount;
-    
+    private bool Pause;
+
+    public bool canvas;
+
     // Use this for initialization
     void Start () {
         AnimNum = new int[AnimSize.Length];
@@ -31,18 +34,42 @@ public class SpriteAnimator : MonoBehaviour {
         AnimKind = 0;
         nCount = 0;
 
+        Pause = false;
+
+        if(canvas)
+        {
+            gameObject.GetComponent<SpriteRenderer>().enabled = false;
+        }
+        else
+        {
+            gameObject.GetComponent<Image>().enabled = false;
+        }
     }
 	
 	// Update is called once per frame
 	void Update () {
-        nCount += 1 * Time.deltaTime;
+        if (!Pause)
+        {
+            nCount += 1 * Time.deltaTime;
+        }
+        else
+        {
+            nCount += 1 * Time.unscaledDeltaTime;
+        }
          if(nCount >= Second[AnimKind])
          {
              nCount = 0;
             NowAnim++;
             if (NowAnim - AnimNum[AnimKind] >= AnimSize[AnimKind])
                 NowAnim = AnimNum[AnimKind];
-            gameObject.GetComponent<SpriteRenderer>().sprite = TexBox[NowAnim];
+            if (!canvas)
+            {
+                gameObject.GetComponent<SpriteRenderer>().sprite = TexBox[NowAnim];
+            }
+            else
+            {
+                gameObject.GetComponent<Image>().sprite = TexBox[NowAnim];
+            }
 
         }  
 	}
@@ -53,6 +80,31 @@ public class SpriteAnimator : MonoBehaviour {
         {
             NowAnim = AnimNum[nNum];
             AnimKind = nNum;
+        }
+    }
+
+    public void PauseAnim()
+    {
+        Pause = true;
+    }
+
+    public void NormalAnim()
+    {
+        Pause = false;
+    }
+
+    public void ChangeMode()
+    {
+        canvas = canvas ? false : true;
+        if (canvas)
+        {
+            gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            gameObject.GetComponent<Image>().enabled = true;
+        }
+        else
+        {
+            gameObject.GetComponent<SpriteRenderer>().enabled = true;
+            gameObject.GetComponent<Image>().enabled = false;
         }
     }
 }
