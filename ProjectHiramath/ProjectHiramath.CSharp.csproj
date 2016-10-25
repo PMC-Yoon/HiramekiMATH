@@ -130,8 +130,10 @@
     <Compile Include="Assets\Script\BlockSelector.cs" />
     <Compile Include="Assets\Script\CharacterSelect\CharacterSelectSystem.cs" />
     <Compile Include="Assets\Script\Character_Box.cs" />
+    <Compile Include="Assets\Script\GalileoSkill.cs" />
     <Compile Include="Assets\Script\GameSystem.cs" />
     <Compile Include="Assets\Script\GaugeMove.cs" />
+    <Compile Include="Assets\Script\HintMessage.cs" />
     <Compile Include="Assets\Script\Menu.cs" />
     <Compile Include="Assets\Script\Opening\OpeningSystem.cs" />
     <Compile Include="Assets\Script\PlayerController.cs" />
