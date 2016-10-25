@@ -40,4 +40,19 @@ public class Character_Box : MonoBehaviour
         Chara.GetComponent<SpriteAnimator>().ChangeAnim(nNum);
 
     }
+
+    public void PauseAnime()
+    {
+        Chara.GetComponent<SpriteAnimator>().PauseAnim();
+    }
+
+    public void NormalAnime()
+    {
+        Chara.GetComponent<SpriteAnimator>().NormalAnim();
+    }
+
+    public void ChangeMode()
+    {
+        Chara.GetComponent<SpriteAnimator>().ChangeMode();
+    }
 }

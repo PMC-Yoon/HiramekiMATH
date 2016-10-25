@@ -70,8 +70,41 @@ public class Menu : MonoBehaviour {
 
 
     //リザルト出す関数 追加しました　by福岡
-    public void Result()
+    public void Result(bool Clear)
     {
+        GameObject PlBox = GameObject.Find("CharacterBox");
+        GameObject EnBox = GameObject.Find("CharacterBox_2");
+        float ResultScale = 200.0f;
+
+        PlBox.transform.SetParent(GameObject.Find("Canvas").transform);
+        PlBox.transform.localPosition = new Vector3(-330.0f,0);
+        PlBox.transform.localScale = new Vector3(ResultScale, ResultScale, ResultScale);
+        PlBox.transform.SetSiblingIndex(ResultPrefab.transform.GetSiblingIndex() + 1);
+        PlBox.GetComponent<Character_Box>().PauseAnime();
+        PlBox.GetComponent<Character_Box>().ChangeMode();
+
+        EnBox.transform.SetParent(GameObject.Find("Canvas").transform);
+        EnBox.transform.localPosition = new Vector3(330.0f, 0);
+        EnBox.transform.localScale = new Vector3(ResultScale, ResultScale, ResultScale);
+        EnBox.transform.SetSiblingIndex(ResultPrefab.transform.GetSiblingIndex() + 1);
+        EnBox.GetComponent<Character_Box>().PauseAnime();
+        EnBox.GetComponent<Character_Box>().ChangeMode();
+
+        if (Clear)
+        {
+            ResultPrefab.transform.GetChild(4).gameObject.SetActive(false);
+            PlBox.GetComponent<Character_Box>().AnimChange(3);
+            EnBox.GetComponent<Character_Box>().AnimChange(4);
+        }
+        else
+        {
+            ResultPrefab.transform.GetChild(3).gameObject.SetActive(false);
+            PlBox.GetComponent<Character_Box>().AnimChange(4);
+            EnBox.GetComponent<Character_Box>().AnimChange(3);
+        }
+
+        
+
         if ((int)Time.timeScale == 0)
         {
             PauseRelease();
