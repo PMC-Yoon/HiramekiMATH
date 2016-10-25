@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 90e8a36c272ad574d8a1095996f21e1b
-timeCreated: 1477364943
+timeCreated: 1477393217
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -8,6 +8,7 @@ TextureImporter:
     21300002: UI_Stage_02_1
     21300004: UI_Stage_02_2
     21300006: UI_Stage_02_3
+    21300008: UI_Stage_02_4
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -99,13 +100,26 @@ TextureImporter:
       name: UI_Stage_02_3
       rect:
         serializedVersion: 2
-        x: 1
-        y: 711
-        width: 937
-        height: 688
+        x: 0
+        y: 762
+        width: 938
+        height: 401
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: UI_Stage_02_4
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 1200
+        width: 935
+        height: 199
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 46, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     outline: []
