@@ -129,6 +129,7 @@
     <Compile Include="Assets\Script\BlockBox.cs" />
     <Compile Include="Assets\Script\BlockSelector.cs" />
     <Compile Include="Assets\Script\CharacterSelect\CharacterSelectSystem.cs" />
+    <Compile Include="Assets\Script\CharacterSelect\SelectCharacterPanelController.cs" />
     <Compile Include="Assets\Script\Character_Box.cs" />
     <Compile Include="Assets\Script\GalileoSkill.cs" />
     <Compile Include="Assets\Script\GameSystem.cs" />
