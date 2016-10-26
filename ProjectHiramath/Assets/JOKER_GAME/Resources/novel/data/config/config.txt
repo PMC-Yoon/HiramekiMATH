@@ -1,7 +1,8 @@
 title=“タイトルです”
 
 ;最初に読み込まれるシナリオファイル
-first_scenario = "first"
+g_first_scenario = "adv/adv000"
+g_second_scenario = "adv/adv001"
 
 ;セーブできるスロット数の上限を設定できます
 saveslot_max = 5
@@ -18,6 +19,3 @@ showLog=true
 
 ;バックログの最大保持数
 backlogNum=100
-
-;width=“gagaga”
-;height=“wwwww”

@@ -13,9 +13,8 @@ public class SceneInit : MonoBehaviour {
 	private string currentMessage = ""; //現在表示中の文字列
 	public string messageForSaveTitle = ""; //セーブのタイトル用に保持する文字列.
 
-
 	public SceneInit(){
-
+    
 	}
 
 	// Use this for initialization
@@ -61,7 +60,6 @@ public class SceneInit : MonoBehaviour {
 
 			this.gameManager.loadData (next_load);
 
-
 		}else if(StatusManager.nextFileName !=""){
 
 			//scene new でジャンプしてきた後。variable は引き継がないとだめ。
@@ -78,25 +76,50 @@ public class SceneInit : MonoBehaviour {
 			AbstractComponent cmp = this.gameManager.parser.makeTag (tag_str);
 			cmp.start();
 
-
-
-		}else {
-
+		} else {
 			//初回起動時
 			this.messageSpeed = float.Parse (this.gameManager.getConfig ("messageSpeed"));
 
 			StatusManager.variable.replaceAll ("global", this.gameManager.globalSetting.globalVar);
 
-			string scenario_file = this.gameManager.getConfig ("first_scenario");
+            string scenario_file = this.gameManager.getConfig("g_first_scenario");
+            int characterNumb = 0;
+            int stageNumb = 1;
 
-			this.gameManager.loadScenario (scenario_file);
+            switch (characterNumb) {
+                case 0: //ガリレオ
+                    switch (stageNumb) {
+                        case 0:
+                            scenario_file = this.gameManager.getConfig("g_first_scenario");
+                            break;
+
+                        case 1:
+                            scenario_file = this.gameManager.getConfig("g_second_scenario");
+                            break;
+
+                        case 2:
+                            break;
+
+                        case 3:
+                            break;
+                    }
+                    break;
+
+                case 1:
+                    break;
+
+                case 2:
+                    break;
+
+                case 3:
+                    break;
+            }
+
+            this.gameManager.loadScenario (scenario_file);
 
 			this.gameManager.nextOrder ();
-
 		}
-
 	}
-
 
 	void OnGUI()
 	{
