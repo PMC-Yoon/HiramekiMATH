@@ -144,6 +144,7 @@
     <Compile Include="Assets\Script\SpriteAnimator.cs" />
     <Compile Include="Assets\Script\StageData.cs" />
     <Compile Include="Assets\Script\StageSelect\BackgeroundChanger.cs" />
+    <Compile Include="Assets\Script\StageSelect\BorderMessage.cs" />
     <Compile Include="Assets\Script\StageSelect\StageSelectSystem.cs" />
     <Compile Include="Assets\Script\StageSelect\selectcharacternum.cs" />
     <Compile Include="Assets\Script\StageSelect\selectstagenum.cs" />
