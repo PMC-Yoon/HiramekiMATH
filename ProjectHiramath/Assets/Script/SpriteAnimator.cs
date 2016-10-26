@@ -21,6 +21,8 @@ public class SpriteAnimator : MonoBehaviour {
     private bool Pause;
 
     public bool canvas;
+    private bool AnimEnd;
+    public bool Loop;
 
     // Use this for initialization
     void Start () {
@@ -44,6 +46,8 @@ public class SpriteAnimator : MonoBehaviour {
         {
             gameObject.GetComponent<Image>().enabled = false;
         }
+
+        AnimEnd = false;
     }
 	
 	// Update is called once per frame
@@ -61,7 +65,17 @@ public class SpriteAnimator : MonoBehaviour {
              nCount = 0;
             NowAnim++;
             if (NowAnim - AnimNum[AnimKind] >= AnimSize[AnimKind])
-                NowAnim = AnimNum[AnimKind];
+            {
+                if (Loop)
+                {
+                    NowAnim = AnimNum[AnimKind];
+                }
+                else
+                {
+                    ResetAnim();
+                    this.gameObject.SetActive(false);
+                }
+            }
             if (!canvas)
             {
                 gameObject.GetComponent<SpriteRenderer>().sprite = TexBox[NowAnim];
@@ -107,4 +121,10 @@ public class SpriteAnimator : MonoBehaviour {
             gameObject.GetComponent<Image>().enabled = false;
         }
     }
+
+    public void ResetAnim()
+    {
+        NowAnim = AnimNum[AnimKind];
+    }
+
 }
