@@ -1,22 +1,22 @@
 fileFormatVersion: 2
-guid: 7ba85ee7aea012f488a7be0fe2cf8acc
-timeCreated: 1477452276
+guid: 4e743f45ed59e734eb9389b5736b4533
+timeCreated: 1477456450
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: UI_Block_Grid_NeoExtremeEditionDX_0
-    21300002: UI_Block_Grid_NeoExtremeEditionDX_1
-    21300004: UI_Block_Grid_NeoExtremeEditionDX_2
-    21300006: UI_Block_Grid_NeoExtremeEditionDX_3
-    21300008: UI_Block_Grid_NeoExtremeEditionDX_4
-    21300010: UI_Block_Grid_NeoExtremeEditionDX_5
-    21300012: UI_Block_Grid_NeoExtremeEditionDX_6
-    21300014: UI_Block_Grid_NeoExtremeEditionDX_7
-    21300016: UI_Block_Grid_NeoExtremeEditionDX_8
-    21300018: UI_Block_Grid_NeoExtremeEditionDX_9
-    21300020: UI_Block_Grid_NeoExtremeEditionDX_10
-    21300022: UI_Block_Grid_NeoExtremeEditionDX_11
-    21300024: UI_Block_Grid_NeoExtremeEditionDX_12
+    21300000: UI_Block_Grid_UltimateSuperNeoExtremeEditionDXTurboRemasterPowerKit_0
+    21300002: UI_Block_Grid_UltimateSuperNeoExtremeEditionDXTurboRemasterPowerKit_1
+    21300004: UI_Block_Grid_UltimateSuperNeoExtremeEditionDXTurboRemasterPowerKit_2
+    21300006: UI_Block_Grid_UltimateSuperNeoExtremeEditionDXTurboRemasterPowerKit_3
+    21300008: UI_Block_Grid_UltimateSuperNeoExtremeEditionDXTurboRemasterPowerKit_4
+    21300010: UI_Block_Grid_UltimateSuperNeoExtremeEditionDXTurboRemasterPowerKit_5
+    21300012: UI_Block_Grid_UltimateSuperNeoExtremeEditionDXTurboRemasterPowerKit_6
+    21300014: UI_Block_Grid_UltimateSuperNeoExtremeEditionDXTurboRemasterPowerKit_7
+    21300016: UI_Block_Grid_UltimateSuperNeoExtremeEditionDXTurboRemasterPowerKit_8
+    21300018: UI_Block_Grid_UltimateSuperNeoExtremeEditionDXTurboRemasterPowerKit_9
+    21300020: UI_Block_Grid_UltimateSuperNeoExtremeEditionDXTurboRemasterPowerKit_10
+    21300022: UI_Block_Grid_UltimateSuperNeoExtremeEditionDXTurboRemasterPowerKit_11
+    21300024: UI_Block_Grid_UltimateSuperNeoExtremeEditionDXTurboRemasterPowerKit_12
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -66,7 +66,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: UI_Block_Grid_NeoExtremeEditionDX_0
+      name: UI_Block_Grid_UltimateSuperNeoExtremeEditionDXTurboRemasterPowerKit_0
       rect:
         serializedVersion: 2
         x: 0
@@ -79,7 +79,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: UI_Block_Grid_NeoExtremeEditionDX_1
+      name: UI_Block_Grid_UltimateSuperNeoExtremeEditionDXTurboRemasterPowerKit_1
       rect:
         serializedVersion: 2
         x: 100
@@ -92,7 +92,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: UI_Block_Grid_NeoExtremeEditionDX_2
+      name: UI_Block_Grid_UltimateSuperNeoExtremeEditionDXTurboRemasterPowerKit_2
       rect:
         serializedVersion: 2
         x: 200
@@ -105,7 +105,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: UI_Block_Grid_NeoExtremeEditionDX_3
+      name: UI_Block_Grid_UltimateSuperNeoExtremeEditionDXTurboRemasterPowerKit_3
       rect:
         serializedVersion: 2
         x: 300
@@ -118,7 +118,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: UI_Block_Grid_NeoExtremeEditionDX_4
+      name: UI_Block_Grid_UltimateSuperNeoExtremeEditionDXTurboRemasterPowerKit_4
       rect:
         serializedVersion: 2
         x: 400
@@ -131,7 +131,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: UI_Block_Grid_NeoExtremeEditionDX_5
+      name: UI_Block_Grid_UltimateSuperNeoExtremeEditionDXTurboRemasterPowerKit_5
       rect:
         serializedVersion: 2
         x: 500
@@ -144,7 +144,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: UI_Block_Grid_NeoExtremeEditionDX_6
+      name: UI_Block_Grid_UltimateSuperNeoExtremeEditionDXTurboRemasterPowerKit_6
       rect:
         serializedVersion: 2
         x: 600
@@ -157,7 +157,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: UI_Block_Grid_NeoExtremeEditionDX_7
+      name: UI_Block_Grid_UltimateSuperNeoExtremeEditionDXTurboRemasterPowerKit_7
       rect:
         serializedVersion: 2
         x: 700
@@ -170,7 +170,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: UI_Block_Grid_NeoExtremeEditionDX_8
+      name: UI_Block_Grid_UltimateSuperNeoExtremeEditionDXTurboRemasterPowerKit_8
       rect:
         serializedVersion: 2
         x: 800
@@ -183,7 +183,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: UI_Block_Grid_NeoExtremeEditionDX_9
+      name: UI_Block_Grid_UltimateSuperNeoExtremeEditionDXTurboRemasterPowerKit_9
       rect:
         serializedVersion: 2
         x: 900
@@ -196,7 +196,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: UI_Block_Grid_NeoExtremeEditionDX_10
+      name: UI_Block_Grid_UltimateSuperNeoExtremeEditionDXTurboRemasterPowerKit_10
       rect:
         serializedVersion: 2
         x: 0
@@ -209,7 +209,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: UI_Block_Grid_NeoExtremeEditionDX_11
+      name: UI_Block_Grid_UltimateSuperNeoExtremeEditionDXTurboRemasterPowerKit_11
       rect:
         serializedVersion: 2
         x: 100
@@ -222,7 +222,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: UI_Block_Grid_NeoExtremeEditionDX_12
+      name: UI_Block_Grid_UltimateSuperNeoExtremeEditionDXTurboRemasterPowerKit_12
       rect:
         serializedVersion: 2
         x: 200
