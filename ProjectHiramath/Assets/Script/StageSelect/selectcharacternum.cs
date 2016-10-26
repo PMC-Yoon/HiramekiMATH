@@ -7,7 +7,7 @@ public class selectcharacternum : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+        GetComponent<Text>().text = "";
 	}
 	
 	// Update is called once per frame

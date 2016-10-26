@@ -121,4 +121,14 @@ public class StageData : MonoBehaviour {
     {
         return StageClearFlag[Chara, Stage];
     }
+
+    //20161026　追記　Terabayashi
+    //メソッド追加、ボーダーを返す関数
+    public int GetStageBorder(int chara , int stage)
+    {
+        return StageBox[chara, stage].Border;
+    }
+    //追記ここまで
+
+
 }

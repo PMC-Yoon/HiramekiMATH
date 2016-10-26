@@ -23,8 +23,8 @@ public class SelectCharacterPanelController : MonoBehaviour {
         {
             case 0: //Galileo
                 {
-                    transform.FindChild("explanation").gameObject.GetComponent<Text>().text = "Galileoの説明文";
-                    transform.FindChild("Skillexplanation").gameObject.GetComponent<Text>().text = "GalileoのSkill説明文";
+                    transform.FindChild("explanation").gameObject.GetComponent<Text>().text = "「世界で一番自分がかしこい」と信じて疑わない女の子。\n\nいつも身勝手な行動で皆を困らせている。\n\nだが、実は繊細な一面もある。";
+                    transform.FindChild("Skillexplanation").gameObject.GetComponent<Text>().text = "ボタンをタップすると\nアドバイスを聞くことができる";
                     transform.FindChild("CharacterName").gameObject.GetComponent<Text>().text = "ガリレオ";
                     transform.FindChild("CharacterImage").gameObject.GetComponent<Image>().sprite = GalileoSprite;
                     break;

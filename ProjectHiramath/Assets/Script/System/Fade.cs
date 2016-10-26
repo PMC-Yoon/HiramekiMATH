@@ -16,7 +16,7 @@ public class Fade : MonoBehaviour
     public float FadeTime;
     Color alpha;
     string fadeStart;
-
+    bool fadestarted;
 
 
     // Use this for initialization
@@ -26,7 +26,7 @@ public class Fade : MonoBehaviour
 
         startTime = Time.time;
         fadeStart = "FadeIn";
-
+        fadestarted = false;
     }
 
     // Update is called once per frame
@@ -61,10 +61,14 @@ public class Fade : MonoBehaviour
 
     public void FadeStart()
     {
-        
-        fadeStart = "FadeOut";
-        startTime = Time.time;
-        Invoke("Load", FadeTime);
+        if (!fadestarted)
+        {
+            fadeStart = "FadeOut";
+            startTime = Time.time;
+            Invoke("Load", FadeTime);
+
+            fadestarted = true;
+        }
     }
 
 

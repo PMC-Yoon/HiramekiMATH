@@ -11,7 +11,7 @@ public class selectstagenum : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        GetComponent<Text>().text = "SelectSategeNum :" + StageSelectSystem.SelectStage;
+        GetComponent<Text>().text = "Stage" + (StageSelectSystem.SelectStage+1);
 
 
     }
