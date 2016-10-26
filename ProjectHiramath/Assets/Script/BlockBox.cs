@@ -267,7 +267,7 @@ public class BlockBox : MonoBehaviour {
 
         if(EraseFlag)
         {
-            float smallsize = 1.0f * Time.deltaTime;
+            float smallsize = 1.5f * Time.deltaTime;
             int score = 0;
             if (ChangeNum != 3)
             {
