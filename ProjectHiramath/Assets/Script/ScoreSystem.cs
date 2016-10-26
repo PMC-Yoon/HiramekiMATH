@@ -14,7 +14,7 @@ public class ScoreSystem : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        TEXT.text = string.Format("{0:D10}",Score);
+        TEXT.text = string.Format("{0:D3}",Score);
 
     }
 
