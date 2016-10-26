@@ -23,6 +23,8 @@ public class BlockBox : MonoBehaviour {
         //追加人：福岡
         public bool Delete; //消えた
         public GameObject Block;
+
+        public GameObject Eff;
     }
 
     //宣言
@@ -32,6 +34,7 @@ public class BlockBox : MonoBehaviour {
     GameObject puzzlebackground;
 
     public GameObject NumberBlock; //ブロック割当
+    public GameObject EraseEffect; //消去エフェクト
     private ScoreSystem Score;
     private float nCount;
     public float BlockTime; //せり出してくるまでの時間
@@ -56,6 +59,14 @@ public class BlockBox : MonoBehaviour {
 
     private int EraseBlockX;
     private int EraseBlockY;
+    private bool EraseHorizontal;
+    private bool EraseVertical;
+
+    public float RotateTime;
+    private Vector3 DestScale;
+
+    private bool ProductFlag;
+    private bool ProductNowFlag;
 
     void Awake()
     {
@@ -154,8 +165,11 @@ public class BlockBox : MonoBehaviour {
                     addData(n, m, true, a_Block[n, m].data);
                 }
 
-
-
+                a_Block[n, m].Eff = Instantiate(EraseEffect) as GameObject;
+                a_Block[n, m].Eff.transform.SetParent(this.transform);
+                a_Block[n, m].Eff.transform.localPosition = a_Block[n, m].pos;
+                a_Block[n, m].Eff.transform.localScale = new Vector3(0.5f,0.5f,0.5f);
+                a_Block[n, m].Eff.SetActive(false);
             }
         }
         //数字のランダム配置 追加　福岡　2016/10/11 ここまで
@@ -177,6 +191,11 @@ public class BlockBox : MonoBehaviour {
 
         EraseBlockX = 0;
         EraseBlockY = 0;
+        EraseHorizontal = false;
+        EraseVertical = false;
+
+        ProductFlag = false;
+        ProductNowFlag = false;
     }
 
     void StageLoad()
@@ -226,7 +245,10 @@ public class BlockBox : MonoBehaviour {
     void Update()
     {
         CrearCheck();
-        EraseCheck();
+        if (ChangeNum >= 0)
+        {
+            EraseCheck();
+        }
         //計算処理　追加　福岡　2016/10/11 ここから
         if(Input.GetMouseButtonDown(0) && !EraseFlag)
         {
@@ -245,23 +267,109 @@ public class BlockBox : MonoBehaviour {
 
         if(EraseFlag)
         {
+            float smallsize = 1.0f * Time.deltaTime;
+            int score = 0;
             if (ChangeNum != 3)
             {
-                a_Block[EraseBlockX, EraseBlockY].Block.transform.Rotate(0, 180 * Time.deltaTime, 0);
-
-                if (a_Block[EraseBlockX, EraseBlockY].Block.transform.localEulerAngles.y > 180.0f)
+                if (!ProductNowFlag)
                 {
-                    CheckNumber();
-                    EraseFlag = false;
-                    a_Block[EraseBlockX, EraseBlockY].Block.transform.localEulerAngles = Vector3.zero;
+                    if (a_Block[EraseBlockX, EraseBlockY].Block.transform.localEulerAngles.y <= 180.0f)
+                    {
+                        a_Block[EraseBlockX, EraseBlockY].Block.transform.Rotate(0, (180 / RotateTime) * Time.deltaTime, 0);
+                        DestScale = a_Block[EraseBlockX, EraseBlockY].Block.transform.localScale;
+                    }
+
+                    if (a_Block[EraseBlockX, EraseBlockY].Block.transform.localEulerAngles.y > 180.0f)
+                    {
+                        a_Block[EraseBlockX, EraseBlockY].Block.transform.localScale -= new Vector3(smallsize, smallsize, smallsize);
+                        if (EraseHorizontal)
+                        {
+                            a_Block[EraseBlockX - 1, EraseBlockY].Block.transform.localScale -= new Vector3(smallsize, smallsize, smallsize);
+                            a_Block[EraseBlockX + 1, EraseBlockY].Block.transform.localScale -= new Vector3(smallsize, smallsize, smallsize);
+                        }
+                        if (EraseVertical)
+                        {
+                            a_Block[EraseBlockX, EraseBlockY - 1].Block.transform.localScale -= new Vector3(smallsize, smallsize, smallsize);
+                            a_Block[EraseBlockX, EraseBlockY + 1].Block.transform.localScale -= new Vector3(smallsize, smallsize, smallsize);
+                        }
+
+                        if (a_Block[EraseBlockX, EraseBlockY].Block.transform.localScale.x < 0.0f && !ProductNowFlag)
+                        {
+                            a_Block[EraseBlockX, EraseBlockY].Eff.SetActive(true);
+                            if (EraseHorizontal)
+                            {
+                                switch (a_Block[EraseBlockX, EraseBlockY].data)
+                                {
+                                    case 0:
+                                        score += (a_Block[EraseBlockX - 1, EraseBlockY].data * a_Block[EraseBlockX + 1, EraseBlockY].data);
+                                        break;
+                                    case 1:
+                                        score += (a_Block[EraseBlockX - 1, EraseBlockY].data + a_Block[EraseBlockX + 1, EraseBlockY].data);
+                                        break;
+                                    case 2:
+                                        score += (a_Block[EraseBlockX - 1, EraseBlockY].data - a_Block[EraseBlockX - 1, EraseBlockY].data);
+                                        break;
+                                }
+                                a_Block[EraseBlockX - 1, EraseBlockY].Eff.SetActive(true);
+                                a_Block[EraseBlockX + 1, EraseBlockY].Eff.SetActive(true);
+                            }
+                            if (EraseVertical)
+                            {
+                                switch (a_Block[EraseBlockX, EraseBlockY].data)
+                                {
+                                    case 0:
+                                        score += (a_Block[EraseBlockX, EraseBlockY - 1].data * a_Block[EraseBlockX, EraseBlockY + 1].data);
+                                        break;
+                                    case 1:
+                                        score += (a_Block[EraseBlockX, EraseBlockY - 1].data + a_Block[EraseBlockX, EraseBlockY + 1].data);
+                                        break;
+                                    case 2:
+                                        score += (a_Block[EraseBlockX, EraseBlockY - 1].data - a_Block[EraseBlockX, EraseBlockY + 1].data);
+                                        break;
+                                }
+                                a_Block[EraseBlockX, EraseBlockY - 1].Eff.SetActive(true);
+                                a_Block[EraseBlockX, EraseBlockY + 1].Eff.SetActive(true);
+                            }
+                            GameObject.Find("ScoreProduct").GetComponent<ScoreProduct>().Product(score, RectTransformUtility.WorldToScreenPoint(Camera.main, a_Block[EraseBlockX, EraseBlockY].Block.transform.position));
+                            Debug.Log("捕鯨");
+                            //CheckNumber();
+                            ProductNowFlag = true;
+                        }
+                        
+                    }
+
+
+                    else if (a_Block[EraseBlockX, EraseBlockY].Block.transform.localEulerAngles.y > 90.0f && a_Block[EraseBlockX, EraseBlockY].Number != false)
+                    {
+                        Debug.Log("hoge");
+                        deleteData(EraseBlockX, EraseBlockY);
+                        addData(EraseBlockX, EraseBlockY, false, ChangeNum);
+
+                    }
                 }
-
-                else if (a_Block[EraseBlockX, EraseBlockY].Block.transform.localEulerAngles.y > 90.0f && a_Block[EraseBlockX, EraseBlockY].Number != false)
+                else
                 {
-                    Debug.Log("hoge");
-                    deleteData(EraseBlockX, EraseBlockY);
-                    addData(EraseBlockX, EraseBlockY, false, ChangeNum);
+                    if (ProductFlag)
+                    {
+                        a_Block[EraseBlockX, EraseBlockY].Block.transform.localEulerAngles = Vector3.zero;
+                        a_Block[EraseBlockX, EraseBlockY].Block.transform.localScale = DestScale;
+                        if (EraseHorizontal)
+                        {
+                            a_Block[EraseBlockX - 1, EraseBlockY].Block.transform.localScale = DestScale;
+                            a_Block[EraseBlockX + 1, EraseBlockY].Block.transform.localScale = DestScale;
 
+                        }
+                        if (EraseVertical)
+                        {
+                            a_Block[EraseBlockX, EraseBlockY - 1].Block.transform.localScale = DestScale;
+                            a_Block[EraseBlockX, EraseBlockY + 1].Block.transform.localScale = DestScale;
+                        }
+                        EraseHorizontal = false;
+                        EraseVertical = false;
+                        ProductFlag = false;
+                        EraseFlag = false;
+                        ProductNowFlag = false;
+                    }
                 }
             }
             else
@@ -499,6 +607,9 @@ public class BlockBox : MonoBehaviour {
         }
 
         FallBlock();
+
+        
+        ProductFlag = true;
     }
     //計算処理　追加　福岡　2016/10/11 ここまで
 
@@ -754,7 +865,9 @@ public class BlockBox : MonoBehaviour {
                 {
                     BlockX = n;
                     BlockY = 0;
+                    EraseHorizontal = true;
                 }
+
             }
 
             if ((a_Block[n - 1, HeightMax].use && a_Block[n + 1, HeightMax].use) && (a_Block[n, HeightMax].pos.x + fWidth > MousePos.x && a_Block[n, HeightMax].pos.x - fWidth < MousePos.x) && (a_Block[n, HeightMax].pos.y + fHeight > MousePos.y && a_Block[n, HeightMax].pos.y - fHeight < MousePos.y))
@@ -763,6 +876,7 @@ public class BlockBox : MonoBehaviour {
                 {
                     BlockX = n;
                     BlockY = HeightMax;
+                    EraseHorizontal = true;
                 }
             }
         }
@@ -774,6 +888,7 @@ public class BlockBox : MonoBehaviour {
                 {
                     BlockX = 0;
                     BlockY = m;
+                    EraseVertical = true;
                 }
             }
 
@@ -783,6 +898,7 @@ public class BlockBox : MonoBehaviour {
                 {
                     BlockX = WidthMax;
                     BlockY = m;
+                    EraseVertical = true;
                 }
             }
         }
@@ -800,6 +916,14 @@ public class BlockBox : MonoBehaviour {
                     {
                         BlockX = n;
                         BlockY = m;
+                        if (a_Block[n - 1, m].use && a_Block[n + 1, m].use)
+                        {
+                            EraseHorizontal = true;
+                        }
+                        if (a_Block[n, m - 1].use && a_Block[n, m + 1].use)
+                        {
+                            EraseVertical = true;
+                        }
                     }
                 }
             }
