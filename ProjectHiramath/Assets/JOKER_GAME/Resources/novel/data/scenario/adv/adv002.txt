@@ -1,0 +1,82 @@
+﻿@call file=tall/libs/utils
+[bg_new name="background" storage="N_BG"]
+[bg_show name="background"]
+
+;メッセージ表示
+[showmessage]
+[text_new name=_sp_chara_name layer=ui x=-40 y=-140 val="" color="FFFFFF" fontsize=16 anchor="MiddleLeft"]
+[text_show name="_sp_chara_name"] 
+
+;---------------キャラ定義
+
+@tag_default tag="chara"
+[chara_new name="Galileo" storage="G_normal_1" jname="ガリレオ" scale=1 jcolor=FF77FF]
+[chara_new name="Einstein" storage="E_normal_1" jname="アインシュタイン" scale=1 jcolor=8822FF]
+[chara_new name="Arkimedes" storage="A_normal_1" jname="アルキメデス" scale=0.9 jcolor=FF7722]
+[chara_new name="Newton" storage="N_normal_1" jname="ニュートン" scale=1 jcolor=55FF55]
+@reset_tag_default
+
+;ゆうこの表情登録
+[chara_face name="Galileo" face="angry" storage=chara_a ]
+[chara_face name="Galileo" face="komaru" storage=chara_k ]
+[chara_face name="Galileo" face="warau" storage=chara_w ]
+
+;麻衣の表情登録
+[chara_face name="Einstein" face="angry" storage=kiri_a ]
+[chara_face name="Einstein" face="komaru" storage=kiri_k ]
+
+@chara_pos name="Galileo" x=-1.2 y=0.6
+@chara_pos name="Einstein" x=1.5 y=0.6
+@chara_pos name="Arkimedes" x=1.0 y=0.1
+@chara_pos name="Newton" x=1.5 y=0.6
+
+;[playbgm wait=false time=1 storage="music"]
+
+[font color=#000000]
+
+アインシュタインとの対決に難なく勝利することができたガリレオ。 [r]
+勝利に酔いしれるガリレオに、満身創痍のアインシュタインは衝撃の事実を告げるのでした―――[p]
+
+@show name=Galileo
+#Galileo
+「さて、ぼうしがもりにあることがわかったはいいが」[r]
+「どこだ、ここは・・・？」[r]
+「すっかりまよってしまったな」[p]
+「ん・・・？なにかひとのこえがするな」[r]
+「みちをきけるかもしれない、ちかづいてみるか」[p]
+「すみませぇーん・・・・[l]えﾞっ！？」[r]
+「なんかへんなじじいがいるぞ！？」[p]
+
+@show name=Arkimedes
+#Arkimedes
+「♪～♪～♪～」[r]
+「ん？なにやら見られておる気がするな」[p]
+
+@show name=Galileo
+#Galileo
+「しかも・・・ふろにはいってる！？」[p]
+
+@show name=Arkimedes
+#Arkimedes
+「キャーーーッ！！のぞきーーーッ！！」[p]
+
+@show name=Galileo
+#Galileo
+「なんでおまえがはずかしがってるんだ！？」[p]
+
+@show name=Arkimedes
+#Arkimedes
+「お、そうじゃった」[r]
+「にしても失礼な奴じゃのう、ワシの朝風呂を邪魔しないでもらいたいわい」[p]
+
+@show name=Galileo
+#Galileo
+「もりのなかであさぶろにはいるやつがいるか・・・？」[r]
+「ともかく、じじい！あたしはおまえにみちをききたいのだ」[p]
+「ぼうしがどこにあるか、とっととおしえてもらおうか」[p]
+
+@show name=Arkimedes
+#Arkimedes
+「なに、帽子じゃと・・・？[l]まあよい、それはともかく」[r]
+「いきなりバスタイムを邪魔した挙句、じじい呼ばわりとは・・・」[p]
+「これは、教育が必要な様じゃのう！！」

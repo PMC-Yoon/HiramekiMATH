@@ -3,6 +3,8 @@ title=“タイトルです”
 ;最初に読み込まれるシナリオファイル
 g_first_scenario = "adv/adv000"
 g_second_scenario = "adv/adv001"
+g_third_scenario = "adv/adv002"
+g_fourth_scenario = "adv/adv003"
 
 ;セーブできるスロット数の上限を設定できます
 saveslot_max = 5

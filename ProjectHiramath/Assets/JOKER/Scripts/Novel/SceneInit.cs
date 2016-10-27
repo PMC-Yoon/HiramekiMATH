@@ -83,8 +83,10 @@ public class SceneInit : MonoBehaviour {
 			StatusManager.variable.replaceAll ("global", this.gameManager.globalSetting.globalVar);
 
             string scenario_file = this.gameManager.getConfig("g_first_scenario");
+
+            //ここに選んだキャラクターとステージの番号入れてください。
             int characterNumb = 0;
-            int stageNumb = 1;
+            int stageNumb = 3;
 
             switch (characterNumb) {
                 case 0: //ガリレオ
@@ -98,9 +100,11 @@ public class SceneInit : MonoBehaviour {
                             break;
 
                         case 2:
+                            scenario_file = this.gameManager.getConfig("g_third_scenario");
                             break;
 
                         case 3:
+                            scenario_file = this.gameManager.getConfig("g_fourth_scenario");
                             break;
                     }
                     break;
@@ -124,39 +128,6 @@ public class SceneInit : MonoBehaviour {
 	void OnGUI()
 	{
 
-		/*
-
-		if (GUI.Button(new Rect(10, 20, 100, 100), "Load"))
-		{
-			// set text
-			GameObject message_area = GameObject.Find("message_area") as GameObject;
-			message_area.guiText.text = "click this is test";
-
-			//message_area.guiText.text = fm.test ();
-
-
-		}
-
-		if (GUI.Button (new Rect (10, 120, 100, 100), "Save")) {
-
-			GameManager gameManager = NovelSingleton.GameManager;
-
-			//tmp領域に保存しておいた所からセーブする
-			gameManager.saveManager.saveFromSnap("test");
-
-		}
-		if (GUI.Button (new Rect (10, 220, 100, 100), "シーン切り替え")) {
-
-			StatusManager.nextLoad ="test";
-			Application.LoadLevel("Player");
-
-			//GameManager gameManager = NovelSingleton.GameManager;
-			//gameManager.saveManager.save();
-
-		}
-
-		*/
-
 	}
 
 
@@ -164,14 +135,12 @@ public class SceneInit : MonoBehaviour {
 	
 		//処理を止める
 		StartCoroutine("startWait",time);
-
 	}
 
 
 	public void coroutineShowMessage(string message){
 		StatusManager.isMessageShowing = true;
-		StartCoroutine("showMessage",message);
-	
+		StartCoroutine("showMessage",message);	
 	}
 
 	//一定時間処理を停止するためのコルーチン
@@ -186,10 +155,7 @@ public class SceneInit : MonoBehaviour {
 		this.gameManager.nextOrder ();
 
 		yield return null;
-
-
 	}
-
 
 	public float MessageSpeed{
 		get{
@@ -203,7 +169,6 @@ public class SceneInit : MonoBehaviour {
 	//現在のメッセージをクリアする
 	public void clearCurrentMessage(){
 		this.messageForSaveTitle = this.currentMessage;
-
 
 		GameObject obj = GameObject.Find ("Canvas/_sp_chara_name");
 
@@ -221,7 +186,6 @@ public class SceneInit : MonoBehaviour {
 		string color = ColorX.RGBToHex(c);
 		this.gameManager.logManager.addLog (name,color,this.currentMessage);
 
-
 		this.currentMessage = "";
 
 	}
@@ -230,11 +194,6 @@ public class SceneInit : MonoBehaviour {
 		get{
 			return this.currentMessage;
 		}
-		/*
-		set{
-			this.currentMessage = value;
-		}
-		*/
 	}
 
 	//メッセージ表示制御用のコルーチン
@@ -269,18 +228,13 @@ public class SceneInit : MonoBehaviour {
 			yield return new WaitForSeconds(this.messageSpeed);
 		}
 
-
 		StatusManager.isMessageShowing = false;
 		this.messageSpeed = float.Parse(this.gameManager.getConfig ("messageSpeed"));
 
 		this.gameManager.nextOrder ();
 
 		yield return null;
- 
-
 	}
-
-
 
 	public void coroutineAnimation(Animation a, CompleteDelegate completeDeletgate){
 
@@ -306,49 +260,18 @@ public class SceneInit : MonoBehaviour {
 		}
 
 		completeDeletgate ();
-
-
 	}
 
 
 	// Update is called once per frame
 	void Update () {
 
-		//メッセージ表示中は検知しない
-		/*
-		if (StatusManager.isMessageShowing == true) {
-			return;
-		}
-		*/
-
-
-
 		//this.gameManager.check ();
 		if (Input.GetMouseButtonUp (0)) {
 
 			StartCoroutine("ClickButton");
 		}
-
-
-		/*
-		if(Input.GetMouseButtonDown(0)){
-			Vector3 screenPoint = Camera.main.Button_(gameObject.transform.position);
-			Vector3 newVector = Camera.main.ScreenToWorldPoint( new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
-
-			Vector2 tapPoint = new Vector2(newVector.x, newVector.y);
-			Collider2D colition2d = Physics2D.OverlapPoint(tapPoint);
-
-			if(colition2d) {
-				RaycastHit2D hitObject = Physics2D.Raycast(tapPoint, -Vector2.up);
-				if(hitObject){
-					Debug.Log("hit object is " + hitObject.collider.gameObject.name);
-					gameManager.eventManager.checkEvent (hitObject.collider.gameObject.name, "click");
-				}
-			}
-		}
-        */
 	}
-
 
 	private IEnumerator ClickButton() {
 
@@ -460,7 +383,4 @@ public class SceneInit : MonoBehaviour {
 		//gameManager.saveManager.saveFromSnap("autosave"); 
 
 	}
-
-
-
 }

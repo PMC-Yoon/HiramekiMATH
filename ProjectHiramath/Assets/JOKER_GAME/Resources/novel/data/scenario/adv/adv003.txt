@@ -1,0 +1,92 @@
+﻿@call file=tall/libs/utils
+[bg_new name="background" storage="N_BG"]
+[bg_show name="background"]
+
+;メッセージ表示
+[showmessage]
+[text_new name=_sp_chara_name layer=ui x=-40 y=-140 val="" color="FFFFFF" fontsize=16 anchor="MiddleLeft"]
+[text_show name="_sp_chara_name"] 
+
+@tag_default tag="chara"
+[chara_new name="Galileo" storage="G_normal_1" jname="ガリレオ" scale=1 jcolor=FF77FF]
+[chara_new name="Einstein" storage="E_normal_1" jname="アインシュタイン" scale=1 jcolor=8822FF]
+[chara_new name="Arkimedes" storage="A_normal_1" jname="アルキメデス" scale=0.9 jcolor=FF7722]
+[chara_new name="Newton" storage="N_normal_1" jname="ニュートン" scale=1 jcolor=55FF55]
+@reset_tag_default
+
+;ゆうこの表情登録
+[chara_face name="Galileo" face="angry" storage=chara_a ]
+[chara_face name="Galileo" face="komaru" storage=chara_k ]
+[chara_face name="Galileo" face="warau" storage=chara_w ]
+
+;麻衣の表情登録
+[chara_face name="Einstein" face="angry" storage=kiri_a ]
+[chara_face name="Einstein" face="komaru" storage=kiri_k ]
+
+@chara_pos name="Galileo" x=-1.2 y=0.6
+@chara_pos name="Einstein" x=1.5 y=0.6
+@chara_pos name="Arkimedes" x=1.0 y=0.1
+@chara_pos name="Newton" x=1.5 y=0.6
+
+;[playbgm wait=false time=1 storage="music"]
+
+[font color=#000000]
+
+アルキメデスを撃退したガリレオ。[r]
+激しい戦いが続き少し疲れたのか、草原のほとりで休むことにしました。[p]
+
+@show name=Galileo
+#Galileo
+「なんだったんだ、さっきのおっさん・・・」[r]
+「ともかくすこしつかれたな[l]ちょうどいいきがあるし、このへんでひとやすみするか・・・」[p]
+「すぴー・・すぴー・・・」[p]
+
+@show name=Newton
+#Newton
+「・・・・・・・の・・・」[p]
+
+@show name=Galileo
+#Galileo
+「むにゃむにゃ・・・もうしゃけフレークたべられないよ・・・」[p]
+
+@show name=Newton
+#Newton
+「・・・・・のぅ・・・・」[r]
+「あのぅ・・・」[p]
+
+@show name=Galileo
+#Galileo
+「にょわーーっ！！？」[r]
+「なんだおまえ、びっくりさせるんじゃあない！！」[p]
+
+@show name=Newton
+#Newton
+「すみません・・・でもどうしても聞きたいことがあって・・・」[r]
+「ほんとに困ってるんです、お願いできませんか・・？」[p]
+
+@show name=Galileo
+#Galileo
+「むう、そこまでいうなら・・・」[r]
+「きいてやってもいいぞ、どうしたんだうすのろ？」[p]
+
+@show name=Newton
+#Newton
+「ありがとうございます、実は・・・」[r]
+「リンゴを、なくしてしまって・・・」[p]
+
+@show name=Galileo
+#Galileo
+「・・・・・・・・・」[p]
+
+@show name=Newton
+#Newton
+「一緒に探してくれませんか・・・？」[p]
+
+@show name=Galileo
+#Galileo
+「はぁぁ～・・・[l]まじめにおまえのはなしをきいてしまったあたしがバカだったよ」[r]
+「ちょうどいい、ねむけざましにこてんぱんにしてやる！かくごしろ！」
+
+[scene file="Game"]
+
+[s]
