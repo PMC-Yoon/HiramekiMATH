@@ -267,7 +267,7 @@ public class BlockBox : MonoBehaviour {
 
         if(EraseFlag)
         {
-            float smallsize = 1.5f * Time.deltaTime;
+            float smallsize = 2.0f * Time.deltaTime;
             int score = 0;
             if (ChangeNum != 3)
             {
@@ -307,7 +307,7 @@ public class BlockBox : MonoBehaviour {
                                         score += (a_Block[EraseBlockX - 1, EraseBlockY].data + a_Block[EraseBlockX + 1, EraseBlockY].data);
                                         break;
                                     case 2:
-                                        score += (a_Block[EraseBlockX - 1, EraseBlockY].data - a_Block[EraseBlockX - 1, EraseBlockY].data);
+                                        score += (a_Block[EraseBlockX - 1, EraseBlockY].data - a_Block[EraseBlockX + 1, EraseBlockY].data);
                                         break;
                                 }
                                 a_Block[EraseBlockX - 1, EraseBlockY].Eff.SetActive(true);
@@ -998,7 +998,7 @@ public class BlockBox : MonoBehaviour {
 
             NumberLast[LastSymbol]++;
 
-            Score.ScorePlus(-LastScore);
+            Score.ScoreUndo(LastScore);
             UndoFlag = false;
         }
     }
