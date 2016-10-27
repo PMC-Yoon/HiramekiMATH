@@ -30,7 +30,7 @@ public class ScoreProduct : MonoBehaviour {
                 pos.y += 1.0f * Time.deltaTime;
                 //transform.position = pos;
                 MoveSize = (ScorePos.position - transform.position).normalized;
-                MoveSize *= 6000.0f;
+                MoveSize *= 2000.0f;
             }
             else
             {
