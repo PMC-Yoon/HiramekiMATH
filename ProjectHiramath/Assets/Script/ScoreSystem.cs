@@ -9,6 +9,7 @@ public class ScoreSystem : MonoBehaviour {
     private Text BorderText;
     private float TimeCount;
     private float PlusSpeed;
+    private int Border;
 	// Use this for initialization
 	void Start () {
         TEXT = this.gameObject.GetComponent<Text>();
@@ -32,6 +33,14 @@ public class ScoreSystem : MonoBehaviour {
         }
         TEXT.text = string.Format("{0:D3}",ProductScore);
 
+        if(Border <= Score)
+        {
+            TEXT.color = new Color(0.15f, 1.0f, 0, 1.0f);
+        }
+        else
+        {
+            TEXT.color = new Color(0,0,0,1.0f);
+        }
     }
 
     public void ScorePlus(int nScore)
@@ -53,5 +62,6 @@ public class ScoreSystem : MonoBehaviour {
     public void BorderSet(int nBorder)
     {
         BorderText.text = string.Format("{0,3}",nBorder);
+        Border = nBorder;
     }
 }
