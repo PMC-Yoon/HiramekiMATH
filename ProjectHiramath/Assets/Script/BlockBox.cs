@@ -87,7 +87,7 @@ public class BlockBox : MonoBehaviour {
         width = puzzlebackground.GetComponent<SpriteRenderer>().bounds.size.x;
         height = puzzlebackground.GetComponent<SpriteRenderer>().bounds.size.y;
 
-
+        ChangeNum = -1;
         
 
         //ブロックの幅を求める
@@ -947,6 +947,12 @@ public class BlockBox : MonoBehaviour {
         {
             ChangeNum = nNum;
         }
+    }
+
+    //関数追加20161028 terabayashi
+    public int GetChangeNum()
+    {
+        return ChangeNum;
     }
 
     public int NumberLastCheck(int nNum)

@@ -143,6 +143,7 @@
     <Compile Include="Assets\Script\RemainingNumber.cs" />
     <Compile Include="Assets\Script\SceneChange.cs" />
     <Compile Include="Assets\Script\ScoreSystem.cs" />
+    <Compile Include="Assets\Script\SelectOperator.cs" />
     <Compile Include="Assets\Script\SpriteAnimator.cs" />
     <Compile Include="Assets\Script\StageData.cs" />
     <Compile Include="Assets\Script\StageSelect\BackgeroundChanger.cs" />
