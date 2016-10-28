@@ -64,4 +64,10 @@ public class ScoreSystem : MonoBehaviour {
         BorderText.text = string.Format("{0,3}",nBorder);
         Border = nBorder;
     }
+
+    //Borderを取得する関数を追加
+    public int GetBorderValue()
+    {
+        return Border;
+    }
 }

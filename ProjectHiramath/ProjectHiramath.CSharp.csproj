@@ -141,6 +141,8 @@
     <Compile Include="Assets\Script\Opening\OpeningSystem.cs" />
     <Compile Include="Assets\Script\PlayerController.cs" />
     <Compile Include="Assets\Script\RemainingNumber.cs" />
+    <Compile Include="Assets\Script\Result\ResultBorder.cs" />
+    <Compile Include="Assets\Script\Result\ResultScore.cs" />
     <Compile Include="Assets\Script\SceneChange.cs" />
     <Compile Include="Assets\Script\ScoreSystem.cs" />
     <Compile Include="Assets\Script\SelectOperator.cs" />
