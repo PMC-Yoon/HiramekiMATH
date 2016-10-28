@@ -10,6 +10,7 @@ public class ScoreSystem : MonoBehaviour {
     private float TimeCount;
     private float PlusSpeed;
     private int Border;
+    private float MinusSpeed;
     // Use this for initialization
     void Start () {
         TEXT = this.gameObject.GetComponent<Text>();
@@ -31,7 +32,16 @@ public class ScoreSystem : MonoBehaviour {
                 TimeCount = 0;
             }
         }
-        TEXT.text = string.Format("{0:D3}",ProductScore);
+        if(Score < ProductScore)
+        {
+            TimeCount += 1.0f * Time.deltaTime;
+            if (TimeCount >= MinusSpeed)
+            {
+                ProductScore--;
+                TimeCount = 0;
+            }
+        }
+        TEXT.text = string.Format("{0,3}",ProductScore);
 
         if (Border <= Score)
         {
@@ -47,6 +57,10 @@ public class ScoreSystem : MonoBehaviour {
     {
         Score += nScore;
         PlusSpeed = 0.1f / (Score - ProductScore);
+        if(Score < ProductScore)
+        {
+            MinusSpeed = 0.1f / Mathf.Abs(Score - ProductScore);
+        }
     }
 
     public void ScoreUndo(int nScore)
