@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 public class Menu : MonoBehaviour {
     public GameObject PauseMenuPrefab;
     public GameObject ResultPrefab; //追加しました　by福岡
@@ -119,5 +120,7 @@ public class Menu : MonoBehaviour {
         }*/
         ResultPrefab.SetActive(true);
     }
+
+
 
 }
