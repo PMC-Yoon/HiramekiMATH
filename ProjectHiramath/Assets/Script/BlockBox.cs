@@ -407,6 +407,15 @@ public class BlockBox : MonoBehaviour {
                 ButtonWhite(n);
             }
         }
+
+        if(UndoFlag)
+        {
+            UndoWhite();
+        }
+        else
+        {
+            UndoBlack();
+        }
         //計算処理　追加　福岡　2016/10/11 ここまで
     }
 
@@ -1046,6 +1055,15 @@ public class BlockBox : MonoBehaviour {
         {
             GameObject.Find(ButtonName[Num]).GetComponent<Image>().color = new Color(1.0f, 1.0f, 1.0f);
         }
+    }
+
+    public void UndoBlack()
+    {
+            GameObject.Find("undo").GetComponent<Image>().color = new Color(0.5f, 0.5f, 0.5f);
+    }
+    public void UndoWhite()
+    {
+            GameObject.Find("undo").GetComponent<Image>().color = new Color(1.0f, 1.0f, 1.0f);
     }
 }
 
