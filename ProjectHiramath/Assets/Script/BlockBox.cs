@@ -69,6 +69,7 @@ public class BlockBox : MonoBehaviour {
     private bool ProductNowFlag;
 
     private string[] ButtonName = new string[4];
+    private BorderProduct borderProduct;
 
     void Awake()
     {
@@ -203,6 +204,10 @@ public class BlockBox : MonoBehaviour {
         ButtonName[1] = "PlusButton";
         ButtonName[2] = "MinusButton";
         ButtonName[3] = "SkillButton";
+
+        borderProduct = GameObject.Find("BorderProduct").GetComponent<BorderProduct>();
+
+        borderProduct.BorderIn();
     }
 
     void StageLoad()
@@ -435,10 +440,13 @@ public class BlockBox : MonoBehaviour {
             }
         }
 
+        
+
         if (bLast && (Score.ScoreCheck() >= Border) && !bEnd && !EraseFlag)
         {
             Debug.Log("おわた");
             stageData.StageClear(CharaNum, StageNum, true);
+            borderProduct.BorderOut();
             GameObject.Find("GameSystem").GetComponent<Menu>().Result(true);
             bEnd = true;
             //リザルト呼び出し
@@ -448,6 +456,7 @@ public class BlockBox : MonoBehaviour {
         else if(bLast && (Score.ScoreCheck() < Border) && !bEnd && !EraseFlag)
         {
             Debug.Log("無念");
+            borderProduct.BorderOut();
             GameObject.Find("GameSystem").GetComponent<Menu>().Result(false);
             bEnd = true;
         }

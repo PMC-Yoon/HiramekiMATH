@@ -45,6 +45,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\BorderProduct.cs" />
      <Compile Include="Assets\ClickCheck.cs" />
      <Compile Include="Assets\JOKER\Scripts\Novel\Components\AnimComponent.cs" />
      <Compile Include="Assets\JOKER\Scripts\Novel\Components\AudioComponent.cs" />
