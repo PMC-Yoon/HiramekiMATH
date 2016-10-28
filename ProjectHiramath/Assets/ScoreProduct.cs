@@ -30,14 +30,14 @@ public class ScoreProduct : MonoBehaviour {
                 pos.y += 1.0f * Time.deltaTime;
                 //transform.position = pos;
                 MoveSize = (ScorePos.position - transform.position).normalized;
-                MoveSize *= 2000.0f;
+                MoveSize *= 200.0f;
             }
             else
             {
                 transform.Translate(MoveSize * Time.deltaTime);
             }
 
-            if(Vector3.Distance(ScorePos.position,transform.position) <= 100.0f)
+            if(Vector3.Distance(ScorePos.position,transform.position) <= 2.0f)
             {
                 TEXT.color = new Color(TEXT.color.r, TEXT.color.g, TEXT.color.b, 0.0f);
                 Box.CheckNumber();
@@ -55,6 +55,7 @@ public class ScoreProduct : MonoBehaviour {
         ProdFlag = true;
         // transform.localPosition = camera.WorldToViewportPoint(pos);
         transform.position = pos;
+       // transform.localPosition = pos;
         Debug.Log(pos);
     }
 }

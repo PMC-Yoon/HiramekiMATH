@@ -103,9 +103,9 @@ public class Menu : MonoBehaviour {
             EnBox.GetComponent<Character_Box>().AnimChange(3);
         }
 
-        
 
-        if ((int)Time.timeScale == 0)
+
+        /*if ((int)Time.timeScale == 0)
         {
             PauseRelease();
             ResultPrefab.SetActive(false);
@@ -114,9 +114,10 @@ public class Menu : MonoBehaviour {
         if ((int)Time.timeScale == 1)
         {
             PauseSet();
-            ResultPrefab.SetActive(true);
+           
             return;
-        }
+        }*/
+        ResultPrefab.SetActive(true);
     }
 
 }

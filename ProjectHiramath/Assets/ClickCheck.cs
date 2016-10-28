@@ -9,6 +9,7 @@ public class ClickCheck : MonoBehaviour {
         //particle = transform.GetChild(0).GetComponent<ParticleSystem>();
         particle = GetComponent<ParticleSystem>();
         DontDestroyOnLoad(this);
+        particle.Clear();
     }
 	
 	// Update is called once per frame

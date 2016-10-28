@@ -337,7 +337,8 @@ public class BlockBox : MonoBehaviour {
                                 a_Block[EraseBlockX, EraseBlockY - 1].Eff.SetActive(true);
                                 a_Block[EraseBlockX, EraseBlockY + 1].Eff.SetActive(true);
                             }
-                            GameObject.Find("ScoreProduct").GetComponent<ScoreProduct>().Product(score, RectTransformUtility.WorldToScreenPoint(Camera.main, a_Block[EraseBlockX, EraseBlockY].Block.transform.position));
+                            //GameObject.Find("ScoreProduct").GetComponent<ScoreProduct>().Product(score, RectTransformUtility.WorldToScreenPoint(Camera.main, a_Block[EraseBlockX, EraseBlockY].Block.transform.position));
+                            GameObject.Find("ScoreProduct").GetComponent<ScoreProduct>().Product(score,  a_Block[EraseBlockX, EraseBlockY].Block.transform.position);
                             Debug.Log("捕鯨");
                             //CheckNumber();
                             ProductNowFlag = true;
