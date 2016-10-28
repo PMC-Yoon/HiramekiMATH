@@ -159,7 +159,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\JOKER_GAME\Resources\novel\data\config\config.txt" />
-    <None Include="Assets\JOKER_GAME\Resources\novel\data\scenario\adv\adv_000.txt" />
+    <None Include="Assets\JOKER_GAME\Resources\novel\data\scenario\adv\adv000.txt" />
+    <None Include="Assets\JOKER_GAME\Resources\novel\data\scenario\adv\adv001.txt" />
+    <None Include="Assets\JOKER_GAME\Resources\novel\data\scenario\adv\adv002.txt" />
+    <None Include="Assets\JOKER_GAME\Resources\novel\data\scenario\adv\adv003.txt" />
     <None Include="Assets\JOKER_GAME\Resources\novel\data\scenario\first.txt" />
     <None Include="Assets\JOKER_GAME\Resources\novel\data\scenario\tall\libs\menu.txt" />
     <None Include="Assets\JOKER_GAME\Resources\novel\data\scenario\tall\libs\save.txt" />

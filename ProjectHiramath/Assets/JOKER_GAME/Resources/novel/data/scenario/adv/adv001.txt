@@ -1,0 +1,78 @@
+﻿@call file=tall/libs/utils
+[bg_new name="background" storage="N_BG"]
+[bg_show name="background"]
+
+;メッセージ表示
+[showmessage]
+[text_new name=_sp_chara_name layer=ui x=-40 y=-140 val="" color="FFFFFF" fontsize=16 anchor="MiddleLeft"]
+[text_show name="_sp_chara_name"] 
+
+;---------------キャラ定義
+
+@tag_default tag="chara"
+[chara_new name="Galileo" storage="G_normal_1" jname="ガリレオ" scale=1 jcolor=FF77FF]
+[chara_new name="Einstein" storage="E_normal_1" jname="アインシュタイン" scale=1 jcolor=8822FF]
+@reset_tag_default
+
+;ゆうこの表情登録
+[chara_face name="Galileo" face="angry" storage=chara_a ]
+[chara_face name="Galileo" face="komaru" storage=chara_k ]
+[chara_face name="Galileo" face="warau" storage=chara_w ]
+
+;麻衣の表情登録
+[chara_face name="Einstein" face="angry" storage=kiri_a ]
+[chara_face name="Einstein" face="komaru" storage=kiri_k ]
+
+@chara_pos name="Galileo" x=-1.2 y=0.6
+@chara_pos name="Einstein" x=1.5 y=0.6
+
+;[playbgm wait=false time=1 storage="music"]
+
+[font color=#000000]
+
+アインシュタインとの対決に難なく勝利することができたガリレオ。 [r]
+勝利に酔いしれるガリレオに、満身創痍のアインシュタインは衝撃の事実を告げるのでした―――[p]
+
+@show name=Galileo
+#Galileo
+「いえーーい！やはりわたしがいちばんかしこいのだぁーー！」[p]
+
+@show name=Einstein
+#Einstein
+「フッ、いい気なものだな」[r]
+「お前も知っているだろう、この島の伝説を」[p]
+
+@show name=Galileo
+#Galileo
+「“ちえのぼうし”だろう？[l]あんなおとぎばなし、しんじてるのはアホのニュートンくらいだろ」[r]
+「そのぼうしがどうしたのだ？」[p]
+
+@show name=Einstein
+#Einstein
+「フフフ・・・・[l]アホはお前だガリレオ」[r]
+「帽子は実在するんだよ！」[p]
+
+@show name=Galileo
+#Galileo
+「なに！？それはほんとうか！？」[p]
+
+@show name=Einstein
+#Einstein
+「ああ・・・私が先日開発したこの“ぼうしレーダー”では」[r]
+「帽子は確かに、この島の山奥に存在している！」[r]
+「まあ、信じるかどうかはお前次第だがな」[p]
+
+@show name=Galileo
+#Galileo
+「ぼうしが・・・ほんとうにこのしまに・・」[r]
+「ぜったいにてにいれてやる・・・だがそのまえに！」[p]
+「わたしをアホとよんだことをあやまれっ！」[p]
+
+@show name=Einstein
+#Einstein
+「フッ・・・いいだろう、[l]ちょうど準備運動が終わったところだ！」[r]
+「帽子は、私の物だ！」[p]
+
+[scene file="Game"]
+
+[s]

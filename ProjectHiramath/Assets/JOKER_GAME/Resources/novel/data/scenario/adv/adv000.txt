@@ -1,0 +1,76 @@
+﻿@call file=tall/libs/utils
+[bg_new name="background" storage="N_BG"]
+[bg_show name="background"]
+
+;メッセージ表示
+[showmessage]
+[text_new name=_sp_chara_name layer=ui x=-40 y=-140 val="" color="FFFFFF" fontsize=16 anchor="MiddleLeft"]
+[text_show name="_sp_chara_name"] 
+
+;---------------キャラ定義
+
+@tag_default tag="chara"
+[chara_new name="Galileo" storage="G_normal_1" jname="ガリレオ" scale=1 jcolor=FF77FF]
+[chara_new name="Einstein" storage="E_normal_1" jname="アインシュタイン" scale=1 jcolor=8822FF]
+@reset_tag_default
+
+;ゆうこの表情登録
+[chara_face name="Galileo" face="angry" storage=chara_a ]
+[chara_face name="Galileo" face="komaru" storage=chara_k ]
+[chara_face name="Galileo" face="warau" storage=chara_w ]
+
+;麻衣の表情登録
+[chara_face name="Einstein" face="angry" storage=kiri_a ]
+[chara_face name="Einstein" face="komaru" storage=kiri_k ]
+
+@chara_pos name="Galileo" x=-1.2 y=0.6
+@chara_pos name="Einstein" x=1.5 y=0.6
+
+;[playbgm wait=false time=1 storage="music"]
+
+[font color=#000000]
+
+ここは、偉人たちが暮らす[r]「ジーニアスアイランド」 [p]
+この島にはある伝説が言い伝えられています[p]
+“山奥の神殿にある、「知恵の帽子」 [r]
+これを手にしたものは、「永遠の知恵」と、 [r]
+「いちばん賢い」称号を手に入れるだろう“と・・・[p]
+少しバカな住人たちは、この帽子の伝説をあろうことか信じてしまい[r]
+かわいそうなことに、帽子をめぐって戦い続けるのでした。 [p]
+
+@show name=Galileo
+この少女は、「ガリレオ」。[r]すこし強気な負けず嫌いのおてんばな女の子です。[p]
+今日も自分が一番賢いと証明するため、[r]アインシュタインの家に出かけているようです。[p]
+
+@show name=Galileo
+#Galileo
+「よし、ついたな　ここがやつのいえだ」[r]
+「さっそくきょうひとりめのあいてをしてもらうとするか」[p]
+「おい！おまえ！！」 [p]
+
+@show name=Einstein
+#Einstein
+「あん？」 [p]
+
+@show name=Galileo
+#Galileo
+「あたしとしょうぶしろ！」 [p]
+
+@show name=Einstein
+#Einstein
+「いやだね」[l][r]「私はサボテンの世話で忙しいんだ」[p]
+
+@show name=Galileo
+#Galileo
+「えーーー！」[r]
+「じゃあ、いちばんかしこいのはあたしってことだな！[l]ばーかばーか！！」[p]
+
+@show name=Einstein
+#Einstein
+「カチン」[l][r]
+「気が変わった　そこまで言うならいいだろう」[p]
+「見せてやろう[l]私の力を！」[p]
+
+[scene file="Game"]
+
+[s]
