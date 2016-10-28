@@ -68,6 +68,8 @@ public class BlockBox : MonoBehaviour {
     private bool ProductFlag;
     private bool ProductNowFlag;
 
+    private string[] ButtonName = new string[4];
+
     void Awake()
     {
 
@@ -87,7 +89,7 @@ public class BlockBox : MonoBehaviour {
         width = puzzlebackground.GetComponent<SpriteRenderer>().bounds.size.x;
         height = puzzlebackground.GetComponent<SpriteRenderer>().bounds.size.y;
 
-
+        ChangeNum = -1;
         
 
         //ブロックの幅を求める
@@ -196,6 +198,11 @@ public class BlockBox : MonoBehaviour {
 
         ProductFlag = false;
         ProductNowFlag = false;
+
+        ButtonName[0] = "MultiButton";
+        ButtonName[1] = "PlusButton";
+        ButtonName[2] = "MinusButton";
+        ButtonName[3] = "SkillButton";
     }
 
     void StageLoad()
@@ -384,6 +391,20 @@ public class BlockBox : MonoBehaviour {
 
             }
 
+            
+
+        }
+
+        for (int n = 0; n < NumberLast.Length - 1; n++)
+        {
+            if (NumberLast[n] <= 0)
+            {
+                ButtonBlack(n);
+            }
+            else
+            {
+                ButtonWhite(n);
+            }
         }
         //計算処理　追加　福岡　2016/10/11 ここまで
     }
@@ -489,6 +510,8 @@ public class BlockBox : MonoBehaviour {
                 }
             }
         }
+
+        
     }
     //計算処理　追加　福岡　2016/10/11 ここから
     public void CheckNumber()
@@ -949,6 +972,12 @@ public class BlockBox : MonoBehaviour {
         }
     }
 
+    //関数追加20161028 terabayashi
+    public int GetChangeNum()
+    {
+        return ChangeNum;
+    }
+
     public int NumberLastCheck(int nNum)
     {
         return NumberLast[nNum];
@@ -1000,6 +1029,21 @@ public class BlockBox : MonoBehaviour {
 
             Score.ScoreUndo(LastScore);
             UndoFlag = false;
+        }
+    }
+
+    public void ButtonBlack(int Num)
+    {
+        //if (CharaNum != 3)
+        {
+            GameObject.Find(ButtonName[Num]).GetComponent<Image>().color = new Color(0.5f, 0.5f, 0.5f);
+        }
+    }
+    public void ButtonWhite(int Num)
+    {
+        //if (ChangeNum != 3)
+        {
+            GameObject.Find(ButtonName[Num]).GetComponent<Image>().color = new Color(1.0f, 1.0f, 1.0f);
         }
     }
 }

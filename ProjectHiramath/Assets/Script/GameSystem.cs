@@ -23,4 +23,10 @@ public class GameSystem : MonoBehaviour {
 
 
 	}
+
+    public void StageSelectBack()
+    {
+        GameObject.Find("Fade").gameObject.GetComponent<Fade>().NextSceneName = "StageSelect";
+        GameObject.Find("Fade").gameObject.GetComponent<Fade>().FadeStart();
+    }
 }

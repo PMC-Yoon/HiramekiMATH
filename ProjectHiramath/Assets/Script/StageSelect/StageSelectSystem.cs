@@ -44,5 +44,11 @@ public class StageSelectSystem : MonoBehaviour {
     {
         ConfirmMenuPrefab.SetActive(false);
     }
-	
+
+    public void Charaback()
+    {
+        GameObject.Find("Fade").gameObject.GetComponent<Fade>().NextSceneName = "CharacterSelect";
+        GameObject.Find("Fade").gameObject.GetComponent<Fade>().FadeStart();
+    }
+
 }
