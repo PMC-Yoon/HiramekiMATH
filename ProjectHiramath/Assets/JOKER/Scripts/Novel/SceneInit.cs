@@ -132,6 +132,9 @@ public class SceneInit : MonoBehaviour
             this.gameManager.loadScenario(scenario_file);
 
             this.gameManager.nextOrder();
+
+
+           
         }
     }
 

@@ -3,8 +3,8 @@
 ;背景の定義
 
 ;ライブラリ呼び出し
-;[call file=system target="*system_setting_buttons"]
-;@call file=libs/utils
+[call file=system target="*system_setting_buttons"]
+@call file=libs/utils
 
 ;横バージョン読み込み
 ;@jump file=wide/title

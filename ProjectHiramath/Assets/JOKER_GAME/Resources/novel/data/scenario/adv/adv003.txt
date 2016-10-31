@@ -23,6 +23,24 @@
 [chara_face name="Einstein" face="angry" storage=kiri_a ]
 [chara_face name="Einstein" face="komaru" storage=kiri_k ]
 
+
+
+;Skip Backbutton tuika terabayashi
+@image_new name="button_Skip" tag="button" x=1.8 y=-1.6  storage="ADV_skip" scale=1
+@show tag=button
+[evt name="button_Skip" act="click" target="*click_skip" ]
+
+@image_new name="button_Back" tag="button" x=0.5 y=-1.6  storage="ADV_modoru" scale=1
+@show tag=button
+[evt name="button_Back" act="click" target="*click_back" ]
+
+
+
+
+
+
+
+
 @chara_pos name="Galileo" x=-1.2 y=0.6
 @chara_pos name="Einstein" x=1.5 y=0.6
 @chara_pos name="Arkimedes" x=1.0 y=0.1
@@ -90,3 +108,21 @@
 [scene file="Game"]
 
 [s]
+
+
+
+*click_skip
+[playse storage="skip"]
+@anim name="button_Skip" scale=2.0 wait=false
+@hide tag="button" time=1
+;@bg_hide name="background" time=1.5
+;[wait time=2]
+[scene file="Game"]
+
+*click_back
+[playse storage="back"]
+@anim name="button_Back" scale=2.0 wait=false
+@hide tag="button" time=1
+;@bg_hide name="background" time=1.5
+;[wait time=2]
+[scene file="stageselect"]
