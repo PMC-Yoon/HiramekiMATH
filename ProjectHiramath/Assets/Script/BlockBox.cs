@@ -1017,7 +1017,10 @@ public class BlockBox : MonoBehaviour {
     {
         if(nNum >= 0)
         {
-            ChangeNum = nNum;
+            if (NumberLast[nNum] > 0)
+            {
+                ChangeNum = nNum;
+            }
         }
     }
 
