@@ -66,5 +66,7 @@ public class BorderProduct : MonoBehaviour {
 	{
 		Alpha = 0.0f;
 		ProText.color = new Color(Title.color.r, Title.color.g, Title.color.b, Alpha);
+		bProduct[0] = false;
+		bProduct[1] = false;
 	}
 }
