@@ -37,7 +37,7 @@ public class ScoreProduct : MonoBehaviour {
                 transform.Translate(MoveSize * Time.deltaTime);
             }
 
-            if(Vector3.Distance(ScorePos.position,transform.position) <= 2.0f)
+            if(ScorePos.position.y - transform.position.y <= 1.0f)
             {
                 TEXT.color = new Color(TEXT.color.r, TEXT.color.g, TEXT.color.b, 0.0f);
                 Box.CheckNumber();
