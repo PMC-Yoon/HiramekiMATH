@@ -92,8 +92,11 @@ public class SpriteAnimator : MonoBehaviour {
     {
         if (nNum < AnimSize.Length)
         {
-            NowAnim = AnimNum[nNum];
-            AnimKind = nNum;
+			if (AnimKind != nNum) {
+				NowAnim = AnimNum [nNum];
+			}
+				AnimKind = nNum;
+			
         }
     }
 

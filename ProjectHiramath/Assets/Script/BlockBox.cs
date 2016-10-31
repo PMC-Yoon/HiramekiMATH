@@ -71,6 +71,11 @@ public class BlockBox : MonoBehaviour {
     private string[] ButtonName = new string[4];
     private BorderProduct borderProduct;
 
+	private Character_Box Player;
+	private Character_Box Enemy;
+	private AnimationManager anim;
+	private int[,] EnemyCharaBox;
+
     void Awake()
     {
 
@@ -208,6 +213,20 @@ public class BlockBox : MonoBehaviour {
         borderProduct = GameObject.Find("BorderProduct").GetComponent<BorderProduct>();
 
         borderProduct.BorderIn();
+
+		EnemyCharaBox = new int[4, 4];
+		EnemyCharaBox[0,0] = 2;
+		EnemyCharaBox[0,1] = 2;
+		EnemyCharaBox[0,2] = 1;
+		EnemyCharaBox[0,3] = 3;
+
+		Player = GameObject.Find ("CharacterBox").GetComponent<Character_Box> ();
+		Enemy = GameObject.Find ("CharacterBox_2").GetComponent<Character_Box> ();
+		//anim = GameObject.Find ("AnimationManager").GetComponent<AnimationManager>();
+		Player.CharacterChange (CharaNum);
+		Enemy.CharacterChange (EnemyCharaBox[CharaNum,StageNum]);
+		//anim.PlayerCharaChange (CharaNum);
+		//anim.EnemyCharaChange (EnemyCharaBox[CharaNum,StageNum]);
     }
 
     void StageLoad()
@@ -428,6 +447,7 @@ public class BlockBox : MonoBehaviour {
     {
         bool bLast = false;
         int Count = 0;
+		int AllLast = 0;
         for (int n = 0; n < NumberLast.Length; n++)
         {
             if(NumberLast[n] == 0 || (CharaNum == 0 && n == NumberLast.Length - 1))
@@ -438,28 +458,38 @@ public class BlockBox : MonoBehaviour {
             {
                 bLast = true;
             }
+
+			AllLast += NumberLast [n];
         }
+
+
 
         
 
-        if (bLast && (Score.ScoreCheck() >= Border) && !bEnd && !EraseFlag)
-        {
-            Debug.Log("おわた");
-            stageData.StageClear(CharaNum, StageNum, true);
-            borderProduct.BorderOut();
-            GameObject.Find("GameSystem").GetComponent<Menu>().Result(true);
-            bEnd = true;
-            //リザルト呼び出し
-            // fade.gameObject.GetComponent<Fade>().NextSceneName = "title";
-        }
+		if (bLast && (Score.ScoreCheck () >= Border) && !bEnd && !EraseFlag) {
+			Debug.Log ("おわた");
+			stageData.StageClear (CharaNum, StageNum, true);
+			borderProduct.BorderOut ();
+			GameObject.Find ("GameSystem").GetComponent<Menu> ().Result (true);
+			bEnd = true;
+			//リザルト呼び出し
+			// fade.gameObject.GetComponent<Fade>().NextSceneName = "title";
+		} else if (bLast && (Score.ScoreCheck () < Border) && !bEnd && !EraseFlag) {
+			Debug.Log ("無念");
+			borderProduct.BorderOut ();
+			GameObject.Find ("GameSystem").GetComponent<Menu> ().Result (false);
+			bEnd = true;
+		} else if(!bEnd) {
+			if (Score.ScoreCheck() >= Border) {
+				Player.AnimChange (1);
+				Enemy.AnimChange (2);
+			}
 
-        else if(bLast && (Score.ScoreCheck() < Border) && !bEnd && !EraseFlag)
-        {
-            Debug.Log("無念");
-            borderProduct.BorderOut();
-            GameObject.Find("GameSystem").GetComponent<Menu>().Result(false);
-            bEnd = true;
-        }
+			/*if (Score.ScoreCheck() < Border && AllLast <= 2) {
+				Player.AnimChange (2);
+				Enemy.AnimChange (1);
+			}*/
+		}
     }
 
     void EraseCheck()

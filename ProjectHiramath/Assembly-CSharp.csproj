@@ -45,6 +45,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\AnimationManager.cs" />
      <Compile Include="Assets\BorderProduct.cs" />
      <Compile Include="Assets\ClickCheck.cs" />
      <Compile Include="Assets\JOKER\Scripts\Novel\Components\AnimComponent.cs" />
@@ -129,16 +130,20 @@
      <Compile Include="Assets\Script\StageSelect\selectstagenum.cs" />
      <Compile Include="Assets\Script\System\Fade.cs" />
      <Compile Include="Assets\Script\Timer.cs" />
+     <Compile Include="Assets\Script\pauseResultBorder.cs" />
      <None Include="Assets\JOKER_GAME\Resources\novel\data\scenario\wide\libs\utils.txt" />
      <None Include="Assets\JOKER_GAME\Resources\novel\data\scenario\tall\libs\utils.txt" />
+     <None Include="Assets\JOKER_GAME\Resources\novel\data\scenario\adv\adv003.txt" />
      <None Include="Assets\JOKER_GAME\Resources\novel\data\scenario\wide\libs\save.txt" />
      <None Include="Assets\JOKER_GAME\Resources\novel\data\scenario\wide\title.txt" />
+     <None Include="Assets\JOKER_GAME\Resources\novel\data\scenario\adv\adv001.txt" />
      <None Include="Assets\JOKER_GAME\Resources\novel\data\scenario\tall\libs\save.txt" />
      <None Include="Assets\JOKER_GAME\Resources\novel\data\scenario\tall\title.txt" />
      <None Include="Assets\JOKER_GAME\Resources\novel\data\scenario\tall\system.txt" />
      <None Include="Assets\JOKER_GAME\Resources\novel\data\scenario\wide\scene1.txt" />
      <None Include="Assets\JOKER_GAME\Resources\novel\data\scenario\wide\system.txt" />
-     <None Include="Assets\JOKER_GAME\Resources\novel\data\scenario\adv\adv_000.txt" />
+     <None Include="Assets\JOKER_GAME\Resources\novel\data\scenario\adv\adv000.txt" />
+     <None Include="Assets\JOKER_GAME\Resources\novel\data\scenario\adv\adv002.txt" />
      <None Include="Assets\JOKER_GAME\Resources\novel\data\scenario\wide\libs\menu.txt" />
      <None Include="Assets\JOKER_GAME\Resources\novel\data\scenario\first.txt" />
      <None Include="Assets\JOKER_GAME\Resources\novel\data\scenario\tall\libs\menu.txt" />
