@@ -7,13 +7,14 @@ public class BorderProduct : MonoBehaviour {
     private Text ProText;
     private float Alpha;
     private bool[] bProduct;
+	private bool bEnd;
 	// Use this for initialization
 	void Start () {
         Title = transform.GetChild(0).gameObject.GetComponent<Text>();
         ProText = transform.GetChild(1).gameObject.GetComponent<Text>();
         bProduct = new bool[2];
         Alpha = 1.0f;
-        
+		bEnd = false;
     }
 	
 	// Update is called once per frame
@@ -41,6 +42,7 @@ public class BorderProduct : MonoBehaviour {
                // bProduct[0] = false;
                // bProduct[1] = true;
                 Alpha = 1.0f;
+				bEnd = true;
             }
         }
 	}
@@ -54,4 +56,15 @@ public class BorderProduct : MonoBehaviour {
     {
         bProduct[1] = true;
     }
+
+	public bool EndCheck()
+	{
+		return bEnd;
+	}
+
+	public void TextErase()
+	{
+		Alpha = 0.0f;
+		ProText.color = new Color(Title.color.r, Title.color.g, Title.color.b, Alpha);
+	}
 }
