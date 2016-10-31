@@ -71,6 +71,9 @@ public class BlockBox : MonoBehaviour {
     private string[] ButtonName = new string[4];
     private BorderProduct borderProduct;
 
+	private AnimationManager anim;
+	private int[,] EnemyCharaBox;
+
     void Awake()
     {
 
@@ -208,6 +211,16 @@ public class BlockBox : MonoBehaviour {
         borderProduct = GameObject.Find("BorderProduct").GetComponent<BorderProduct>();
 
         borderProduct.BorderIn();
+
+		EnemyCharaBox = new int[4, 4];
+		EnemyCharaBox[0,0] = 2;
+		EnemyCharaBox[0,1] = 2;
+		EnemyCharaBox[0,2] = 1;
+		EnemyCharaBox[0,2] = 3;
+
+		anim = GameObject.Find ("AnimationManager").GetComponent<AnimationManager>();
+		anim.PlayerCharaChange (CharaNum);
+		anim.EnemyAnimChange (EnemyCharaBox[CharaNum,StageNum]);
     }
 
     void StageLoad()
