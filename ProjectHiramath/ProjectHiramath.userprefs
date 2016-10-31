@@ -1,12 +1,12 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\BlockBox.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\Character_Box.cs">
     <Files>
-      <File FileName="Assets\JOKER\Scripts\Novel\Core\StatusManager.cs" Line="6" Column="1" />
-      <File FileName="Assets\AnimationManager.cs" Line="37" Column="2" />
+      <File FileName="Assets\JOKER\Scripts\Novel\Core\StatusManager.cs" Line="1" Column="1" />
       <File FileName="Assets\Script\Character_Box.cs" Line="1" Column="1" />
-      <File FileName="Assets\Script\SpriteAnimator.cs" Line="1" Column="1" />
-      <File FileName="Assets\Script\BlockBox.cs" Line="211" Column="1" />
+      <File FileName="Assets\Script\SpriteAnimator.cs" Line="102" Column="1" />
+      <File FileName="Assets\Script\BlockBox.cs" Line="491" Column="7" />
+      <File FileName="Assets\Script\ScoreSystem.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

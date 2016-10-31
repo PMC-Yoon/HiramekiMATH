@@ -17,21 +17,21 @@ public class AnimationManager : MonoBehaviour {
 
 	public void PlayerCharaChange(int nNum)
 	{
-		Player.GetComponent<Character_Box> ().CharacterChange (nNum);
+//		Player.GetComponent<Character_Box>().CharacterChange(nNum);
 	}
 
 	public void EnemyCharaChange(int nNum)
 	{
-		Enemy.GetComponent<Character_Box> ().CharacterChange (nNum);
+	//	Enemy.GetComponent<Character_Box> ().CharacterChange (nNum);
 	}
 
 	public void PlayerAnimChange(int nNum)
 	{
-		Player.GetComponent<Character_Box> ().AnimChange (nNum);
+	//	Player.GetComponent<Character_Box> ().AnimChange (nNum);
 	}
 
 	public void EnemyAnimChange(int nNum)
 	{
-		Enemy.GetComponent<Character_Box> ().AnimChange (nNum);
+//Enemy.GetComponent<Character_Box> ().AnimChange (nNum);
 	}
 }
