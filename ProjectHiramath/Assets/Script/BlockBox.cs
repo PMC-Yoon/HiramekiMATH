@@ -470,15 +470,23 @@ public class BlockBox : MonoBehaviour {
 			Debug.Log ("おわた");
 			stageData.StageClear (CharaNum, StageNum, true);
 			borderProduct.BorderOut ();
-			GameObject.Find ("GameSystem").GetComponent<Menu> ().Result (true);
-			bEnd = true;
+			//StartCoroutine (ProductWaitCoroutine (true));
+			if (borderProduct.EndCheck ()) {
+				borderProduct.TextErase ();
+				GameObject.Find ("GameSystem").GetComponent<Menu> ().Result (true);
+				bEnd = true;
+			}
 			//リザルト呼び出し
 			// fade.gameObject.GetComponent<Fade>().NextSceneName = "title";
 		} else if (bLast && (Score.ScoreCheck () < Border) && !bEnd && !EraseFlag) {
 			Debug.Log ("無念");
 			borderProduct.BorderOut ();
-			GameObject.Find ("GameSystem").GetComponent<Menu> ().Result (false);
-			bEnd = true;
+			//StartCoroutine (ProductWaitCoroutine (false));
+			if (borderProduct.EndCheck ()) {
+				borderProduct.TextErase ();
+				GameObject.Find ("GameSystem").GetComponent<Menu> ().Result (false);
+				bEnd = true;
+			}
 		} else if(!bEnd) {
 			if (Score.ScoreCheck() >= Border) {
 				Player.AnimChange (1);
@@ -1107,5 +1115,13 @@ public class BlockBox : MonoBehaviour {
     {
             GameObject.Find("undo").GetComponent<Image>().color = new Color(1.0f, 1.0f, 1.0f);
     }
+
+	IEnumerator ProductWaitCoroutine (bool bFlag)
+	{
+		yield return new WaitForSeconds(3.5f);
+
+		GameObject.Find ("GameSystem").GetComponent<Menu> ().Result (bFlag);
+		bEnd = true;
+	}
 }
 
